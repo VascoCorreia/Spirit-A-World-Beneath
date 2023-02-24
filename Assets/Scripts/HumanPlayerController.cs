@@ -19,7 +19,6 @@ public class HumanPlayerController : MonoBehaviour
     void Update()
     {
         getPlayerMovementInput();
-
         applyGravity();
         calculateVelocityAndMove();
     }
@@ -27,8 +26,8 @@ public class HumanPlayerController : MonoBehaviour
     //gets player movement input
     private void getPlayerMovementInput()
     {
-        _playerInput.x = Input.GetAxis("Horizontal");
-        _playerInput.y = Input.GetAxis("Vertical");
+        _playerInput.x = Input.GetAxis("HumanHorizontal");
+        _playerInput.y = Input.GetAxis("HumanVertical");
     }
 
     //This function is reponsible for continuously applying gravity to our human.
@@ -48,7 +47,7 @@ public class HumanPlayerController : MonoBehaviour
     //It is also responsible for listening to jumping input
     private void calculateVelocityAndMove()
     {
-        if (_onGround && Input.GetButtonDown("Jump"))
+        if (_onGround && Input.GetButtonDown("HumanJump"))
         {
             Jump();
         }
