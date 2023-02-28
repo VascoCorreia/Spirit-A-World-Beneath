@@ -6,7 +6,8 @@ public class HumanPlayerController : MonoBehaviour
     [SerializeField] private Vector3 _velocity;
     [SerializeField] private bool _onGround;
     [SerializeField, Range(0f, 10f)] private float maxJumpHeight = 2f;
-    [SerializeField, Range(0f, 100f)] private float _maxSpeed = 10f;
+    [SerializeField, Range(0f, 50f)] private float _maxSpeed = 10f;
+    [SerializeField, Range(0f, 25f)] private float pushPower = 3f;
 
     private CharacterController _controller;
     private Vector2 _playerInput;
@@ -21,6 +22,11 @@ public class HumanPlayerController : MonoBehaviour
         getPlayerMovementInput();
         applyGravity();
         calculateVelocityAndMove();
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        MovePushableObject(hit.collider.attachedRigidbody, hit);
     }
 
     //gets player movement input
@@ -69,7 +75,7 @@ public class HumanPlayerController : MonoBehaviour
     //https://screenrec.com/share/62pUYiuKDW
     private void Jump()
     {
-        _ySpeed += Mathf.Sqrt(maxJumpHeight * -2.0f * Physics.gravity.y); 
+        _ySpeed += Mathf.Sqrt(maxJumpHeight * -2.0f * Physics.gravity.y);
     }
 
     //removes bounciness when moving down slopes, keeps the direction of the movement align with the slope angle
@@ -91,5 +97,24 @@ public class HumanPlayerController : MonoBehaviour
             }
         }
         return velocity;
+    }
+
+    //OnControllerColliderHit is called when the controller hits a collider while performing a Move.
+    //We will use it to push any object with a rigidbody attached.
+    //Later if we dont want to push all rigidbodies we can add a tag to the ones we want to move and check it before we apply the logic
+
+    private void MovePushableObject(Rigidbody body, ControllerColliderHit hit)
+    {
+        // no rigidbody nothing happens
+        if (body == null || body.isKinematic)
+        {
+            return;
+        }
+
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        //apply the push
+
+        body.AddForce(pushDir * pushPower, ForceMode.Force);
     }
 }
