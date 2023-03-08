@@ -3,8 +3,9 @@ using UnityEngine;
 //The character as of now is 1.56m long in real world units or 0.78 in Unity capsule units. (normal height for 13 year old)
 public class HumanPlayerController : MonoBehaviour
 {
-    [SerializeField] private Vector3 _velocity;
+    [SerializeField] private Vector3 _velocity, _velocityTest;
     [SerializeField] private bool _onGround;
+    [SerializeField] private Camera _humanCamera;
     [SerializeField, Range(0f, 10f)] private float maxJumpHeight = 2f;
     [SerializeField, Range(0f, 50f)] private float _maxSpeed = 10f;
     [SerializeField, Range(0f, 25f)] private float pushPower = 3f;
@@ -57,19 +58,45 @@ public class HumanPlayerController : MonoBehaviour
         {
             Jump();
         }
+        //get player input
+        //get cameras forward and right vectors
+        //multiply input X vector by camera right vector
+        //multiply input Z vector by camera forward vector
+        //add these two vectors
 
-        Vector3 movementDirection = new Vector3(_playerInput.x, 0, _playerInput.y);
+        Vector3 forward = _humanCamera.transform.forward;
+        Vector3 right = _humanCamera.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward = forward.normalized;
+        right = right.normalized;
 
-        //clamping the magnitude to 1 prevents the character from moving faster diagonally.
-        float magnitude = Mathf.Clamp01(movementDirection.magnitude) * _maxSpeed;
+        Vector3 forwardRelativeVerticalInput = forward * _playerInput.y;
+        Vector3 rightRelativeVerticalInput = right * _playerInput.x;
 
-        //after calculating the magnitude we can normalize the movement direction vector to get the direction of movement
-        movementDirection.Normalize();
-        _velocity = movementDirection * magnitude;
-        _velocity.y = _ySpeed;
-        _velocity = AdjustvelocityToSlope(_velocity);
+        Vector3 cameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
 
-        _controller.Move(_velocity * Time.deltaTime);
+        float magnitudeTest = Mathf.Clamp01(cameraRelativeMovement.magnitude) * _maxSpeed;
+
+        cameraRelativeMovement.Normalize();
+        _velocityTest = cameraRelativeMovement * magnitudeTest;
+        _velocityTest.y = _ySpeed;
+        _velocityTest = AdjustvelocityToSlope(_velocityTest);
+
+        _controller.Move(_velocityTest * Time.deltaTime);
+
+        //Vector3 movementDirection = new Vector3(_playerInput.x, 0, _playerInput.y);
+
+        ////clamping the magnitude to 1 prevents the character from moving faster diagonally.
+        //float magnitude = Mathf.Clamp01(movementDirection.magnitude) * _maxSpeed;
+
+        ////after calculating the magnitude we can normalize the movement direction vector to get the direction of movement
+        //movementDirection.Normalize();
+        //_velocity = movementDirection * magnitude;
+        //_velocity.y = _ySpeed;
+        //_velocity = AdjustvelocityToSlope(_velocity);
+
+        //_controller.Move(_velocity * Time.deltaTime);
     }
 
     //https://screenrec.com/share/62pUYiuKDW
@@ -85,7 +112,7 @@ public class HumanPlayerController : MonoBehaviour
 
         var ray = new Ray(transform.position, Vector3.down);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 1f))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 2f))
         {
             var rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
             var adjustedvelocity = rotation * velocity;
