@@ -17,10 +17,6 @@ public class Bat : MonoBehaviour, IPossessable
         }
     }
 
-    //When exiting possession:
-    // 1- exable spirit gameobject
-    // 2- Change camera
-    // 3- disable this script
     public void ExitPossess()
     {
         Destroy(GetComponent<CharacterController>());
