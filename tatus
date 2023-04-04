@@ -1,0 +1,71 @@
+[33mcommit 704c18d5d8fc45f6a700bdcc432b5e1928f99e27[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Fri Mar 17 00:27:18 2023 +0000
+
+    improvemente to possession
+
+[33mcommit abc9abb48607392f96ccf45329e952e9a99cf3c4[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Thu Mar 16 19:42:04 2023 +0000
+
+    Added raycast and event firing for spirit possession
+
+[33mcommit 83889936c87936d3f868a3cd77bd817889883727[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Thu Mar 16 15:35:46 2023 +0000
+
+    Added camera control with controller
+
+[33mcommit 15387ac29a055052d99edff7c2dcc07db4083e61[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Tue Mar 14 12:57:01 2023 +0000
+
+    Git commands file
+
+[33mcommit d22d09609399c2ae79a1d872dcb31397e480c9be[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Mon Mar 13 23:38:05 2023 +0000
+
+    Controller mapping test
+
+[33mcommit 6d39ae8c414452fc6d50da24c22816db0b7868f3[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Mon Mar 13 22:39:55 2023 +0000
+
+    Changed Input to new unity inpu package and added support for controller
+
+[33mcommit 271f66c6a8b0c3132f2b59aa7be637163b41e11d[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Wed Mar 8 23:24:33 2023 +0000
+
+    added crosshair and spirit camera behaviour
+
+[33mcommit ecdb6f56ca5a879035077c730ccdd5d804371fc3[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Wed Mar 8 16:31:50 2023 +0000
+
+    Changed camera behaviour and player movement
+
+[33mcommit 06562501326d34253eb037612f92308bfa9d50cb[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Tue Feb 28 01:53:47 2023 +0000
+
+    Camera movement with cinemachine and pushable object
+
+[33mcommit 3f2e38b78bd56772f210fddcedc40f6d43ce45ff[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Fri Feb 24 13:34:25 2023 +0000
+
+    spirit movement
+
+[33mcommit e85b17708a9f02db637b9159550dfabbe8cdda17[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Fri Feb 24 13:20:52 2023 +0000
+
+    refactor
+
+[33mcommit d0e860fb66ebb05bb0b433d1d0d0c30c6bc54576[m
+Author: Vasco Correia <vasco.rosa.correia.trabalho@gmail.com>
+Date:   Fri Feb 24 12:38:05 2023 +0000
+
+    Fix repository
