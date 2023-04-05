@@ -21,6 +21,7 @@ public class HumanPlayerController : MonoBehaviour
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
+        _playerInteract = GetComponent<PlayerInteract>();
     }
     void Update()
     {
@@ -97,19 +98,6 @@ public class HumanPlayerController : MonoBehaviour
         _velocity = AdjustvelocityToSlope(_velocity);
 
         _controller.Move(_velocity * Time.deltaTime);
-
-        //Vector3 movementDirection = new Vector3(_playerInput.x, 0, _playerInput.y);
-
-        ////clamping the magnitude to 1 prevents the character from moving faster diagonally.
-        //float magnitude = Mathf.Clamp01(movementDirection.magnitude) * _maxSpeed;
-
-        ////after calculating the magnitude we can normalize the movement direction vector to get the direction of movement
-        //movementDirection.Normalize();
-        //_velocity = movementDirection * magnitude;
-        //_velocity.y = _ySpeed;
-        //_velocity = AdjustvelocityToSlope(_velocity);
-
-        //_controller.Move(_velocity * Time.deltaTime);
     }
 
     //https://screenrec.com/share/62pUYiuKDW
