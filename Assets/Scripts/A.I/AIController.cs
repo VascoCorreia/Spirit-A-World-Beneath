@@ -28,13 +28,13 @@ public class AIController : MonoBehaviour
     float m_rotationTime;                           //  Variable of the wait time to rotate when the player is near that makes the delay
     bool m_playerInRange;                           //  If the player is in range of vision, state of chasing
     bool m_PlayerNear;                              //  If the player is near, state of hearing
-    bool m_IsPatrol;                                //  If the enemy is patrol, state of patroling
+    bool m_Wandering;                                //  If the enemy is patrol, state of patroling
     bool m_CaughtPlayer;                            //  if the enemy has caught the player
 
     void Start()
     {
         m_PlayerPosition = Vector3.zero;
-        m_IsPatrol = true;
+        m_Wandering = true;
         m_CaughtPlayer = false;
         m_playerInRange = false;
         m_PlayerNear = false;
@@ -44,7 +44,6 @@ public class AIController : MonoBehaviour
         m_CurrentWaypointIndex = 0;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-        navMeshAgent.isStopped = false;
         navMeshAgent.speed = walkingSpeed;
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
     }
@@ -53,47 +52,13 @@ public class AIController : MonoBehaviour
     {
         EnviromentView();
 
-        if (!m_IsPatrol)
+        if (!m_Wandering)
         {
             Chasing();
         }
         else
         {
             Patroling();
-        }
-    }
-
-    private void Chasing()
-    {
-        //  The enemy is chasing the player
-        m_PlayerNear = false;
-        playerLastPosition = Vector3.zero;
-
-        if (!m_CaughtPlayer)
-        {
-            Move(runningSpeed);
-            navMeshAgent.SetDestination(m_PlayerPosition);
-        }
-        
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
-        {
-            if (m_WaitingTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
-            {
-                //  Check if the enemy is not near to the player, returns to patrol after the wait time delay
-                m_IsPatrol = true;
-                m_PlayerNear = false;
-                Move(walkingSpeed);
-                m_rotationTime = rotationTime;
-                m_WaitingTime = startWaitingTimer;
-                navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-            }
-            else
-            {
-                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
-                    //  Wait if the current position is not the player position
-                    Stop();
-                m_WaitingTime -= Time.deltaTime;
-            }
         }
     }
 
@@ -110,7 +75,6 @@ public class AIController : MonoBehaviour
             else
             {
                 //  The enemy wait for a moment and then go to the last player position
-                Stop();
                 m_rotationTime -= Time.deltaTime;
             }
         }
@@ -138,26 +102,15 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private void OnAnimatorMove()
-    {
-
-    }
-
     public void NextPoint()
     {
         m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
     }
 
-    void Stop()
-    {
-        navMeshAgent.isStopped = true;
-        navMeshAgent.speed = 0;
-    }
 
     void Move(float speed)
     {
-        navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
     }
 
@@ -182,7 +135,6 @@ public class AIController : MonoBehaviour
             }
             else
             {
-                Stop();
                 m_WaitingTime -= Time.deltaTime;
             }
         }
@@ -204,7 +156,7 @@ public class AIController : MonoBehaviour
                 if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
                 {
                     m_playerInRange = true;
-                    m_IsPatrol = false;
+                    m_Wandering = false;
                 }
                 else
                 {
