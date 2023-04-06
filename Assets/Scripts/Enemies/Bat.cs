@@ -10,7 +10,7 @@ public class Bat : MonoBehaviour, IPossessable
         {
             gameObject.AddComponent<CharacterController>();
             gameObject.AddComponent<PlayerInteract>();
-            gameObject.AddComponent<SpiritPlayerController>();
+            gameObject.AddComponent<BatController>();
 
             gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
 

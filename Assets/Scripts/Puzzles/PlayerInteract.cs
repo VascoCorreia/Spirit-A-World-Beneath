@@ -6,6 +6,13 @@ public class PlayerInteract : MonoBehaviour
     [field: SerializeField] public float interactableDistance { get; private set; }
 
     private GameObject _interactedObject;
+
+    private void Start()
+    {
+        interactableDistance = 15f;
+        _layerMask = LayerMask.GetMask("Interactable");
+    }
+
     public void Interact(Camera camera)
     {
         Ray ray = new(camera.transform.position, camera.transform.forward);
@@ -27,8 +34,6 @@ public class PlayerInteract : MonoBehaviour
         if (_interactedObject != null)
         {
             _interactedObject.GetComponent<IInteractable>().Released();
-
-            //Can add more interactables
         }
     }
 }

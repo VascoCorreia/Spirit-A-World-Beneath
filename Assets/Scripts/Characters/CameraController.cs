@@ -8,6 +8,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private SpiritPossession _spiritPossession;
     [SerializeField] private GameObject _spiritCached;
 
+    private const float DefaultTopRigRadius = 4.5f;
+    private const float DefaultMiddleRigRadius = 9f;
+    private const float DefaultBottomRigRadius = 4.5f;
+    private const float DefaultTopRigHeight = 4.5f;
+
     void Awake()
     {
         _camera = GetComponent<CinemachineFreeLook>();
@@ -56,6 +61,18 @@ public class CameraController : MonoBehaviour
         {
             _camera.Follow = possessedGameobject.getPossessedEnemy().transform;
             _camera.LookAt = possessedGameobject.getPossessedEnemy().transform;
+
+
+            //Mushroom possession
+            if (_spiritPossession.typeInPossession == SpiritPossession.TypeInPossession.Mushroom)
+            {
+                _camera.m_Orbits[0].m_Radius *= 1.5f;
+                _camera.m_Orbits[1].m_Radius *= 1.5f;
+                _camera.m_Orbits[2].m_Radius *= 1.5f;
+
+                _camera.m_Orbits[0].m_Height *= 2.5f;
+
+            }
         }
     }
     private void ChangeCameraOnExitPossession()
@@ -65,6 +82,13 @@ public class CameraController : MonoBehaviour
             _camera.Follow = _spiritCached.transform;
             _camera.LookAt = _spiritCached.transform;
         }
+
+        //Reset camera to regular values
+        _camera.m_Orbits[0].m_Radius = DefaultTopRigRadius;
+        _camera.m_Orbits[1].m_Radius = DefaultMiddleRigRadius;
+        _camera.m_Orbits[2].m_Radius = DefaultBottomRigRadius;
+
+        _camera.m_Orbits[0].m_Height = DefaultTopRigHeight;
 
     }
 }

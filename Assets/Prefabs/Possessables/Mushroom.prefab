@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8543672251185251420}
   - component: {fileID: 8543672251185251411}
   - component: {fileID: 8943758795098187540}
+  - component: {fileID: 6820994780391035283}
+  - component: {fileID: 1429323209042389026}
   m_Layer: 8
   m_Name: Mushroom
   m_TagString: Mushroom
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8543672251185251409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 23.75, y: 2.5, z: 10.25}
-  m_LocalScale: {x: -0.28, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,3 +112,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2d4a8e2a143534190cb8a8997a7da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &6820994780391035283
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543672251185251409}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1429323209042389026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543672251185251409}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95d7fe89bf84b14d8bd2921eb35bb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <_spiritCamera>k__BackingField: {fileID: 0}
+  <_spiritFreeLookCamera>k__BackingField: {fileID: 0}
+  <_playerInteract>k__BackingField: {fileID: 0}
+  <_spiritPossession>k__BackingField: {fileID: 0}
+  <_controller>k__BackingField: {fileID: 0}
+  <_maxSpeed>k__BackingField: 0
+  maxJumpHeight: 0
+  _velocity: {x: 0, y: 0, z: 0}
+  _onGround: 0
+  _maxSize: 0
+  _minSize: {x: 0, y: 0, z: 0}
+  _mushroomGrowthSpeed: 0

@@ -12,10 +12,9 @@ public class SpiritPlayerController : MonoBehaviour
     [field: SerializeField, Range(0f, 50f)] public float _maxSpeed { get; set; }
 
     [SerializeField, Range(0f, 10f)] private float maxJumpHeight;
-    [SerializeField] private float _mushroomGrowthSpeed;
-    [SerializeField] private Vector3 _velocity;
+    [SerializeField] protected Vector3 _velocity;
     [SerializeField] private bool _onGround;
-    private Vector2 _playerInput;
+    protected Vector2 _playerInput;
     private float _ySpeed;
 
     private void Awake()
@@ -24,31 +23,27 @@ public class SpiritPlayerController : MonoBehaviour
         _playerInteract = GetComponent<PlayerInteract>();
         _spiritCamera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
         _spiritFreeLookCamera = GameObject.Find("SpiritCamera").GetComponent<CinemachineFreeLook>();
-        _spiritPossession = GameObject.Find("TestPossession").GetComponent<SpiritPossession>();
+        _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
+
+        if (_spiritPossession.typeInPossession == SpiritPossession.TypeInPossession.Mushroom)
+        {
+            Debug.Log("I am mush");
+        }
     }
 
     private void Start()
     {
         _maxSpeed = 10;
-        _mushroomGrowthSpeed = UnityEngine.Random.Range(0.005f, 0.05f);
     }
 
-    void Update()
+    protected virtual void Update()
     {
         getPlayerInput();
         applyGravity();
 
-        switch (_spiritPossession.typeInPossession)
+        if (_spiritPossession.typeInPossession == SpiritPossession.TypeInPossession.None)
         {
-            case SpiritPossession.TypeInPossession.Bat:
-                possessedBatPlayerMovement();
-                break;
-            case SpiritPossession.TypeInPossession.Mushroom:
-                possessedMushromPlayerMovement();
-                break;
-            case SpiritPossession.TypeInPossession.None:
-                SpiritMovement();
-                break;
+            SpiritMovement();
         }
     }
 
@@ -98,7 +93,7 @@ public class SpiritPlayerController : MonoBehaviour
     }
 
     //removes bounciness when moving down slopes, keeps the direction of the movement align with the slope angle
-    private Vector3 AdjustVelocityToSlope(Vector3 velocity)
+    protected Vector3 AdjustVelocityToSlope(Vector3 velocity)
     {
         var ray = new Ray(transform.position, Vector3.down);
 
@@ -117,7 +112,7 @@ public class SpiritPlayerController : MonoBehaviour
         return velocity;
     }
 
-    private void SpiritMovement()
+    protected virtual void SpiritMovement()
     {
         _maxSpeed = 10f;
         if (_onGround && Input.GetButtonDown("SpiritJump"))
@@ -152,29 +147,5 @@ public class SpiritPlayerController : MonoBehaviour
         _controller.Move(_velocity * Time.deltaTime);
     }
 
-    void possessedBatPlayerMovement()
-    {
-        _maxSpeed = 15f;
-        Vector3 forward = _spiritCamera.transform.forward;
-        Vector3 right = _spiritCamera.transform.right;
-
-        Vector3 forwardRelativeVerticalInput = forward * _playerInput.y;
-        Vector3 rightRelativeVerticalInput = right * _playerInput.x;
-
-        Vector3 PlayerCameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
-
-        float magnitudeTest = Mathf.Clamp01(PlayerCameraRelativeMovement.magnitude) * _maxSpeed;
-
-        PlayerCameraRelativeMovement.Normalize();
-        _velocity = PlayerCameraRelativeMovement * magnitudeTest;
-        _velocity = AdjustVelocityToSlope(_velocity);
-
-        _controller.Move(_velocity * Time.deltaTime);
-    }
-
-    private void possessedMushromPlayerMovement()
-    {
-        transform.localScale += new Vector3(_playerInput.y * _mushroomGrowthSpeed, _playerInput.y * _mushroomGrowthSpeed, _playerInput.y * _mushroomGrowthSpeed);
-    }
 }
 
