@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6623535093320010454}
   - component: {fileID: 6623535093320010453}
   - component: {fileID: 6623535093320010452}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Bat
   m_TagString: Bat
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6623535093320010455
 MeshFilter:
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5c8be9d8b6181264d9d3ada405ad95c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,9 +93,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6623535093320010450}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6623535093320010452
@@ -110,5 +118,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae698eafb516cda4aaf84226e3f228ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spiritPossession: {fileID: 0}
-  _spiritController: {fileID: 0}

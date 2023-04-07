@@ -47,11 +47,11 @@ public class BatAi : MonoBehaviour
         m_WaitingTime = startWaitingTimer;
         m_rotationTime = rotationTime;
 
-        m_CurrentWaypointIndex = 0;
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        waypointIndex = 0;
+        agent = GetComponent<NavMeshAgent>();
 
-        navMeshAgent.speed = walkingSpeed;
-        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+        agent.speed = walkingSpeed;
+        agent.SetDestination(waypoints[waypointIndex].position);
     }
 
     void Update()
@@ -107,27 +107,27 @@ public class BatAi : MonoBehaviour
             if (m_rotationTime <= 0)
             {
                 Move(walkingSpeed);
-                LookingPlayer(playerLastPosition);
+                //LookingPlayer(playerLastPosition);
             }
         }
         else
         {
             m_PlayerNear = false;
             playerLastPosition = Vector3.zero;
-            navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+            agent.SetDestination(waypoints[waypointIndex].position);
 
-            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 //If the bat arrives to the waypoint position then wait for a moment and go to the next
                 if (m_WaitingTime <= 0)
                 {
-                    NextPoint();
+                    //NextPoint();
                     Move(walkingSpeed);
                     m_WaitingTime = startWaitingTimer;
                 }
                 else
                 {
-                    Stop();
+                    //Stop();
                     m_WaitingTime -= Time.deltaTime;
                 }
             }
@@ -147,10 +147,10 @@ public class BatAi : MonoBehaviour
         if (!m_CaughtPlayer)
         {
             Move(runningSpeed);
-            navMeshAgent.SetDestination(m_PlayerPosition);
+            agent.SetDestination(m_PlayerPosition);
         }
 
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
             if (m_WaitingTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
             {
@@ -160,7 +160,7 @@ public class BatAi : MonoBehaviour
                 Move(walkingSpeed);
                 m_rotationTime = rotationTime;
                 m_WaitingTime = startWaitingTimer;
-                agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                agent.SetDestination(waypoints[waypointIndex].position);
             }
         }
     }

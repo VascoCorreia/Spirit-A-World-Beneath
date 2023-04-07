@@ -18,13 +18,13 @@ TagManager:
   - UI
   - HumanCamera
   - SpiritCamera
-  - Possesable
+  - PossesableStatic
   - Interactable
   - RoryBarrier
   - SpiritBarrier
   - Rory
   - Spirit
-  - 
+  - PossessableDynamic
   - 
   - 
   - 

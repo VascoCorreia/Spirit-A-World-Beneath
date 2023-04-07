@@ -23,5 +23,6 @@ public static class MaterialExtensions
         material.EnableKeyword("_ALPHABLEND_ON");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        material.color = new Color(material.color.r, material.color.g, material.color.b, 0.4f);
     }
 }

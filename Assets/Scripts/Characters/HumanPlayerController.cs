@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 //The character as of now is 1.56m long in real world units or 0.78 in Unity capsule units. (normal height for 13 year old)
 public class HumanPlayerController : MonoBehaviour
@@ -22,6 +21,19 @@ public class HumanPlayerController : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _playerInteract = GetComponent<PlayerInteract>();
+
+        _controller.enabled = true;
+        _playerInteract.enabled = true;
+    }
+
+    private void OnEnable()
+    {
+        Death.playerDied += playerHasDiedEventHandler;
+    }
+
+    private void OnDisable()
+    {
+        Death.playerDied -= playerHasDiedEventHandler;
     }
     void Update()
     {
@@ -29,11 +41,11 @@ public class HumanPlayerController : MonoBehaviour
         applyGravity();
         calculateVelocityAndMove();
 
-        if(Input.GetButtonDown("HumanInteract"))
+        if (Input.GetButtonDown("HumanInteract"))
         {
             _playerInteract.Interact(_humanCamera);
         }
-        if(Input.GetButtonUp("HumanInteract"))
+        if (Input.GetButtonUp("HumanInteract"))
         {
             _playerInteract.StopInteract();
         }
@@ -119,7 +131,7 @@ public class HumanPlayerController : MonoBehaviour
             var adjustedvelocity = rotation * velocity;
 
             //if slope is over controller limit slide down
-            if(Vector3.Angle(Vector3.up, hitInfo.normal) > _controller.slopeLimit)
+            if (Vector3.Angle(Vector3.up, hitInfo.normal) > _controller.slopeLimit)
             {
                 return rotation * Vector3.forward * Physics.gravity.y;
             }
@@ -149,5 +161,11 @@ public class HumanPlayerController : MonoBehaviour
         //apply the push
 
         body.AddForce(pushDir * pushPower, ForceMode.Force);
+    }
+
+    void playerHasDiedEventHandler()
+    {
+        _controller.enabled = false;
+        _playerInteract.enabled = false;
     }
 }

@@ -8,7 +8,17 @@ public class MakeObjectsInvisible : MonoBehaviour
 
     private List<Material[]> _materialsInTheWay = new List<Material[]>();
     private List<Material[]> _materialsAlreadyTransparent = new List<Material[]>();
+    private LayerMask _combinedLayerMask;
+    private int _roryLayerMask, _spiritLayerMask, _dynamicPossessablesLayerMask;
+    private void Start()
+    {
+        _roryLayerMask = LayerMask.GetMask("Rory");
+        _spiritLayerMask = LayerMask.GetMask("Spirit");
+        _dynamicPossessablesLayerMask = LayerMask.GetMask("PossessableDynamic");
 
+        //_layerMask = ~((1 << _roryLayerMask) | (1 << _spiritLayerMask));
+        _combinedLayerMask = ~(_roryLayerMask | _spiritLayerMask | _dynamicPossessablesLayerMask);
+    }
     private void Update()
     {
         _materialsInTheWay = AllObjectsInTheWay(ref _materialsInTheWay);
@@ -49,9 +59,11 @@ public class MakeObjectsInvisible : MonoBehaviour
 
     List<Material[]> AllObjectsInTheWay(ref List<Material[]> materials)
     {
+
+        //NEED TO CREATE LAYERMASK TO IGNORE PLAYERS
         materials.Clear();
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(_camera.transform.position, transform.position - _camera.transform.position, Vector3.Distance(transform.position, _camera.transform.position));
+        hits = Physics.RaycastAll(_camera.transform.position, transform.position - _camera.transform.position, Vector3.Distance(transform.position, _camera.transform.position), _combinedLayerMask);
 
         foreach (RaycastHit hit in hits)
         {

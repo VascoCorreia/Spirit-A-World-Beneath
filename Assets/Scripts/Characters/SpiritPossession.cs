@@ -18,9 +18,12 @@ public class SpiritPossession : MonoBehaviour
     [field: SerializeField, Range(10f, 30f)] public float _possessableDistance { get; private set; }
     [field: SerializeField] public GameObject _currentPossessedObject { get; private set; }
 
-    [SerializeField] private LayerMask _possessionLayerMask;
     [SerializeField] private float _possessionCooldown;
     [SerializeField] private GameObject _cacheSpirit;
+
+    private LayerMask _combinedPossessionLayerMask;
+    private LayerMask _possessionStaticLayerMask;
+    private LayerMask _possessionDynamicLayerMask;
 
     public TypeInPossession typeInPossession;
 
@@ -33,6 +36,10 @@ public class SpiritPossession : MonoBehaviour
         _spiritCamera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
         _spiritFreeLookCamera = GameObject.Find("SpiritCamera").GetComponent<CinemachineFreeLook>();
         _cacheSpirit = GameObject.Find("Spirit");
+
+        _possessionDynamicLayerMask = LayerMask.GetMask("PossessableDynamic");
+        _possessionStaticLayerMask = LayerMask.GetMask("PossessableStatic");
+        _combinedPossessionLayerMask = (_possessionDynamicLayerMask | _possessionStaticLayerMask);
     }
 
     private void OnEnable()
@@ -83,7 +90,7 @@ public class SpiritPossession : MonoBehaviour
         {
             Ray ray = new(_spiritCamera.transform.position, _spiritCamera.transform.forward);
 
-            if (Physics.Raycast(ray, out RaycastHit info, _possessableDistance, _possessionLayerMask) && _canPossess && !_alreadyInPossession)
+            if (Physics.Raycast(ray, out RaycastHit info, _possessableDistance, _combinedPossessionLayerMask) && _canPossess && !_alreadyInPossession)
             {
                 _alreadyInPossession = true;
 
@@ -104,8 +111,6 @@ public class SpiritPossession : MonoBehaviour
 
                 //Run the Possess function in the possessed object
                 _currentPossessedObject.GetComponent<IPossessable>().Possess(new possessionEventArgs(info.collider.gameObject));
-
-
 
                 //Invoke possession successfull event and pass the possessed object
                 possessionSucessfull?.Invoke(new possessionEventArgs(info.collider.gameObject));
