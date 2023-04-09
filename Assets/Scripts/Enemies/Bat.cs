@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bat : MonoBehaviour, IPossessable
 {
+    public string TypeInPossession { get; set; } = "Bat";
     public void Possess(possessionEventArgs raycastedBat)
     {
         //Only possess the correct bat
@@ -21,7 +22,7 @@ public class Bat : MonoBehaviour, IPossessable
     {
         Destroy(GetComponent<CharacterController>());
         Destroy(GetComponent<PlayerInteract>());
-        Destroy(GetComponent<SpiritPlayerController>());
+        Destroy(GetComponent<NonPossessionController>());
 
         gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
     }

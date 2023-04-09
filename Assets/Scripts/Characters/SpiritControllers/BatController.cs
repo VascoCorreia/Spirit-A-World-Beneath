@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BatController : SpiritPlayerController
+public class BatController : NonPossessionController
 {
-    // Start is called before the first frame update
     void Start()
     {
         _maxSpeed = 15f;
@@ -14,8 +11,13 @@ public class BatController : SpiritPlayerController
     protected override void Update()
     {
         base.Update();
-        Vector3 forward = _spiritCamera.transform.forward;
-        Vector3 right = _spiritCamera.transform.right;
+        Actions();
+    }
+
+    protected override void Actions()
+    {
+        Vector3 forward = _camera.transform.forward;
+        Vector3 right = _camera.transform.right;
 
         Vector3 forwardRelativeVerticalInput = forward * _playerInput.y;
         Vector3 rightRelativeVerticalInput = right * _playerInput.x;

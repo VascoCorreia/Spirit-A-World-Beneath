@@ -9,6 +9,7 @@ TagManager:
   - Mushroom
   - Spirit
   - Rory
+  - Crystal
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - HumanCamera
   - SpiritCamera
-  - PossesableStatic
+  - PossessableStatic
   - Interactable
   - RoryBarrier
   - SpiritBarrier

@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class SpiritPossession : MonoBehaviour
 {
-    public enum TypeInPossession
-    {
-        None,
-        Bat,
-        Mushroom,
-    }
     [field: SerializeField] public bool _alreadyInPossession { get; set; }
     [field: SerializeField] public bool _canPossess { get; set; }
     [field: SerializeField] public Camera _spiritCamera { get; private set; }
@@ -25,7 +19,7 @@ public class SpiritPossession : MonoBehaviour
     private LayerMask _possessionStaticLayerMask;
     private LayerMask _possessionDynamicLayerMask;
 
-    public TypeInPossession typeInPossession;
+    public string typeInPossession;
 
     public Action possessionFailed;
     public Action exitPossession;
@@ -44,6 +38,7 @@ public class SpiritPossession : MonoBehaviour
 
     private void OnEnable()
     {
+        typeInPossession = null;
         _alreadyInPossession = false;
         _canPossess = true;
         _possessionCooldown = 2f;
@@ -62,14 +57,14 @@ public class SpiritPossession : MonoBehaviour
         {
             _alreadyInPossession = false;
 
+            //Teleport the spirit to the position of the possessd object
+            _cacheSpirit.transform.position = _currentPossessedObject.transform.position;
+
             //Reactivate the spirit object
             _cacheSpirit.SetActive(true);
 
             //Update the type of possession to No Possession
-            typeInPossession = TypeInPossession.None;
-
-            //Teleport the spirit to the position of the possessd object
-            _cacheSpirit.transform.position = _currentPossessedObject.transform.position;
+            typeInPossession = null;
 
             //Run the Exit possession function on the possessed object 
             _currentPossessedObject.GetComponent<IPossessable>().ExitPossess();
@@ -94,23 +89,14 @@ public class SpiritPossession : MonoBehaviour
             {
                 _alreadyInPossession = true;
 
+                IPossessable possessable = info.collider.GetComponent<IPossessable>();
                 //cache the possessed object
                 _currentPossessedObject = info.collider.gameObject;
 
-                //Update the type of possession to the current posssessed object
-                switch (info.collider.tag)
-                {
-                    case "Bat":
-                        typeInPossession = TypeInPossession.Bat;
-                        break;
-                    case "Mushroom":
-                        typeInPossession = TypeInPossession.Mushroom;
-                        break;
-
-                }
+                typeInPossession = possessable.TypeInPossession;
 
                 //Run the Possess function in the possessed object
-                _currentPossessedObject.GetComponent<IPossessable>().Possess(new possessionEventArgs(info.collider.gameObject));
+                possessable.Possess(new possessionEventArgs(info.collider.gameObject));
 
                 //Invoke possession successfull event and pass the possessed object
                 possessionSucessfull?.Invoke(new possessionEventArgs(info.collider.gameObject));

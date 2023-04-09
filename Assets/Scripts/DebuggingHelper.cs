@@ -5,7 +5,7 @@ public class DebuggingHelper : MonoBehaviour
 {
     public static DebuggingHelper Instance { get; private set; }
 
-    [SerializeField] SpiritPlayerController _spiritPlayerController;
+    [SerializeField] SpiritPlayerController _playerController;
     [SerializeField] SpiritPossession _spiritPossession;
     [SerializeField] HumanPlayerController _humanPlayerController;
     [SerializeField] float DistanceFromController;
@@ -22,16 +22,16 @@ public class DebuggingHelper : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        TrueDistanceFromPlayerToObjectRay(_spiritPlayerController._spiritCamera, _spiritPlayerController._controller, _spiritPossession._possessableDistance, out DistanceFromController);
+    //void Update()
+    //{
+    //    //TrueDistanceFromPlayerToObjectRay(_playerController._camera, _playerController., _spiritPossession._possessableDistance, out DistanceFromController);
 
-    }
+    //}
 
-    void TrueDistanceFromPlayerToObjectRay(Camera camera, CharacterController controller, float distanceToTest, out float DistanceFromController)
-    {
-        DistanceFromController = distanceToTest - Vector3.Distance(camera.transform.position, controller.transform.position) - controller.radius;
+    //void TrueDistanceFromPlayerToObjectRay(Camera camera, CharacterController controller, float distanceToTest, out float DistanceFromController)
+    //{
+    //    DistanceFromController = distanceToTest - Vector3.Distance(camera.transform.position, controller.transform.position) - controller.radius;
 
-        Debug.DrawRay(camera.transform.position, camera.transform.forward * distanceToTest, Color.yellow);
-    }
+    //    Debug.DrawRay(camera.transform.position, camera.transform.forward * distanceToTest, Color.yellow);
+    //}
 }

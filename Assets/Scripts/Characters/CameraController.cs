@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
 
 
             //Mushroom possession
-            if (_spiritPossession.typeInPossession == SpiritPossession.TypeInPossession.Mushroom)
+            if (_spiritPossession.typeInPossession == "Mushroom")
             {
                 _camera.m_Orbits[0].m_Radius *= 1.5f;
                 _camera.m_Orbits[1].m_Radius *= 1.5f;
