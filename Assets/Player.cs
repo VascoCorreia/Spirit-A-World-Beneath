@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     List<GameObject> BatsInRadius = new List<GameObject>();
 
     public float CallingRadius;
-    public Action<calledBatsEventArgs> OnWhistle;
+    public Action<WhistleEventArgs> OnWhistle;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
             BatsInRadius = GetBatsInRadius(BatsInRadius);
             Transform positionWhenCalled = gameObject.transform;
 
-            OnWhistle?.Invoke(new calledBatsEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled));
+            OnWhistle?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled));
 
         }
     }
@@ -50,36 +50,5 @@ public class Player : MonoBehaviour
         }
 
         return objectInRadius;
-    }
-}
-
-public class calledBatsEventArgs : EventArgs
-{
-    private Transform _positionWhenWhistled;
-    private GameObject _calledBat;
-
-    public GameObject getCalledBat()
-    {
-        return _calledBat;
-    }
-
-    public void setCalledEnemy(GameObject CalledBat)
-    {
-        _calledBat = CalledBat;
-    }
-
-    public Transform getPosition()
-    {
-        return _positionWhenWhistled;
-    }
-
-    public void getSetPosition(Transform calledPosition)
-    {
-        _positionWhenWhistled = calledPosition;
-    }
-    public calledBatsEventArgs(GameObject calledBat, Transform positionWhenWhistled)
-    {
-        _calledBat = calledBat;
-        _positionWhenWhistled = positionWhenWhistled;
     }
 }

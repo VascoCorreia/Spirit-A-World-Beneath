@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 //The character as of now is 1.56m long in real world units or 0.78 in Unity capsule units. (normal height for 13 year old)
@@ -10,12 +11,17 @@ public class HumanPlayerController : MonoBehaviour
 
     [SerializeField] private Vector3 _velocity;
     [SerializeField] private bool _onGround;
+    [SerializeField] private float CallingRadius;
     [SerializeField, Range(0f, 10f)] private float maxJumpHeight = 2f;
     [SerializeField, Range(0f, 50f)] private float _maxSpeed = 10f;
     [SerializeField, Range(0f, 25f)] private float pushPower = 3f;
 
     private Vector2 _playerInput;
     private float _ySpeed;
+
+    List<GameObject> BatsInRadius = new List<GameObject>();
+
+    public Action<WhistleEventArgs> OnWhistle;
 
     private void Awake()
     {
@@ -48,6 +54,15 @@ public class HumanPlayerController : MonoBehaviour
         if (Input.GetButtonUp("HumanInteract"))
         {
             _playerInteract.StopInteract();
+        }
+
+        //R1
+        if (Input.GetButtonDown("HumanWhistle"))
+        {
+            BatsInRadius = GetBatsInRadius(BatsInRadius);
+            Transform positionWhenCalled = gameObject.transform;
+
+            OnWhistle?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled));
         }
     }
 
@@ -167,5 +182,20 @@ public class HumanPlayerController : MonoBehaviour
     {
         _controller.enabled = false;
         _playerInteract.enabled = false;
+    }
+
+    private List<GameObject> GetBatsInRadius(List<GameObject> objectInRadius)
+    {
+        Collider[] Temporary = Physics.OverlapSphere(transform.position, CallingRadius);
+
+        foreach (var item in Temporary)
+        {
+            if (item.gameObject.tag == "Bat")
+            {
+                objectInRadius.Add(item.gameObject);
+            }
+        }
+
+        return objectInRadius;
     }
 }

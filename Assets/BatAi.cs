@@ -102,7 +102,7 @@ public class BatAi : MonoBehaviour
     //    currentTargetTEST = test;
     //}
 
-    public void BatCalling(calledBatsEventArgs calledBats)
+    public void BatCalling(WhistleEventArgs calledBats)
     {
         if (calledBats.getCalledBat() == gameObject)
         {
