@@ -5,6 +5,7 @@ public class CrystalController : SpiritPlayerController
     private Light _pointLight;
     [SerializeField] private float _lightIntensityGrowthSpeed;
     [SerializeField] private float _lightMaxRange;
+    [SerializeField] private Light ?li;
     [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
 
 
