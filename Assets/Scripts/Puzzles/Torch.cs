@@ -5,14 +5,30 @@ using UnityEngine;
 
 public class Torch : MonoBehaviour, IInteractable
 {
-    public void Interacted()
+
+    //TOCHA MUST BE IN LAYER INTERACTABLE
+    public void Interacted(GameObject player)
     {
-        Debug.Log("I am gay");
+        if(player.tag == "Rory")
+        {
+           //tocha vai para rory
+           //
+        }
     }
 
-    public void Released()
+    public void Released(GameObject player)
     {
-        Debug.Log("I am not gay");
+        if (player.tag == "Rory")
+        {
+            // IF RORY NOT LOOKING AT PLACE TO PUT TOCHA OU ESTIVER LONGE DESSA MERDA -> TOCHA CAI
+           
+            //IF RORY IS LOOKING AT PLACE TO PUT TOCHA AND IS CLOSE ENOUGH -> DEBUG.LOG("I AM WORKING")
 
+            //IF RORY IS TOO FAR AWAY -> TOCHA CAI
+
+            //IF RORY NOT LOOKING -> TOCHA CAI
+
+
+        }
     }
 }

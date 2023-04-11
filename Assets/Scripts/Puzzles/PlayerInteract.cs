@@ -21,7 +21,7 @@ public class PlayerInteract : MonoBehaviour
         {
             _interactedObject = info.collider.gameObject;
 
-            _interactedObject.GetComponent<IInteractable>().Interacted();
+            _interactedObject.GetComponent<IInteractable>().Interacted(gameObject);
         }
         else
         {
@@ -33,7 +33,7 @@ public class PlayerInteract : MonoBehaviour
     {
         if (_interactedObject != null)
         {
-            _interactedObject.GetComponent<IInteractable>().Released();
+            _interactedObject.GetComponent<IInteractable>().Released(gameObject);
         }
     }
 }

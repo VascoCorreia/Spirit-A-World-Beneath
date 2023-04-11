@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public interface IInteractable
 {
-    void Interacted();
-    void Released();
+    void Interacted(GameObject player);
+    void Released(GameObject player);
 
 }
