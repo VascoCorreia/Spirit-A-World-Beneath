@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WhistleEventArgs : EventArgs
 {
-    private Transform _positionWhenWhistled;
+    private Vector3 _playerPositionWhenWhistled;
     private GameObject _calledBat;
 
     public GameObject getCalledBat()
@@ -16,18 +16,18 @@ public class WhistleEventArgs : EventArgs
         _calledBat = CalledBat;
     }
 
-    public Transform getPosition()
+    public Vector3 getPlayerPositionWhenWhistled()
     {
-        return _positionWhenWhistled;
+        return _playerPositionWhenWhistled;
     }
 
-    public void getSetPosition(Transform calledPosition)
+    public void setPlayerPositionWhenWhistled(Vector3 calledPosition)
     {
-        _positionWhenWhistled = calledPosition;
+        _playerPositionWhenWhistled = calledPosition;
     }
-    public WhistleEventArgs(GameObject calledBat, Transform positionWhenWhistled)
+    public WhistleEventArgs(GameObject calledBat, Vector3 playerPositionWhenWhistled)
     {
         _calledBat = calledBat;
-        _positionWhenWhistled = positionWhenWhistled;
+        _playerPositionWhenWhistled = playerPositionWhenWhistled;
     }
 }

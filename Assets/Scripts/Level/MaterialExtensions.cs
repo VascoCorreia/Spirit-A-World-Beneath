@@ -19,12 +19,19 @@ public static class MaterialExtensions
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
 
         material.SetShaderPassEnabled("DepthOnly", true);
-        material.SetShaderPassEnabled("SHADOWCASTER", true);
+        material.SetShaderPassEnabled("SHADOWCASTER", false);
 
         material.SetOverrideTag("RenderType", "Opaque");
 
         material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+
+        material.color = new Color(
+            material.color.r,
+            material.color.g,
+            material.color.b,
+            1f
+        );
     }
 
     public static void ToTransparentMode(Material material)
@@ -47,12 +54,18 @@ public static class MaterialExtensions
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
 
         material.SetShaderPassEnabled("DepthOnly", false);
-        material.SetShaderPassEnabled("SHADOWCASTER", true);
+        material.SetShaderPassEnabled("SHADOWCASTER", false);
 
         material.SetOverrideTag("RenderType", "Transparent");
 
         material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
         material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
 
+        material.color = new Color(
+            material.color.r,
+            material.color.g,
+            material.color.b,
+            0.3f
+        );
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //The character as of now is 1.56m long in real world units or 0.78 in Unity capsule units. (normal height for 13 year old)
@@ -7,21 +8,23 @@ public class HumanPlayerController : MonoBehaviour
 {
     [field: SerializeField] public Camera _humanCamera { get; private set; }
     [field: SerializeField] public PlayerInteract _playerInteract { get; private set; }
-    public CharacterController _controller { get; private set; }
+    [field: SerializeField] public CharacterController _controller { get; private set; }
 
     [SerializeField] private Vector3 _velocity;
     [SerializeField] private bool _onGround;
-    [SerializeField] private float CallingRadius;
-    [SerializeField, Range(0f, 10f)] private float maxJumpHeight = 2f;
+    [SerializeField] private float _callingRadius;
+    [SerializeField] private float _whisleCooldown = 2f;
+    [SerializeField, Range(0f, 10f)] private float _maxJumpHeight = 2f;
     [SerializeField, Range(0f, 50f)] private float _maxSpeed = 10f;
-    [SerializeField, Range(0f, 25f)] private float pushPower = 3f;
+    [SerializeField, Range(0f, 25f)] private float _pushPower = 3f;
 
     private Vector2 _playerInput;
     private float _ySpeed;
+    [SerializeField] bool _canWhistle;
+    private List<GameObject> BatsInRadius = new List<GameObject>();
 
-    List<GameObject> BatsInRadius = new List<GameObject>();
-
-    public Action<WhistleEventArgs> OnWhistle;
+    public Action<WhistleEventArgs> OnWhistleSucessfull;
+    public Action OnWhistleFailed;
 
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class HumanPlayerController : MonoBehaviour
 
         _controller.enabled = true;
         _playerInteract.enabled = true;
+        _canWhistle = true;
     }
 
     private void OnEnable()
@@ -59,10 +63,23 @@ public class HumanPlayerController : MonoBehaviour
         //R1
         if (Input.GetButtonDown("HumanWhistle"))
         {
-            BatsInRadius = GetBatsInRadius(BatsInRadius);
-            Transform positionWhenCalled = gameObject.transform;
+            if(_canWhistle)
+            {
+                BatsInRadius = GetBatsInRadius(BatsInRadius);
+                Transform positionWhenCalled = gameObject.transform;
 
-            OnWhistle?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled));
+                if(BatsInRadius.Count > 0)
+                {
+                    OnWhistleSucessfull?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled.position));
+                }
+                
+                if(BatsInRadius.Count == 0)
+                {
+                    OnWhistleFailed?.Invoke();
+                }
+
+                StartCoroutine(Cooldowns.Cooldown(_whisleCooldown, (possessionFlag) => _canWhistle = possessionFlag));
+            }
         }
     }
 
@@ -130,7 +147,7 @@ public class HumanPlayerController : MonoBehaviour
     //https://screenrec.com/share/62pUYiuKDW
     private void Jump()
     {
-        _ySpeed += Mathf.Sqrt(maxJumpHeight * -2.0f * Physics.gravity.y);
+        _ySpeed += Mathf.Sqrt(_maxJumpHeight * -2.0f * Physics.gravity.y);
     }
 
     //removes bounciness when moving down slopes, keeps the direction of the movement align with the slope angle
@@ -175,7 +192,7 @@ public class HumanPlayerController : MonoBehaviour
 
         //apply the push
 
-        body.AddForce(pushDir * pushPower, ForceMode.Force);
+        body.AddForce(pushDir * _pushPower, ForceMode.Force);
     }
 
     void playerHasDiedEventHandler()
@@ -186,7 +203,7 @@ public class HumanPlayerController : MonoBehaviour
 
     private List<GameObject> GetBatsInRadius(List<GameObject> objectInRadius)
     {
-        Collider[] Temporary = Physics.OverlapSphere(transform.position, CallingRadius);
+        Collider[] Temporary = Physics.OverlapSphere(transform.position, _callingRadius);
 
         foreach (var item in Temporary)
         {

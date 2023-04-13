@@ -44,13 +44,6 @@ public class SpiritPossession : MonoBehaviour
         _possessionCooldown = 2f;
     }
 
-    private IEnumerator Cooldown(float cooldownTime, Action<bool> callback)
-    {
-        callback(false);
-        yield return new WaitForSeconds(cooldownTime);
-        callback(true);
-    }
-
     public void ExitPossession()
     {
         if (_alreadyInPossession)
@@ -105,7 +98,7 @@ public class SpiritPossession : MonoBehaviour
                 _cacheSpirit.SetActive(false);
 
                 //Start Cooldown
-                StartCoroutine(Cooldown(_possessionCooldown, (i) =>
+                StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (i) =>
                 {
                     _canPossess = i;
                 }));
@@ -117,7 +110,7 @@ public class SpiritPossession : MonoBehaviour
                 possessionFailed?.Invoke();
 
                 //Start the cooldown
-                StartCoroutine(Cooldown(_possessionCooldown, (i) =>
+                StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (i) =>
                 {
                     _canPossess = i;
                 }));

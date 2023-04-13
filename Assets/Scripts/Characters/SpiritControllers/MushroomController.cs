@@ -28,9 +28,9 @@ public class MushroomController : SpiritPlayerController
     }
     protected override void Actions()
     {
-        transform.localScale += new Vector3(_playerInput.y * _mushroomGrowthSpeed, _playerInput.y * _mushroomGrowthSpeed, _playerInput.y * _mushroomGrowthSpeed);
+        transform.localScale += new Vector3(playerInput.y * _mushroomGrowthSpeed, playerInput.y * _mushroomGrowthSpeed, playerInput.y * _mushroomGrowthSpeed);
         sizeConstraints();
-        Debug.Log(_playerInput.y);
+        Debug.Log(playerInput.y);
     }
 
     public void sizeConstraints()

@@ -22,7 +22,7 @@ public class Bat : MonoBehaviour, IPossessable
     {
         Destroy(GetComponent<CharacterController>());
         Destroy(GetComponent<PlayerInteract>());
-        Destroy(GetComponent<NonPossessionController>());
+        Destroy(GetComponent<MovableController>());
 
         gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
     }

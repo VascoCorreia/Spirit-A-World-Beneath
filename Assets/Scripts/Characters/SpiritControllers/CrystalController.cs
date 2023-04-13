@@ -1,32 +1,30 @@
 ﻿using UnityEngine;
+using VLB;
 
 public class CrystalController : SpiritPlayerController
 {
-    private Light _pointLight;
-    [SerializeField] private float _lightIntensityGrowthSpeed;
-    [SerializeField] private float _lightMaxRange;
-    [SerializeField] private Light ?li;
     [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
 
-
-    private float _maxIntensity;
+    private Light _spotLight;
+    private VolumetricLightBeam _lightBeam;
 
     private void Awake()
     {
-        _pointLight = GetComponentInChildren<Light>();
-    }
-    void Start()
-    {
-        _lightIntensityGrowthSpeed = Random.Range(0.005f, 0.01f);
-        _pointLight.color = GetComponent<MeshRenderer>().material.color;
-        _maxIntensity = 2f;
-        _pointLight.range = _lightMaxRange;
-    }
+        _lightBeam = GetComponentInChildren<VolumetricLightBeam>();
+        _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
+        GetSpotLight();
 
+    }
     protected override void OnEnable()
     {
         base.OnEnable();
-        _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
+
+        EnableLights();
+    }
+
+    private void OnDisable()
+    {
+        _lightBeam.enabled = false;
     }
 
     protected override void Update()
@@ -38,12 +36,14 @@ public class CrystalController : SpiritPlayerController
 
     protected override void Actions()
     {
-        if (_pointLight.intensity > _maxIntensity)
-        {
-            _pointLight.intensity = _maxIntensity;
-        }
+        //if (_pointLight.intensity > _maxIntensity)
+        //{
+        //    _pointLight.intensity = _maxIntensity;
+        //}
 
-        _pointLight.intensity += (_playerInput.y * _lightIntensityGrowthSpeed);
+        //_pointLight.intensity += (_playerInput.y * _lightIntensityGrowthSpeed);
+
+        _lightBeam.transform.Rotate(-playerInput.y, playerInput.x, 0);
     }
 
     protected override void getPlayerInput()
@@ -54,5 +54,26 @@ public class CrystalController : SpiritPlayerController
         {
             _spiritPossession.ExitPossession();
         }
+    }
+
+    private void GetSpotLight()
+    {
+        Light[] allLights = GetComponentsInChildren<Light>();
+
+        foreach (Light light in allLights)
+        {
+            if (light.type == LightType.Spot)
+            {
+                _spotLight = light;
+            }
+        }
+    }
+
+    private void EnableLights()
+    {
+        _lightBeam.enabled = true;
+        _spotLight.enabled = true;
+        _spotLight.color = GetComponent<MeshRenderer>().material.color;
+        _lightBeam.color = GetComponent<MeshRenderer>().material.color;
     }
 }

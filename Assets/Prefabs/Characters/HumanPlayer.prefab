@@ -131,7 +131,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7882676879635170857}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -269,6 +269,7 @@ MonoBehaviour:
   <_playerInteract>k__BackingField: {fileID: 7882676879635170903}
   _velocity: {x: 0, y: 0, z: 0}
   _onGround: 0
+  CallingRadius: 0
   maxJumpHeight: 4.66
   _maxSpeed: 10
   pushPower: 5
@@ -372,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2698993392168584358, guid: 564c2936d64bb5c45875ff884a272ab5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.006794864
+      value: -0.006794863
       objectReference: {fileID: 0}
     - target: {fileID: 2698993392168584358, guid: 564c2936d64bb5c45875ff884a272ab5, type: 3}
       propertyPath: m_LocalRotation.y
@@ -480,11 +481,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2698993393303288426, guid: 564c2936d64bb5c45875ff884a272ab5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7843584
+      value: 0.78435844
       objectReference: {fileID: 0}
     - target: {fileID: 2698993393303288426, guid: 564c2936d64bb5c45875ff884a272ab5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.10691459
+      value: 0.106914595
       objectReference: {fileID: 0}
     - target: {fileID: 2698993393303288426, guid: 564c2936d64bb5c45875ff884a272ab5, type: 3}
       propertyPath: m_LocalRotation.y
@@ -492,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2698993393303288426, guid: 564c2936d64bb5c45875ff884a272ab5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.082524635
+      value: -0.08252463
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -564,6 +565,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 59275784704573789, guid: 8e84c55b94408454595b4289f6666a7c, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 65399
+      objectReference: {fileID: 0}
     - target: {fileID: 59275784704573791, guid: 8e84c55b94408454595b4289f6666a7c, type: 3}
       propertyPath: m_Name
       value: HumanCameraBrain
@@ -571,13 +576,64 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 59275784704573791, guid: 8e84c55b94408454595b4289f6666a7c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 480978635}
   m_SourcePrefab: {fileID: 100100000, guid: 8e84c55b94408454595b4289f6666a7c, type: 3}
 --- !u!4 &59275784922518080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 59275784704573786, guid: 8e84c55b94408454595b4289f6666a7c, type: 3}
   m_PrefabInstance: {fileID: 856658714}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &59275784922518085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 59275784704573791, guid: 8e84c55b94408454595b4289f6666a7c, type: 3}
+  m_PrefabInstance: {fileID: 856658714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &480978635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59275784922518085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!20 &59275784922518087 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 59275784704573789, guid: 8e84c55b94408454595b4289f6666a7c, type: 3}

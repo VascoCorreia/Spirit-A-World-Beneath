@@ -2,7 +2,7 @@ using Cinemachine;
 using System;
 using UnityEngine;
 
-public class NonPossessionController : SpiritPlayerController
+public class MovableController : SpiritPlayerController
 {
     [field: SerializeField] public PlayerInteract _playerInteract { get; private set; }
     [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
@@ -128,8 +128,8 @@ public class NonPossessionController : SpiritPlayerController
         forward = forward.normalized;
         right = right.normalized;
 
-        Vector3 forwardRelativeVerticalInput = forward * _playerInput.y;
-        Vector3 rightRelativeVerticalInput = right * _playerInput.x;
+        Vector3 forwardRelativeVerticalInput = forward * playerInput.y;
+        Vector3 rightRelativeVerticalInput = right * playerInput.x;
 
         Vector3 cameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
 

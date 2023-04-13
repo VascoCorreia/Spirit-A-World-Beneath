@@ -9,15 +9,17 @@ public class MakeObjectsInvisible : MonoBehaviour
     private List<Material[]> _materialsInTheWay = new List<Material[]>();
     private List<Material[]> _materialsAlreadyTransparent = new List<Material[]>();
     private LayerMask _combinedLayerMask;
-    private int _roryLayerMask, _spiritLayerMask, _dynamicPossessablesLayerMask;
+    private int _roryLayerMask, _spiritLayerMask, _dynamicPossessablesLayerMask, spiritBarrierLayerMask, humanBarrierLayerMask;
     private void Start()
     {
         _roryLayerMask = LayerMask.GetMask("Rory");
         _spiritLayerMask = LayerMask.GetMask("Spirit");
         _dynamicPossessablesLayerMask = LayerMask.GetMask("PossessableDynamic");
+        humanBarrierLayerMask = LayerMask.GetMask("RoryBarrier");
+        spiritBarrierLayerMask = LayerMask.GetMask("SpiritBarrier");
 
         //_layerMask = ~((1 << _roryLayerMask) | (1 << _spiritLayerMask));
-        _combinedLayerMask = ~(_roryLayerMask | _spiritLayerMask | _dynamicPossessablesLayerMask);
+        _combinedLayerMask = ~(_roryLayerMask | _spiritLayerMask | _dynamicPossessablesLayerMask | humanBarrierLayerMask | spiritBarrierLayerMask);
     }
     private void Update()
     {

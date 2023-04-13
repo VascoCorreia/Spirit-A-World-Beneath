@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BatController : NonPossessionController
+public class BatController : MovableController
 {
     void Start()
     {
@@ -19,8 +19,8 @@ public class BatController : NonPossessionController
         Vector3 forward = _camera.transform.forward;
         Vector3 right = _camera.transform.right;
 
-        Vector3 forwardRelativeVerticalInput = forward * _playerInput.y;
-        Vector3 rightRelativeVerticalInput = right * _playerInput.x;
+        Vector3 forwardRelativeVerticalInput = forward * playerInput.y;
+        Vector3 rightRelativeVerticalInput = right * playerInput.x;
 
         Vector3 PlayerCameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
 
@@ -31,5 +31,13 @@ public class BatController : NonPossessionController
         _velocity = AdjustVelocityToSlope(_velocity);
 
         _controller.Move(_velocity * Time.deltaTime);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.collider.tag == "Bat")
+        {
+            _spiritPossession.ExitPossession();
+        }
     }
 }
