@@ -19,6 +19,7 @@ public class SpiritPlayerController : MonoBehaviour
         return;
     }
 
+    //All child classes require this inputs
     protected virtual void getPlayerInput()
     {
         playerInput.x = Input.GetAxis("SpiritHorizontal");

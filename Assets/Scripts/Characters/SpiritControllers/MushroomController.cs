@@ -6,7 +6,7 @@ public class MushroomController : SpiritPlayerController
 
     [SerializeField, Range(3, 10)] private float _maxSize;
     [SerializeField] private Vector3 _minSize;
-    [SerializeField] private float _mushroomGrowthSpeed;
+    [SerializeField] private float _mushroomGrowthSpeed; //randomized
 
     void Start()
     {
@@ -30,9 +30,9 @@ public class MushroomController : SpiritPlayerController
     {
         transform.localScale += new Vector3(playerInput.y * _mushroomGrowthSpeed, playerInput.y * _mushroomGrowthSpeed, playerInput.y * _mushroomGrowthSpeed);
         sizeConstraints();
-        Debug.Log(playerInput.y);
     }
 
+    //This function restricts the mushroom for growing or shrinking indefinetely
     public void sizeConstraints()
     {
         if (transform.localScale.x > _maxSize && transform.localScale.y > _maxSize && transform.localScale.z > _maxSize)

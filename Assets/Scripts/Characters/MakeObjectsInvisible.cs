@@ -9,19 +9,11 @@ public class MakeObjectsInvisible : MonoBehaviour
     private List<Material[]> _materialsInTheWay = new List<Material[]>();
     private List<Material[]> _materialsAlreadyTransparent = new List<Material[]>();
     private LayerMask _combinedLayerMask;
-    private int _roryLayerMask, _spiritLayerMask, _dynamicPossessablesLayerMask, spiritBarrierLayerMask, humanBarrierLayerMask, levelLayout;
     private void Start()
     {
-        _roryLayerMask = LayerMask.GetMask("Rory");
-        _spiritLayerMask = LayerMask.GetMask("Spirit");
-        _dynamicPossessablesLayerMask = LayerMask.GetMask("PossessableDynamic");
-        humanBarrierLayerMask = LayerMask.GetMask("RoryBarrier");
-        spiritBarrierLayerMask = LayerMask.GetMask("SpiritBarrier");
-        levelLayout = LayerMask.GetMask("Default");
-
-        //_layerMask = ~((1 << _roryLayerMask) | (1 << _spiritLayerMask));
-        _combinedLayerMask = ~(_roryLayerMask | _spiritLayerMask | _dynamicPossessablesLayerMask | humanBarrierLayerMask | spiritBarrierLayerMask | levelLayout);
+        CreateLayerMask();
     }
+
     private void Update()
     {
         _materialsInTheWay = AllObjectsInTheWay(ref _materialsInTheWay);
@@ -30,6 +22,43 @@ public class MakeObjectsInvisible : MonoBehaviour
         MakeObjectsTransparent();
     }
 
+    //Creates a LayerMask with only the layers that we want to make transparent
+    private void CreateLayerMask()
+    {
+        int _roryLayerMask, _spiritLayerMask, _dynamicPossessablesLayerMask, spiritBarrierLayerMask, humanBarrierLayerMask, levelLayout;
+
+        _roryLayerMask = LayerMask.GetMask("Rory");
+        _spiritLayerMask = LayerMask.GetMask("Spirit");
+        _dynamicPossessablesLayerMask = LayerMask.GetMask("PossessableDynamic");
+        humanBarrierLayerMask = LayerMask.GetMask("RoryBarrier");
+        spiritBarrierLayerMask = LayerMask.GetMask("SpiritBarrier");
+        levelLayout = LayerMask.GetMask("Default");
+
+        _combinedLayerMask = ~(_roryLayerMask | _spiritLayerMask | _dynamicPossessablesLayerMask | humanBarrierLayerMask | spiritBarrierLayerMask | levelLayout);
+    }
+
+    //Puts all materials of an object that is between the character and the camera and belongs to the correct layermask in a List
+    //We clear it in the beggining since this runs every frame
+    List<Material[]> AllObjectsInTheWay(ref List<Material[]> materials)
+    {
+        materials.Clear();
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(_camera.transform.position, transform.position - _camera.transform.position, Vector3.Distance(transform.position, _camera.transform.position), _combinedLayerMask);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (!materials.Contains(hit.collider.GetComponent<MeshRenderer>().materials))
+            {
+                materials.Add(hit.collider.GetComponent<MeshRenderer>().materials);
+            }
+        }
+
+        return materials;
+
+    }
+
+    //Iterates through all the materials of an object that is between the camera and player and changes its materials to transparent
+    //We add to a new list since we need to know which materials are currently invisible
     private void MakeObjectsTransparent()
     {
         _materialsInTheWay.ForEach((materialArray) =>
@@ -42,6 +71,7 @@ public class MakeObjectsInvisible : MonoBehaviour
         });
     }
 
+    //Iterates through all the materials that are currently invisible, if the object is not in the way anymore we change its materials to their regular mode
     private void MakeObjectsSolid()
     {
         List<Material[]> temp = _materialsAlreadyTransparent.ToList();
@@ -57,26 +87,7 @@ public class MakeObjectsInvisible : MonoBehaviour
                 temp.Remove(materialArray);
             }
         });
+
         _materialsAlreadyTransparent = temp;
-    }
-
-    List<Material[]> AllObjectsInTheWay(ref List<Material[]> materials)
-    {
-
-        //NEED TO CREATE LAYERMASK TO IGNORE PLAYERS
-        materials.Clear();
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(_camera.transform.position, transform.position - _camera.transform.position, Vector3.Distance(transform.position, _camera.transform.position), _combinedLayerMask);
-
-        foreach (RaycastHit hit in hits)
-        {
-            if (!materials.Contains(hit.collider.GetComponent<MeshRenderer>().materials))
-            {
-                materials.Add(hit.collider.GetComponent<MeshRenderer>().materials);
-            }
-        }
-
-        return materials;
-
     }
 }

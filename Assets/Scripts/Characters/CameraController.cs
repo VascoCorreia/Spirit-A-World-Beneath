@@ -62,7 +62,7 @@ public class CameraController : MonoBehaviour
             _camera.LookAt = possessedGameobject.getPossessedEnemy().transform;
 
 
-            //Mushroom possession
+            //Mushroom possession requires the camera to be further away from the character, since he can grow
             if (_spiritPossession.typeInPossession == "Mushroom")
             {
                 _camera.m_Orbits[0].m_Radius *= 1.5f;
@@ -76,6 +76,7 @@ public class CameraController : MonoBehaviour
     }
     private void ChangeCameraOnExitPossession()
     {
+        //Return camera to spirit
         if (_character == "Spirit")
         {
             _camera.Follow = _spiritCached.transform;

@@ -14,7 +14,6 @@ public class CrystalController : SpiritPlayerController
         _lightBeam = GetComponentInChildren<VolumetricLightBeam>();
         _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
         GetSpotLight();
-
     }
     protected override void Update()
     {

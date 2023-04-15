@@ -12,6 +12,7 @@ public class HumanPlayerController : MonoBehaviour
     [SerializeField] private Vector3 _velocity;
     [SerializeField] private bool _onGround;
     [SerializeField] private float _callingRadius;
+    [SerializeField] private bool _canWhistle;
     [SerializeField] private float _whisleCooldown = 2f;
     [SerializeField, Range(0f, 10f)] private float _maxJumpHeight = 2f;
     [SerializeField, Range(0f, 50f)] private float _maxSpeed = 10f;
@@ -19,7 +20,6 @@ public class HumanPlayerController : MonoBehaviour
 
     private Vector2 _playerInput;
     private float _ySpeed;
-    [SerializeField] bool _canWhistle;
     private List<GameObject> BatsInRadius = new List<GameObject>();
 
     public Action<WhistleEventArgs> OnWhistleSucessfull;
@@ -30,6 +30,7 @@ public class HumanPlayerController : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _playerInteract = GetComponent<PlayerInteract>();
 
+        //ensures scripts are enabled on level restart/change
         _controller.enabled = true;
         _playerInteract.enabled = true;
         _canWhistle = true;
@@ -40,6 +41,7 @@ public class HumanPlayerController : MonoBehaviour
         Death.playerDied += playerHasDiedEventHandler;
     }
 
+    //very important to unsubscribe specially since it is a static event
     private void OnDisable()
     {
         Death.playerDied -= playerHasDiedEventHandler;
@@ -51,36 +53,11 @@ public class HumanPlayerController : MonoBehaviour
         calculateVelocityAndMove();
         Rotate();
 
-        if (Input.GetButtonDown("HumanInteract"))
-        {
-            _playerInteract.Interact(_humanCamera);
-        }
-        if (Input.GetButtonUp("HumanInteract"))
-        {
-            _playerInteract.StopInteract();
-        }
+        //square
+        Interaction();
 
         //R1
-        if (Input.GetButtonDown("HumanWhistle"))
-        {
-            if (_canWhistle)
-            {
-                BatsInRadius = GetBatsInRadius(BatsInRadius);
-                Transform positionWhenCalled = gameObject.transform;
-
-                if (BatsInRadius.Count > 0)
-                {
-                    OnWhistleSucessfull?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled.position));
-                }
-
-                if (BatsInRadius.Count == 0)
-                {
-                    OnWhistleFailed?.Invoke();
-                }
-
-                StartCoroutine(Cooldowns.Cooldown(_whisleCooldown, (possessionFlag) => _canWhistle = possessionFlag));
-            }
-        }
+        Whistle();
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -93,6 +70,10 @@ public class HumanPlayerController : MonoBehaviour
     {
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
+    }
+    private void Rotate()
+    {
+        transform.rotation = Quaternion.Euler(0, _humanCamera.transform.eulerAngles.y, 0);
     }
 
     //This function is reponsible for continuously applying gravity to our human.
@@ -216,8 +197,38 @@ public class HumanPlayerController : MonoBehaviour
         return objectInRadius;
     }
 
-    private void Rotate()
+    private void Whistle()
     {
-        transform.rotation = Quaternion.Euler(0, _humanCamera.transform.eulerAngles.y, 0);
+        if (Input.GetButtonDown("HumanWhistle"))
+        {
+            if (_canWhistle)
+            {
+                BatsInRadius = GetBatsInRadius(BatsInRadius);
+                Transform positionWhenCalled = gameObject.transform;
+
+                if (BatsInRadius.Count > 0)
+                {
+                    OnWhistleSucessfull?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled.position));
+                }
+
+                if (BatsInRadius.Count == 0)
+                {
+                    OnWhistleFailed?.Invoke();
+                }
+
+                StartCoroutine(Cooldowns.Cooldown(_whisleCooldown, (possessionFlag) => _canWhistle = possessionFlag));
+            }
+        }
+    }
+    private void Interaction()
+    {
+        if (Input.GetButtonDown("HumanInteract"))
+        {
+            _playerInteract.Interact(_humanCamera);
+        }
+        if (Input.GetButtonUp("HumanInteract"))
+        {
+            _playerInteract.StopInteract();
+        }
     }
 }

@@ -118,13 +118,13 @@ public class BatAi : MonoBehaviour
             _currentState = State.ChaseRory;
         }
 
-        else if (_spiritPossession.typeInPossession == "Bat" && _spiritPossession.currentPossessedObject != gameObject && Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
+        else if (
+                _spiritPossession.typeInPossession == "Bat" 
+                 && _spiritPossession.currentPossessedObject != gameObject 
+                 && Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
         {
             _currentState = State.ChasePossessedBat;
 
-            if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
-            {
-            }
         }
 
         else if (isCalled)

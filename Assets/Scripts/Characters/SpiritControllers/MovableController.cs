@@ -1,7 +1,8 @@
-using Cinemachine;
 using System;
 using UnityEngine;
 
+
+//This class is used for Spirit controllers that require translation mainly
 public class MovableController : SpiritPlayerController
 {
     [field: SerializeField] public PlayerInteract _playerInteract { get; private set; }
@@ -13,15 +14,6 @@ public class MovableController : SpiritPlayerController
     [SerializeField] protected Vector3 _velocity;
     [SerializeField] private bool _onGround;
     private float _ySpeed;
-
-    //private void Awake()
-    //{
-    //    _controller = GetComponent<CharacterController>();
-    //    _playerInteract = GetComponent<PlayerInteract>();
-    //    _spiritCamera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
-    //    _spiritFreeLookCamera = GameObject.Find("SpiritCamera").GetComponent<CinemachineFreeLook>();
-    //    _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
-    //}
 
     protected override void OnEnable()
     {
@@ -70,7 +62,7 @@ public class MovableController : SpiritPlayerController
             _playerInteract.StopInteract();
         }
     }
-    //This function is reponsible for continuously applying gravity to our human.
+    //This function is reponsible for continuously applying gravity to our character.
     private void applyGravity()
     {
         _onGround = _controller.isGrounded;
@@ -89,7 +81,7 @@ public class MovableController : SpiritPlayerController
         _ySpeed += Mathf.Sqrt(maxJumpHeight * -2.0f * Physics.gravity.y);
     }
 
-    //removes bounciness when moving down slopes, keeps the direction of the movement align with the slope angle
+    //removes bounciness when moving down slopes, keeps the direction of the movement aligned with the slope angle
     protected Vector3 AdjustVelocityToSlope(Vector3 velocity)
     {
         var ray = new Ray(transform.position, Vector3.down);
@@ -115,11 +107,12 @@ public class MovableController : SpiritPlayerController
         {
             Jump();
         }
-        //get player input
         //get cameras forward and right vectors
+        //We zero the y components since we do not want out character to fly
         //multiply input X vector by camera right vector
         //multiply input Z vector by camera forward vector
-        //add these two vectors
+        //add these two vectors to get the correct rotation
+        //Clamp the magnitude so that diagonal movement is not faster
 
         Vector3 forward = _camera.transform.forward;
         Vector3 right = _camera.transform.right;
@@ -133,10 +126,10 @@ public class MovableController : SpiritPlayerController
 
         Vector3 cameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
 
-        float magnitudeTest = Mathf.Clamp01(cameraRelativeMovement.magnitude) * _maxSpeed;
+        float magnitude = Mathf.Clamp01(cameraRelativeMovement.magnitude) * _maxSpeed;
 
         cameraRelativeMovement.Normalize();
-        _velocity = cameraRelativeMovement * magnitudeTest;
+        _velocity = cameraRelativeMovement * magnitude;
         _velocity.y = _ySpeed;
         _velocity = AdjustVelocityToSlope(_velocity);
 

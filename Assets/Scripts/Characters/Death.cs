@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+//This class handles the static death event.
 public class Death : MonoBehaviour
 {
     public static Action playerDied;
