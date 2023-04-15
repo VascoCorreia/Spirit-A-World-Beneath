@@ -6,7 +6,6 @@ public class Barrier : MonoBehaviour
     {
         //PlaySound()
         //PlayAnimation()
-        Debug.Log("im opening!");
         gameObject.SetActive(false);
     }
 
@@ -14,7 +13,6 @@ public class Barrier : MonoBehaviour
     {
         //PlaySound()
         //PlayAnimation()
-        Debug.Log("closing!");
         gameObject.SetActive(true);
     }
 }

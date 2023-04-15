@@ -33,11 +33,12 @@ public class BatController : MovableController
         _controller.Move(_velocity * Time.deltaTime);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-        if(hit.collider.tag == "Bat")
+        if (other.tag == "Bat" && other.gameObject != gameObject)
         {
             _spiritPossession.ExitPossession();
         }
     }
 }
+

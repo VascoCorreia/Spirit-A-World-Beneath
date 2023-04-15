@@ -16,7 +16,7 @@ public class InGameUIController : MonoBehaviour
 
     private void PossessionFailed()
     {
-        if (!_spiritPossession._alreadyInPossession)
+        if (!_spiritPossession.alreadyInPossession)
             StartCoroutine(DeactivateAfterAnimationComplete(_noTargetForPossessionText, _noTargetForPossessionText.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length));
         else
             StartCoroutine(DeactivateAfterAnimationComplete(_alreadyInPossessionText, _alreadyInPossessionText.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length));

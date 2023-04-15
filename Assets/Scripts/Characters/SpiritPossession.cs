@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class SpiritPossession : MonoBehaviour
 {
-    [field: SerializeField] public bool _alreadyInPossession { get; set; }
-    [field: SerializeField] public bool _canPossess { get; set; }
-    [field: SerializeField] public Camera _spiritCamera { get; private set; }
-    [field: SerializeField] public CinemachineFreeLook _spiritFreeLookCamera { get; private set; }
-    [field: SerializeField, Range(10f, 30f)] public float _possessableDistance { get; private set; }
-    [field: SerializeField] public GameObject _currentPossessedObject { get; private set; }
+    [field: SerializeField] public bool alreadyInPossession { get; set; }
+    [field: SerializeField] public bool canPossess { get; set; }
+    [field: SerializeField] public Camera spiritCamera { get; private set; }
+    [field: SerializeField] public CinemachineFreeLook spiritFreeLookCamera { get; private set; }
+    [field: SerializeField, Range(10f, 30f)] public float possessableDistance { get; private set; }
+    [field: SerializeField] public GameObject currentPossessedObject { get; private set; }
 
     [SerializeField] private float _possessionCooldown;
     [SerializeField] private GameObject _cacheSpirit;
@@ -27,8 +27,8 @@ public class SpiritPossession : MonoBehaviour
 
     private void Awake()
     {
-        _spiritCamera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
-        _spiritFreeLookCamera = GameObject.Find("SpiritCamera").GetComponent<CinemachineFreeLook>();
+        spiritCamera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
+        spiritFreeLookCamera = GameObject.Find("SpiritCamera").GetComponent<CinemachineFreeLook>();
         _cacheSpirit = GameObject.Find("Spirit");
 
         _possessionDynamicLayerMask = LayerMask.GetMask("PossessableDynamic");
@@ -39,19 +39,19 @@ public class SpiritPossession : MonoBehaviour
     private void OnEnable()
     {
         typeInPossession = null;
-        _alreadyInPossession = false;
-        _canPossess = true;
+        alreadyInPossession = false;
+        canPossess = true;
         _possessionCooldown = 2f;
     }
 
     public void ExitPossession()
     {
-        if (_alreadyInPossession)
+        if (alreadyInPossession)
         {
-            _alreadyInPossession = false;
+            alreadyInPossession = false;
 
             //Teleport the spirit to the position of the possessd object
-            _cacheSpirit.transform.position = _currentPossessedObject.transform.position;
+            _cacheSpirit.transform.position = currentPossessedObject.transform.position;
 
             //Reactivate the spirit object
             _cacheSpirit.SetActive(true);
@@ -60,7 +60,7 @@ public class SpiritPossession : MonoBehaviour
             typeInPossession = null;
 
             //Run the Exit possession function on the possessed object 
-            _currentPossessedObject.GetComponent<IPossessable>().ExitPossess();
+            currentPossessedObject.GetComponent<IPossessable>().ExitPossess();
 
             //Invoke event
             exitPossession?.Invoke();
@@ -74,17 +74,17 @@ public class SpiritPossession : MonoBehaviour
     //deactivates the gameObject
     public void tryPossession()
     {
-        if (_canPossess)
+        if (canPossess)
         {
-            Ray ray = new(_spiritCamera.transform.position, _spiritCamera.transform.forward);
+            Ray ray = new(spiritCamera.transform.position, spiritCamera.transform.forward);
 
-            if (Physics.Raycast(ray, out RaycastHit info, _possessableDistance, _combinedPossessionLayerMask) && _canPossess && !_alreadyInPossession)
+            if (Physics.Raycast(ray, out RaycastHit info, possessableDistance, _combinedPossessionLayerMask) && canPossess && !alreadyInPossession)
             {
-                _alreadyInPossession = true;
+                alreadyInPossession = true;
 
                 IPossessable possessable = info.collider.GetComponent<IPossessable>();
                 //cache the possessed object
-                _currentPossessedObject = info.collider.gameObject;
+                currentPossessedObject = info.collider.gameObject;
 
                 typeInPossession = possessable.TypeInPossession;
 
@@ -100,7 +100,7 @@ public class SpiritPossession : MonoBehaviour
                 //Start Cooldown
                 StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (i) =>
                 {
-                    _canPossess = i;
+                    canPossess = i;
                 }));
             }
 
@@ -112,7 +112,7 @@ public class SpiritPossession : MonoBehaviour
                 //Start the cooldown
                 StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (i) =>
                 {
-                    _canPossess = i;
+                    canPossess = i;
                 }));
             }
         }

@@ -10,13 +10,11 @@ public class Death : MonoBehaviour
     {
         eventFiredAlready = false;
     }
-
-    //When Rory hits a bat fire an event once that triggers death
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (hit.gameObject.CompareTag("Bat"))
-        {
-            if(!eventFiredAlready)
+        if (collision.CompareTag("Bat"))
+        {  
+            if (!eventFiredAlready)
             {
                 //Fire Event
                 playerDied?.Invoke();
