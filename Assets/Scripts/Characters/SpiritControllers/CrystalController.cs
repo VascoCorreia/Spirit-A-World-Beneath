@@ -4,6 +4,7 @@ using VLB;
 public class CrystalController : SpiritPlayerController
 {
     [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
+    [SerializeField] private float _lightBeamTranslateSpeed;
 
     private Light _spotLight;
     private VolumetricLightBeam _lightBeam;
@@ -24,14 +25,7 @@ public class CrystalController : SpiritPlayerController
 
     protected override void Actions()
     {
-        //if (_pointLight.intensity > _maxIntensity)
-        //{
-        //    _pointLight.intensity = _maxIntensity;
-        //}
-
-        //_pointLight.intensity += (_playerInput.y * _lightIntensityGrowthSpeed);
-
-        _lightBeam.transform.Rotate(playerInput.x, playerInput.y, 0);
+        _lightBeam.transform.Rotate(playerInput.x * Time.deltaTime * _lightBeamTranslateSpeed, playerInput.y * Time.deltaTime * _lightBeamTranslateSpeed, 0);
     }
 
     protected override void getPlayerInput()

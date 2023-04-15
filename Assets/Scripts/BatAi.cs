@@ -18,7 +18,7 @@ public class BatAi : MonoBehaviour
 
     public float startChasingDistance;
     public float rotationSpeed = 5f; //Rotation speed
-    public float movementSpeed = 0.5f; //movement speed
+    public float movementSpeed; //movement speed
     public int currentTarget; //current target, waypoint or player
     public bool isCalled; //current target, waypoint or player
     public Vector3 positionToGoWhenCalled; //current target, waypoint or player
@@ -76,50 +76,6 @@ public class BatAi : MonoBehaviour
                 break;
 
         }
-        //if(!_spiritPossession.alreadyInPossession)
-        //{
-        //    if (Vector3.Distance(transform.position, _rory.transform.position) > startChasingDistance)
-        //        MoveTo(allWaypoints[currentTarget].position);
-        //}
-
-        //else if (_spiritPossession.typeInPossession == "Bat" && _spiritPossession.currentPossessedObject != gameObject)
-        //{
-        //    if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) > startChasingDistance)
-        //    {
-        //        MoveTo(allWaypoints[currentTarget].position);
-        //        Debug.Log("1");
-        //    }
-        //}
-
-        //if (isCalled)
-        //{
-        //    MoveTo(positionToGoWhenCalled);
-
-        //    if ((Vector3.Distance(transform.position, positionToGoWhenCalled) < 0.5f))
-        //    {
-        //        isCalled = false;
-        //    }
-        //    Debug.Log("2");
-
-        //}
-
-        //if (_spiritPossession.typeInPossession == "Bat" && _spiritPossession.currentPossessedObject != gameObject)
-        //{
-        //    if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
-        //    {
-        //        MoveTo(_spiritPossession.currentPossessedObject.transform.position);
-        //        isCalled = false;
-        //        Debug.Log("3");
-        //    }
-        //}
-
-        ////Chase Rory if close enough
-        //if (Vector3.Distance(transform.position, _rory.transform.position) <= startChasingDistance)
-        //{
-        //    MoveTo(_rory.transform.position);
-        //    isCalled = false;
-        //    Debug.Log("4");
-        //}
     }
 
     private void MoveTo(Vector3 positionToMoveTo)
@@ -183,7 +139,5 @@ public class BatAi : MonoBehaviour
 
         else
             _currentState = State.Wander;
-
-        Debug.Log(_currentState);
     }
 }

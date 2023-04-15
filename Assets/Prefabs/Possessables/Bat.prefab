@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6623535093320010450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 31.976757, y: 1.4621887, z: 22.63926}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -145,7 +145,7 @@ MonoBehaviour:
   - {fileID: 0}
   startChasingDistance: 10
   rotationSpeed: 5
-  movementSpeed: 5
+  movementSpeed: 6
   currentTarget: 0
   isCalled: 0
   positionToGoWhenCalled: {x: 0, y: 0, z: 0}

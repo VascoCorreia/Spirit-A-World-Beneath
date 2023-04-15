@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Mushroom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &8543672251185251422
 Transform:
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8543672251185251421
 MeshFilter:
@@ -131,15 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95d7fe89bf84b14d8bd2921eb35bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_spiritCamera>k__BackingField: {fileID: 0}
-  <_spiritFreeLookCamera>k__BackingField: {fileID: 0}
-  <_playerInteract>k__BackingField: {fileID: 0}
+  <_camera>k__BackingField: {fileID: 0}
+  <_FreeLookCamera>k__BackingField: {fileID: 0}
   <_spiritPossession>k__BackingField: {fileID: 0}
-  <_controller>k__BackingField: {fileID: 0}
-  <_maxSpeed>k__BackingField: 0
-  maxJumpHeight: 0
-  _velocity: {x: 0, y: 0, z: 0}
-  _onGround: 0
   _maxSize: 0
   _minSize: {x: 0, y: 0, z: 0}
   _mushroomGrowthSpeed: 0
