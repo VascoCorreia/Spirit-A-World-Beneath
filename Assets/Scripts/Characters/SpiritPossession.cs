@@ -98,9 +98,9 @@ public class SpiritPossession : MonoBehaviour
                 _cacheSpirit.SetActive(false);
 
                 //Start Cooldown
-                StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (i) =>
+                StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (canPossessFlag) =>
                 {
-                    canPossess = i;
+                    canPossess = canPossessFlag;
                 }));
             }
 
@@ -110,9 +110,9 @@ public class SpiritPossession : MonoBehaviour
                 possessionFailed?.Invoke();
 
                 //Start the cooldown
-                StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (i) =>
+                StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (canPossessFlag) =>
                 {
-                    canPossess = i;
+                    canPossess = canPossessFlag;
                 }));
             }
         }

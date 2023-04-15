@@ -39,6 +39,8 @@ public class ScenesManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    //Fade out and back in and restarts scene
     private void OnPlayerDied()
     {
         _animator.SetTrigger("PlayerDied");
