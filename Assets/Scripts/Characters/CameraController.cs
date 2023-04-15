@@ -48,7 +48,6 @@ public class CameraController : MonoBehaviour
         {
             playerCameraInput = new Vector2(Input.GetAxis("SpiritCameraHorizontal"), Input.GetAxis("SpiritCameraVertical"));
         }
-        //get input from unity input system
 
         //change manually the fields of the frelookcamera
         _camera.m_XAxis.m_InputAxisValue = playerCameraInput.x;

@@ -1,18 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Torch : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private Rigidbody _rb;
 
-    //TOCHA MUST BE IN LAYER INTERACTABLE
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
     public void Interacted(GameObject player)
     {
-        if(player.tag == "Rory")
+        if (player.tag == "Rory")
         {
-           //tocha vai para rory
-           //
+            transform.SetParent(_playerTransform);
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+            transform.localPosition = new Vector3(0, 0, 0);
+            _rb.useGravity = false;
         }
     }
 
@@ -20,15 +24,8 @@ public class Torch : MonoBehaviour, IInteractable
     {
         if (player.tag == "Rory")
         {
-            // IF RORY NOT LOOKING AT PLACE TO PUT TOCHA OU ESTIVER LONGE DESSA MERDA -> TOCHA CAI
-           
-            //IF RORY IS LOOKING AT PLACE TO PUT TOCHA AND IS CLOSE ENOUGH -> DEBUG.LOG("I AM WORKING")
-
-            //IF RORY IS TOO FAR AWAY -> TOCHA CAI
-
-            //IF RORY NOT LOOKING -> TOCHA CAI
-
-
+            _rb.useGravity = true;
+            transform.SetParent(null);
         }
     }
 }

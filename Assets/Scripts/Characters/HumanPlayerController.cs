@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 //The character as of now is 1.56m long in real world units or 0.78 in Unity capsule units. (normal height for 13 year old)
@@ -50,6 +49,7 @@ public class HumanPlayerController : MonoBehaviour
         getPlayerMovementInput();
         applyGravity();
         calculateVelocityAndMove();
+        Rotate();
 
         if (Input.GetButtonDown("HumanInteract"))
         {
@@ -63,17 +63,17 @@ public class HumanPlayerController : MonoBehaviour
         //R1
         if (Input.GetButtonDown("HumanWhistle"))
         {
-            if(_canWhistle)
+            if (_canWhistle)
             {
                 BatsInRadius = GetBatsInRadius(BatsInRadius);
                 Transform positionWhenCalled = gameObject.transform;
 
-                if(BatsInRadius.Count > 0)
+                if (BatsInRadius.Count > 0)
                 {
                     OnWhistleSucessfull?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled.position));
                 }
-                
-                if(BatsInRadius.Count == 0)
+
+                if (BatsInRadius.Count == 0)
                 {
                     OnWhistleFailed?.Invoke();
                 }
@@ -214,5 +214,10 @@ public class HumanPlayerController : MonoBehaviour
         }
 
         return objectInRadius;
+    }
+
+    private void Rotate()
+    {
+        transform.rotation = Quaternion.Euler(0, _humanCamera.transform.eulerAngles.y, 0);
     }
 }

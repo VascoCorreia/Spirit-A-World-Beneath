@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
+    [SerializeField] private bool staysOpen;
     public void OpenBarrier()
     {
         //PlaySound()
@@ -13,6 +14,9 @@ public class Barrier : MonoBehaviour
     {
         //PlaySound()
         //PlayAnimation()
-        gameObject.SetActive(true);
+        if(!staysOpen)
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

@@ -9,6 +9,8 @@ public class Crystal : MonoBehaviour, IPossessable
     public void ExitPossess()
     {
         gameObject.GetComponent<CrystalController>().enabled = false;
+        gameObject.GetComponent<CrystalController>().DisableLights();
+
     }
 
     public void Possess(possessionEventArgs raycastedCrystal)
@@ -16,6 +18,7 @@ public class Crystal : MonoBehaviour, IPossessable
         if (raycastedCrystal.getPossessedEnemy() == gameObject)
         {
             gameObject.GetComponent<CrystalController>().enabled = true;
+            gameObject.GetComponent<CrystalController>().EnableLights();
 
         }
     }

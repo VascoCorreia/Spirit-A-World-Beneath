@@ -15,18 +15,6 @@ public class CrystalController : SpiritPlayerController
         GetSpotLight();
 
     }
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        EnableLights();
-    }
-
-    private void OnDisable()
-    {
-        _lightBeam.enabled = false;
-    }
-
     protected override void Update()
     {
         base.Update();
@@ -43,7 +31,7 @@ public class CrystalController : SpiritPlayerController
 
         //_pointLight.intensity += (_playerInput.y * _lightIntensityGrowthSpeed);
 
-        _lightBeam.transform.Rotate(-playerInput.y, playerInput.x, 0);
+        _lightBeam.transform.Rotate(playerInput.x, playerInput.y, 0);
     }
 
     protected override void getPlayerInput()
@@ -69,10 +57,18 @@ public class CrystalController : SpiritPlayerController
         }
     }
 
-    private void EnableLights()
+    public void EnableLights()
     {
         _lightBeam.enabled = true;
         _spotLight.enabled = true;
+        _spotLight.color = GetComponent<MeshRenderer>().material.color;
+        _lightBeam.color = GetComponent<MeshRenderer>().material.color;
+    }
+
+    public void DisableLights()
+    {
+        _lightBeam.enabled = false;
+        _spotLight.enabled = false;
         _spotLight.color = GetComponent<MeshRenderer>().material.color;
         _lightBeam.color = GetComponent<MeshRenderer>().material.color;
     }

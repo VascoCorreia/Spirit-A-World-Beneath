@@ -2,10 +2,19 @@ using UnityEngine;
 
 public class BatAi : MonoBehaviour
 {
+    private enum State
+    {
+        Wander,
+        ChaseRory,
+        ChasePossessedBat,
+        Called
+    }
+
     public Transform[] allWaypoints; //array of all waypoints
     private Transform _rory;
     private HumanPlayerController _player;
     private SpiritPossession _spiritPossession;
+    private State _currentState;
 
     public float startChasingDistance;
     public float rotationSpeed = 5f; //Rotation speed
@@ -14,13 +23,15 @@ public class BatAi : MonoBehaviour
     public bool isCalled; //current target, waypoint or player
     public Vector3 positionToGoWhenCalled; //current target, waypoint or player
 
-    //enum
+
 
     private void Awake()
     {
         _rory = GameObject.Find("Rory").transform;
         _player = _rory.GetComponent<HumanPlayerController>();
         _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
+
+        _currentState = State.Wander;
 
         _player.OnWhistleSucessfull += BatCalling;
     }
@@ -37,6 +48,7 @@ public class BatAi : MonoBehaviour
     void Update()
     {
         Rotate();
+        StateTransitions();
         Movement();
         ChangeWaypoint();
     }
@@ -48,46 +60,66 @@ public class BatAi : MonoBehaviour
     //4 - Wander
     void Movement()
     {
-        if (Vector3.Distance(transform.position, _rory.transform.position) > startChasingDistance
-                             && _spiritPossession.typeInPossession == "Bat"
-                             && _spiritPossession.currentPossessedObject != gameObject)
+        switch (_currentState)
         {
-            if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
-            {
+            case State.Wander:
                 MoveTo(allWaypoints[currentTarget].position);
-                Debug.Log("1");
-            }
-        }
-
-        else if (isCalled)
-        {
-            MoveTo(positionToGoWhenCalled);
-
-            if ((Vector3.Distance(transform.position, positionToGoWhenCalled) < 0.5f))
-            {
-                isCalled = false;
-            }
-            Debug.Log("2");
-
-        }
-
-        else if (_spiritPossession.typeInPossession == "Bat" && _spiritPossession.currentPossessedObject != gameObject)
-        {
-            if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
-            {
+                break;
+            case State.ChaseRory:
+                MoveTo(_rory.transform.position);
+                break;
+            case State.ChasePossessedBat:
                 MoveTo(_spiritPossession.currentPossessedObject.transform.position);
-                isCalled = false;
-                Debug.Log("3");
-            }
-        }
+                break;
+            case State.Called:
+                MoveTo(positionToGoWhenCalled);
+                break;
 
-        //Chase Rory if close enough
-        else if (Vector3.Distance(transform.position, _rory.transform.position) <= startChasingDistance)
-        {
-            MoveTo(_rory.transform.position);
-            isCalled = false;
-            Debug.Log("4");
         }
+        //if(!_spiritPossession.alreadyInPossession)
+        //{
+        //    if (Vector3.Distance(transform.position, _rory.transform.position) > startChasingDistance)
+        //        MoveTo(allWaypoints[currentTarget].position);
+        //}
+
+        //else if (_spiritPossession.typeInPossession == "Bat" && _spiritPossession.currentPossessedObject != gameObject)
+        //{
+        //    if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) > startChasingDistance)
+        //    {
+        //        MoveTo(allWaypoints[currentTarget].position);
+        //        Debug.Log("1");
+        //    }
+        //}
+
+        //if (isCalled)
+        //{
+        //    MoveTo(positionToGoWhenCalled);
+
+        //    if ((Vector3.Distance(transform.position, positionToGoWhenCalled) < 0.5f))
+        //    {
+        //        isCalled = false;
+        //    }
+        //    Debug.Log("2");
+
+        //}
+
+        //if (_spiritPossession.typeInPossession == "Bat" && _spiritPossession.currentPossessedObject != gameObject)
+        //{
+        //    if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
+        //    {
+        //        MoveTo(_spiritPossession.currentPossessedObject.transform.position);
+        //        isCalled = false;
+        //        Debug.Log("3");
+        //    }
+        //}
+
+        ////Chase Rory if close enough
+        //if (Vector3.Distance(transform.position, _rory.transform.position) <= startChasingDistance)
+        //{
+        //    MoveTo(_rory.transform.position);
+        //    isCalled = false;
+        //    Debug.Log("4");
+        //}
     }
 
     private void MoveTo(Vector3 positionToMoveTo)
@@ -121,5 +153,37 @@ public class BatAi : MonoBehaviour
             isCalled = true;
             positionToGoWhenCalled = calledBats.getPlayerPositionWhenWhistled();
         }
+    }
+
+    private void StateTransitions()
+    {
+        if (Vector3.Distance(transform.position, _rory.transform.position) <= startChasingDistance)
+        {
+            _currentState = State.ChaseRory;
+        }
+
+        else if (_spiritPossession.typeInPossession == "Bat" && _spiritPossession.currentPossessedObject != gameObject && Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
+        {
+            _currentState = State.ChasePossessedBat;
+
+            if (Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
+            {
+            }
+        }
+
+        else if (isCalled)
+        {
+            _currentState = State.Called;
+
+            if ((Vector3.Distance(transform.position, positionToGoWhenCalled) < 0.5f))
+            {
+                isCalled = false;
+            }
+        }
+
+        else
+            _currentState = State.Wander;
+
+        Debug.Log(_currentState);
     }
 }
