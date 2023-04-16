@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148814
+  m_Name: pb_Mesh153604
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -294,7 +294,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149074
+  m_Name: pb_Mesh153864
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -453,6 +453,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &44533370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44533371}
+  m_Layer: 0
+  m_Name: CheatTeleportRoom1
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &44533371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44533370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.5, y: 2.5, z: 22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748495424}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &62130879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1239,11 +1270,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2698993391686345482, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.07061961
+      value: -0.07061964
       objectReference: {fileID: 0}
     - target: {fileID: 2698993391686345482, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0006061923
+      value: 0.00060619233
       objectReference: {fileID: 0}
     - target: {fileID: 2698993391686345482, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1251,7 +1282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2698993391686345482, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.008562159
+      value: 0.008562156
       objectReference: {fileID: 0}
     - target: {fileID: 2698993392112585395, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1598,7 +1629,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148624
+  m_Name: pb_Mesh153414
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2409,7 +2440,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149178
+  m_Name: pb_Mesh153968
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2622,7 +2653,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148888
+  m_Name: pb_Mesh153678
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2905,7 +2936,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148922
+  m_Name: pb_Mesh153712
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3064,6 +3095,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &342229976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342229977}
+  m_Layer: 0
+  m_Name: CheatTeleportRoom3
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &342229977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342229976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 56, y: 2.5, z: 58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748495424}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &348750053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3284,6 +3346,37 @@ Transform:
   m_Father: {fileID: 368366903}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &417555395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417555396}
+  m_Layer: 0
+  m_Name: CheatTeleportRoom2
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417555396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417555395}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 61.75, y: 2.5, z: 22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748495424}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &419573962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2043042658, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
@@ -3408,7 +3501,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148902
+  m_Name: pb_Mesh153692
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3573,7 +3666,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148846
+  m_Name: pb_Mesh153636
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -22455,7 +22548,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148656
+  m_Name: pb_Mesh153446
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -22971,6 +23064,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &899600970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7882676879292910373, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
+  m_PrefabInstance: {fileID: 143837221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &922209897
 GameObject:
   m_ObjectHideFlags: 0
@@ -23849,7 +23947,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149022
+  m_Name: pb_Mesh153812
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -24213,7 +24311,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148692
+  m_Name: pb_Mesh153482
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -24414,7 +24512,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-92240476
+  m_Name: pb_Mesh-94452224
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -26063,7 +26161,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148796
+  m_Name: pb_Mesh153586
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -26798,7 +26896,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149008
+  m_Name: pb_Mesh153798
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -27081,7 +27179,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148862
+  m_Name: pb_Mesh153652
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -27240,6 +27338,63 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1748495422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1748495424}
+  - component: {fileID: 1748495423}
+  m_Layer: 0
+  m_Name: CheatsController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1748495423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748495422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd1681d3199b1941a2c12ad25134050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rory: {fileID: 899600970}
+  _spirit: {fileID: 2003817748}
+  _teleportCheatPosition:
+  - {fileID: 44533371}
+  - {fileID: 417555396}
+  - {fileID: 342229977}
+  - {fileID: 1828751981}
+  _roryCurrentTeleportIndex: 0
+  _spiritCurrentTeleportIndex: 0
+--- !u!4 &1748495424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748495422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 44533371}
+  - {fileID: 417555396}
+  - {fileID: 342229977}
+  - {fileID: 1828751981}
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1783137607 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4819652550491874713, guid: e9a0251f752f5fb449363f0d2e9623a2, type: 3}
@@ -27264,7 +27419,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148984
+  m_Name: pb_Mesh153774
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -27423,6 +27578,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1828751980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1828751981}
+  m_Layer: 0
+  m_Name: CheatTeleportRoom4
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1828751981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828751980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 32, y: 2.5, z: 58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748495424}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1833487920
 GameObject:
   m_ObjectHideFlags: 0
@@ -27648,7 +27834,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh148830
+  m_Name: pb_Mesh153620
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -28266,6 +28452,11 @@ Transform:
   m_Father: {fileID: 368366903}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2003817748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3014130047772908749, guid: 7bf399c90627b154f9ba4c5f03974567, type: 3}
+  m_PrefabInstance: {fileID: 2013535754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2013535754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28475,7 +28666,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149136
+  m_Name: pb_Mesh153926
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
