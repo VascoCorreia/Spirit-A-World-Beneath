@@ -33,7 +33,7 @@ public class WinTrigger : MonoBehaviour
         }
         if (_roryInside && _spiritInside)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("Main menu");
         }
     }
 }
