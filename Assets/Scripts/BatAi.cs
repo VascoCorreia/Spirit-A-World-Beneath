@@ -12,7 +12,7 @@ public class BatAi : MonoBehaviour
 
     public Transform[] allWaypoints; //array of all waypoints
     private Transform _rory;
-    private HumanPlayerController _player;
+    private WhistleMechanic _roryWhistle;
     private SpiritPossession _spiritPossession;
     private State _currentState;
 
@@ -22,23 +22,20 @@ public class BatAi : MonoBehaviour
     public int currentTarget; //current target, waypoint or player
     public bool isCalled; //current target, waypoint or player
     public Vector3 positionToGoWhenCalled; //current target, waypoint or player
-
-
-
     private void Awake()
     {
         _rory = GameObject.Find("Rory").transform;
-        _player = _rory.GetComponent<HumanPlayerController>();
+        _roryWhistle = _rory.GetComponent<WhistleMechanic>();
         _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
 
         _currentState = State.Wander;
 
-        _player.OnWhistleSucessfull += BatCalling;
+        _roryWhistle.OnWhistleSucessfull += BatCalling;
     }
 
     private void OnDestroy()
     {
-        _player.OnWhistleSucessfull -= BatCalling;
+        _roryWhistle.OnWhistleSucessfull -= BatCalling;
     }
 
     private void OnEnable()

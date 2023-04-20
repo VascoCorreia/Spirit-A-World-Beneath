@@ -8,22 +8,16 @@ public class HumanPlayerController : MonoBehaviour
     [field: SerializeField] public Camera _humanCamera { get; private set; }
     [field: SerializeField] public PlayerInteract _playerInteract { get; private set; }
     [field: SerializeField] public CharacterController _controller { get; private set; }
+    [field: SerializeField, Range(0f, 50f)] public float maxSpeed { get; set; }
 
     [SerializeField] private Vector3 _velocity;
     [SerializeField] private bool _onGround;
-    [SerializeField] private float _callingRadius;
-    [SerializeField] private bool _canWhistle;
-    [SerializeField] private float _whisleCooldown = 2f;
+
     [SerializeField, Range(0f, 10f)] private float _maxJumpHeight = 2f;
-    [SerializeField, Range(0f, 50f)] private float _maxSpeed = 10f;
-    [SerializeField, Range(0f, 25f)] private float _pushPower = 3f;
 
     private Vector2 _playerInput;
     private float _ySpeed;
-    private List<GameObject> BatsInRadius = new List<GameObject>();
 
-    public Action<WhistleEventArgs> OnWhistleSucessfull;
-    public Action OnWhistleFailed;
 
     private void Awake()
     {
@@ -32,8 +26,6 @@ public class HumanPlayerController : MonoBehaviour
 
         //ensures scripts are enabled on level restart/change
         _controller.enabled = true;
-        _playerInteract.enabled = true;
-        _canWhistle = true;
     }
 
     private void OnEnable()
@@ -51,18 +43,6 @@ public class HumanPlayerController : MonoBehaviour
         getPlayerMovementInput();
         applyGravity();
         calculateVelocityAndMove();
-        Rotate();
-
-        //square
-        Interaction();
-
-        //R1
-        Whistle();
-    }
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        MovePushableObject(hit.collider.attachedRigidbody, hit);
     }
 
     //gets player movement input
@@ -71,10 +51,7 @@ public class HumanPlayerController : MonoBehaviour
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
     }
-    private void Rotate()
-    {
-        transform.rotation = Quaternion.Euler(0, _humanCamera.transform.eulerAngles.y, 0);
-    }
+
 
     //This function is reponsible for continuously applying gravity to our human.
     private void applyGravity()
@@ -93,7 +70,7 @@ public class HumanPlayerController : MonoBehaviour
     //It is also responsible for listening to jumping input
     private void calculateVelocityAndMove()
     {
-        if (_onGround && Input.GetButtonDown("HumanJump"))
+        if (_onGround && Input.GetButtonDown("HumanJump") && !PushAndPullMechanic.isPulling)
         {
             Jump();
         }
@@ -102,6 +79,7 @@ public class HumanPlayerController : MonoBehaviour
         //multiply input X vector by camera right vector
         //multiply input Z vector by camera forward vector
         //add these two vectors
+
 
         Vector3 forward = _humanCamera.transform.forward;
         Vector3 right = _humanCamera.transform.right;
@@ -115,10 +93,11 @@ public class HumanPlayerController : MonoBehaviour
 
         Vector3 cameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
 
-        float magnitudeTest = Mathf.Clamp01(cameraRelativeMovement.magnitude) * _maxSpeed;
+        float magnitudeTest = Mathf.Clamp01(cameraRelativeMovement.magnitude) * maxSpeed;
 
         cameraRelativeMovement.Normalize();
         _velocity = cameraRelativeMovement * magnitudeTest;
+
         _velocity.y = _ySpeed;
         _velocity = AdjustvelocityToSlope(_velocity);
 
@@ -157,78 +136,8 @@ public class HumanPlayerController : MonoBehaviour
         return velocity;
     }
 
-    ////OnControllerColliderHit is called when the controller hits a collider while performing a Move.
-    ////We will use it to push any object with a rigidbody attached.
-    ////Later if we dont want to push all rigidbodies we can add a tag to the ones we want to move and check it before we apply the logic
-
-    private void MovePushableObject(Rigidbody body, ControllerColliderHit hit)
-    {
-        // no rigidbody nothing happens
-        if (body == null || body.isKinematic)
-        {
-            return;
-        }
-
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-
-        //apply the push
-
-        body.AddForce(pushDir * _pushPower, ForceMode.Force);
-    }
-
     void playerHasDiedEventHandler()
     {
         _controller.enabled = false;
-        _playerInteract.enabled = false;
-    }
-
-    private List<GameObject> GetBatsInRadius(List<GameObject> objectInRadius)
-    {
-        Collider[] Temporary = Physics.OverlapSphere(transform.position, _callingRadius);
-
-        foreach (var item in Temporary)
-        {
-            if (item.gameObject.tag == "Bat")
-            {
-                objectInRadius.Add(item.gameObject);
-            }
-        }
-
-        return objectInRadius;
-    }
-
-    private void Whistle()
-    {
-        if (Input.GetButtonDown("HumanWhistle"))
-        {
-            if (_canWhistle)
-            {
-                BatsInRadius = GetBatsInRadius(BatsInRadius);
-                Transform positionWhenCalled = gameObject.transform;
-
-                if (BatsInRadius.Count > 0)
-                {
-                    OnWhistleSucessfull?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled.position));
-                }
-
-                if (BatsInRadius.Count == 0)
-                {
-                    OnWhistleFailed?.Invoke();
-                }
-
-                StartCoroutine(Cooldowns.Cooldown(_whisleCooldown, (possessionFlag) => _canWhistle = possessionFlag));
-            }
-        }
-    }
-    private void Interaction()
-    {
-        if (Input.GetButtonDown("HumanInteract"))
-        {
-            _playerInteract.Interact(_humanCamera);
-        }
-        if (Input.GetButtonUp("HumanInteract"))
-        {
-            _playerInteract.StopInteract();
-        }
     }
 }
