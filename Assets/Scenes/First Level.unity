@@ -1301,11 +1301,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2698993391686345482, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017239323
+      value: 0.000000017239314
       objectReference: {fileID: 0}
     - target: {fileID: 2698993391686345482, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.4798057e-10
+      value: 1.4798049e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2698993392112585395, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1504,8 +1504,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 679684076}
     m_RemovedComponents:
-    - {fileID: 7882676879635170861, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
-    - {fileID: 7882676879635170860, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7882676879635170899, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
@@ -1524,9 +1524,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7882676879635170857, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       insertIndex: -1
       addedObject: {fileID: 143837232}
-    - targetCorrespondingSourceObject: {fileID: 7882676879635170857, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 143837234}
     - targetCorrespondingSourceObject: {fileID: 7882676879635170857, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
       insertIndex: -1
       addedObject: {fileID: 143837251}
@@ -1574,21 +1571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPushingAndPullingSpeed: 2
---- !u!114 &143837234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143837223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a0dce191006ec14da9301697c5b74e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _whisleCooldown: 2
-  _callingRadius: 10
-  _canWhistle: 0
 --- !u!4 &143837250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7882676879635170899, guid: 4ecc97a21b2af4547a43e91098f78c65, type: 3}
@@ -26890,7 +26872,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28756
+  m_Name: pb_Mesh56890
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
