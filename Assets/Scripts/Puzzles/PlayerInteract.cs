@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [SerializeField] private Camera _roryCamera;
+    [SerializeField] private Camera _camera;
 
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float interactableDistance;
@@ -27,7 +26,11 @@ public class PlayerInteract : MonoBehaviour
     }
     private void Update()
     {
-        Interaction();
+        if (gameObject.CompareTag("Spirit"))
+            Interaction("Spirit");
+
+        if (gameObject.CompareTag("Rory"))
+            Interaction("Human");
     }
     public void Interact(Camera camera)
     {
@@ -61,13 +64,13 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
-    private void Interaction()
+    private void Interaction(string character)
     {
-        if (Input.GetButtonDown("HumanInteract"))
+        if (Input.GetButtonDown(character + "Interact"))
         {
-           Interact(_roryCamera);
+            Interact(_camera);
         }
-        if (Input.GetButtonUp("HumanInteract"))
+        if (Input.GetButtonUp(character + "Interact"))
         {
             StopInteract();
         }

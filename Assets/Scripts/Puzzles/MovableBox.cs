@@ -5,6 +5,11 @@ public class MovableBox : MonoBehaviour, IInteractable
     public void Interacted(GameObject player)
     {
         PushAndPullMechanic.isPulling = true;
+
+        //make player look at object
+        player.transform.LookAt(transform.position);
+
+        //parent object to player to simulate pushing and pulling
         transform.SetParent(player.transform, true);
     }
 
@@ -12,6 +17,5 @@ public class MovableBox : MonoBehaviour, IInteractable
     {
         PushAndPullMechanic.isPulling = false;
         transform.SetParent(null, true);
-
     }
 }

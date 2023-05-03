@@ -74,7 +74,6 @@ public class BatAi : MonoBehaviour
 
         }
     }
-
     private void MoveTo(Vector3 positionToMoveTo)
     {
         transform.position = Vector3.MoveTowards(transform.position, positionToMoveTo, movementSpeed * Time.deltaTime);
