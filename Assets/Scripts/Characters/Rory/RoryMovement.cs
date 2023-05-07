@@ -4,18 +4,30 @@ public class RoryMovement : MonoBehaviour
 {
     [field: SerializeField] public Camera _camera { get; private set; }
     [field: SerializeField, Range(0f, 10f)] public float maxSpeed { get; set; } = 7f;
-    
+    [field: SerializeField] public float _ySpeed { get; private set; }
+    [field: SerializeField] public float _ySpeedInCurrentFrame { get; private set; }
+
     [SerializeField, Range(0f, 10f)] private float _maxJumpHeight = 2f;
 
     [SerializeField] private Vector3 _velocity;
-    [SerializeField] private bool _onGround;
+    [SerializeField] private float FallingThreshold = -1f;
 
     private CharacterController _characterController;
-    private float _ySpeed;
+    private float _lastPositionY;
 
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+    }
+
+    private void Start()
+    {
+        _lastPositionY = transform.position.y;
+    }
+
+    private void Update()
+    {
+        IsFalling();
     }
     public void HandleMovement(Vector2 playerInput)
     {
@@ -25,11 +37,10 @@ public class RoryMovement : MonoBehaviour
 
     private void applyGravity()
     {
-        _onGround = _characterController.isGrounded;
         _ySpeed += Physics.gravity.y * Time.deltaTime;
 
         //if we set it to zero the _controller.isGrounded property does not work as intended so we must set it to a small negative value
-        if (_onGround)
+        if (_characterController.isGrounded)
         {
             _ySpeed = -0.01f;
         }
@@ -39,37 +50,45 @@ public class RoryMovement : MonoBehaviour
     //It is also responsible for listening to jumping input
     private void calculateVelocityAndMove(Vector2 playerInput)
     {
-        if (_onGround && Input.GetButtonDown("HumanJump") && !PushAndPullMechanic.isPulling)
+        if (_characterController.isGrounded && Input.GetButtonDown("HumanJump") && !PushAndPullMechanic.isPulling)
         {
             Jump();
         }
-        //get player input
-        //get cameras forward and right vectors
-        //multiply input X vector by camera right vector
-        //multiply input Z vector by camera forward vector
-        //add these two vectors
 
-        Vector3 forward = _camera.transform.forward;
-        Vector3 right = _camera.transform.right;
-        forward.y = 0;
-        right.y = 0;
-        forward = forward.normalized;
-        right = right.normalized;
+        if (PushAndPullMechanic.isPulling)
+        {
+            MovementWhilePushingOrPulling(ref playerInput);
+        }
+        else
+        {
+            //get player input
+            //get cameras forward and right vectors
+            //multiply input X vector by camera right vector
+            //multiply input Z vector by camera forward vector
+            //add these two vectors
 
-        Vector3 forwardRelativeVerticalInput = forward * playerInput.y;
-        Vector3 rightRelativeVerticalInput = right * playerInput.x;
+            Vector3 forward = _camera.transform.forward;
+            Vector3 right = _camera.transform.right;
+            forward.y = 0;
+            right.y = 0;
+            forward = forward.normalized;
+            right = right.normalized;
 
-        Vector3 cameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
+            Vector3 forwardRelativeVerticalInput = forward * playerInput.y;
+            Vector3 rightRelativeVerticalInput = right * playerInput.x;
 
-        float magnitudeTest = Mathf.Clamp01(cameraRelativeMovement.magnitude) * maxSpeed;
+            Vector3 cameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
 
-        cameraRelativeMovement.Normalize();
-        _velocity = cameraRelativeMovement * magnitudeTest;
+            float magnitudeTest = Mathf.Clamp01(cameraRelativeMovement.magnitude) * maxSpeed;
 
-        _velocity.y = _ySpeed;
-        _velocity = AdjustvelocityToSlope(_velocity);
+            cameraRelativeMovement.Normalize();
+            _velocity = cameraRelativeMovement * magnitudeTest;
 
-        _characterController.Move(_velocity * Time.deltaTime);
+            _velocity.y = _ySpeed;
+            _velocity = AdjustvelocityToSlope(_velocity);
+
+            _characterController.Move(_velocity * Time.deltaTime);
+        }
     }
 
     //https://screenrec.com/share/62pUYiuKDW
@@ -102,5 +121,32 @@ public class RoryMovement : MonoBehaviour
             }
         }
         return velocity;
+    }
+
+    private bool IsFalling()
+    {
+        _ySpeedInCurrentFrame = (transform.position.y - _lastPositionY) / Time.deltaTime;
+
+        _lastPositionY = transform.position.y;
+
+        if (_ySpeedInCurrentFrame > FallingThreshold)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+
+    //Can only move forwards or backwards
+    private void MovementWhilePushingOrPulling(ref Vector2 playerInput)
+    {
+        Vector3 forward = transform.forward;
+        Vector3 forwardRelativeVerticalInput = forward * playerInput.y;
+
+        Vector3 _velocity = forwardRelativeVerticalInput * maxSpeed * Time.deltaTime;
+
+        _velocity = AdjustvelocityToSlope(_velocity);
+
+        _characterController.Move(_velocity);
     }
 }

@@ -1,11 +1,13 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float interactableDistance;
+    [SerializeField] private string[] _objectsThatPlayerCanInteractWith;
+
     private GameObject interactedObject;
 
     private void OnEnable()
@@ -38,20 +40,32 @@ public class PlayerInteract : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit info, interactableDistance, _layerMask))
         {
-            //cache the interacted object
-            interactedObject = info.collider.gameObject;
+            //Only execute interaction if the player can interact with object
+            foreach (string tag in _objectsThatPlayerCanInteractWith)
+            {
+                if (info.collider.gameObject.CompareTag(tag))
+                {
 
-            //look at interacted object
-            transform.LookAt(interactedObject.transform);
+                    //cache the interacted object
+                    interactedObject = info.collider.gameObject;
+                    Vector3 direction = interactedObject.transform.position - transform.position;
+                    direction.y = 0;
+                    Quaternion rotation = Quaternion.LookRotation(direction);
+                    transform.rotation = rotation;
 
-            //disable regular character rotating with camera
-            GetComponent<CharacterRotation>().enabled = false;
+                    //transform.LookAt(direction);
+                    //cannot be like this because character rotates up
+                    //look at interacted object
+                    //transform.LookAt(interactedObject.transform, Vector3.up);
+                    //transform.rotation = new Quaternion(0, transform.rotation.y, transform.rotation.z, 0);
 
-            interactedObject.GetComponent<IInteractable>().Interacted(gameObject);
-        }
-        else
-        {
-            return;
+                    //disable regular character rotating with camera
+                    GetComponent<CharacterRotation>().enabled = false;
+
+                    //Make stuff happen
+                    interactedObject.GetComponent<IInteractable>().Interacted(gameObject);
+                }
+            }
         }
     }
 

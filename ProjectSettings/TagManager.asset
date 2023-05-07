@@ -10,6 +10,8 @@ TagManager:
   - Spirit
   - Rory
   - Crystal
+  - Pushable
+  - Torch
   layers:
   - Default
   - TransparentFX

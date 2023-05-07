@@ -2,37 +2,34 @@
 
 public class PushAndPullMechanic : MonoBehaviour
 {
-    [SerializeField] private float maxPushingAndPullingSpeed = 2f;
-
-    private RoryMovement roryManager;
-    private Animator _animator;
     public static bool isPulling { get; set; } = false;
-
-    private int isPullingHash;
+    [SerializeField] private float _maxPushingAndPullingSpeed = 2f;
+    
+    private float _defaultSpeed;
+    private RoryMovement _roryMovement;
 
     private void Awake()
     {
-        roryManager = GetComponent<RoryMovement>();
-        _animator = GetComponent<Animator>();
+        _roryMovement = GetComponent<RoryMovement>();
     }
+
     private void Start()
     {
-        isPullingHash = Animator.StringToHash("IsPulling");
+        _defaultSpeed = _roryMovement.maxSpeed;
     }
+
     private void Update()
     {
-        //If character starts pulling 
-        if (isPulling && _animator.GetBool(isPullingHash).Equals(false))
+        //If character pulling 
+        if (isPulling)
         {
-            roryManager.maxSpeed = maxPushingAndPullingSpeed;
-            _animator.SetBool(isPullingHash, true);
+            _roryMovement.maxSpeed = _maxPushingAndPullingSpeed;
         }
         
         //if character is not pulling
         if(!isPulling)
         {
-            roryManager.maxSpeed = roryManager.maxSpeed;
-            _animator.SetBool(isPullingHash, false);
+            _roryMovement.maxSpeed = _defaultSpeed;
         }
     }
 }

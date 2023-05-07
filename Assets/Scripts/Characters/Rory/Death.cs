@@ -7,14 +7,9 @@ public class Death : MonoBehaviour
     public static Action playerDied;
     public bool eventFiredAlready;
 
-
     private void Start()
     {
         eventFiredAlready = false;
-    }
-    private void Update()
-    {
-       
     }
 
     private void OnTriggerEnter(Collider collision)

@@ -14,8 +14,6 @@ public class CharacterRotation : MonoBehaviour
 
     private void Rotate()
     {
-        //transform.rotation = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
-
         Vector3 targetDirection = Vector3.zero;
 
         targetDirection = _camera.transform.forward *  _playerInput.y;

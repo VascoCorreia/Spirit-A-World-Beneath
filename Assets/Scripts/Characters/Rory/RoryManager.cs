@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 //The character as of now is 1.56m long in real world units or 0.78 in Unity capsule units. (normal height for 13 year old)
@@ -35,7 +34,7 @@ public class RoryManager : MonoBehaviour
         getPlayerInput();
         #region Animation
 
-        _animatorManager.UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y);
+        _animatorManager.UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y, Mathf.Clamp(_movement._ySpeedInCurrentFrame, -0.2f, 0.2f));
 
         #endregion
         #region Movement
@@ -51,8 +50,6 @@ public class RoryManager : MonoBehaviour
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
     }
-
-    
     void playerHasDiedEventHandler()
     {
         _characterController.enabled = false;

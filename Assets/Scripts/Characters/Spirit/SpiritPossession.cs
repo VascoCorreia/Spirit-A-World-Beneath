@@ -50,6 +50,10 @@ public class SpiritPossession : MonoBehaviour
         {
             alreadyInPossession = false;
 
+            //Change tag and layer
+            currentPossessedObject.tag = "Bat";
+            currentPossessedObject.layer = LayerMask.NameToLayer("PossessableDynamic");
+
             //Teleport the spirit to the position of the possessd object
             _cacheSpirit.transform.position = currentPossessedObject.transform.position;
 
@@ -64,6 +68,9 @@ public class SpiritPossession : MonoBehaviour
 
             //Invoke event
             exitPossession?.Invoke();
+
+            currentPossessedObject = null;
+
 
         }
     }
@@ -82,10 +89,17 @@ public class SpiritPossession : MonoBehaviour
             {
                 alreadyInPossession = true;
 
+                //Check if gameObject is possessable
                 IPossessable possessable = info.collider.GetComponent<IPossessable>();
+
                 //cache the possessed object
                 currentPossessedObject = info.collider.gameObject;
 
+                //change tag and layer
+                currentPossessedObject.tag = "Spirit";
+                currentPossessedObject.layer = LayerMask.NameToLayer("Spirit");
+
+                //Which type of object was possessed
                 typeInPossession = possessable.TypeInPossession;
 
                 //Run the Possess function in the possessed object
