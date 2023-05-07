@@ -35,6 +35,7 @@ public class RoryManager : MonoBehaviour
         #region Animation
 
         _animatorManager.UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y, Mathf.Clamp(_movement._ySpeedInCurrentFrame, -0.2f, 0.2f));
+        _animatorManager.IsPullingAnimation(_playerInput.y);
 
         #endregion
         #region Movement

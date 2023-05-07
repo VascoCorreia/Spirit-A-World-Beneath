@@ -7,11 +7,12 @@ public class RoryAnimatorManager : MonoBehaviour
     private CharacterController _characterController;
 
     private int isPullingHash;
-    private int playerInputHash;
+    private int playerInputXYCombinedHash;
     private int ySpeedHash;
     private int groundedHash;
     private int died;
- 
+    private int playerInputYHash;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -21,11 +22,12 @@ public class RoryAnimatorManager : MonoBehaviour
     private void Start()
     {
         isPullingHash = Animator.StringToHash("isPulling");
-        playerInputHash = Animator.StringToHash("playerInput");
+        playerInputXYCombinedHash = Animator.StringToHash("playerInputXYCombined");
         ySpeedHash = Animator.StringToHash("ySpeed");
         groundedHash = Animator.StringToHash("grounded");
         groundedHash = Animator.StringToHash("grounded");
         died = Animator.StringToHash("died");
+        playerInputYHash = Animator.StringToHash("playerInputY");
     }
 
     private void OnEnable()
@@ -91,26 +93,23 @@ public class RoryAnimatorManager : MonoBehaviour
         //No matter in which direction the player is moving we always want the same walking or running animation
         float sumOfMovementInputs = Mathf.Abs(snappedHorizontal) + Mathf.Abs(snappedVertical);
 
-        _animator.SetFloat(playerInputHash, Mathf.Clamp01(Mathf.Abs(sumOfMovementInputs)), 0.1f, Time.deltaTime);
+        _animator.SetFloat(playerInputXYCombinedHash, Mathf.Clamp01(Mathf.Abs(sumOfMovementInputs)), 0.1f, Time.deltaTime);
         _animator.SetFloat(ySpeedHash, ySpeed, 0.1f, Time.deltaTime);
 
-        if(_characterController.isGrounded)
+        if (_characterController.isGrounded)
         {
             _animator.SetBool(groundedHash, true);
         }
-        if(!_characterController.isGrounded)
+        if (!_characterController.isGrounded)
         {
             _animator.SetBool(groundedHash, false);
         }
     }
 
-    private void OnDeathAnimation()
+    public void IsPullingAnimation(float verticalInput)
     {
-        _animator.SetTrigger(died);
-    }
+        _animator.SetFloat(playerInputYHash, verticalInput);
 
-    private void IsPullingAnimation()
-    {
         if (PushAndPullMechanic.isPulling && _animator.GetBool(isPullingHash).Equals(false))
         {
             _animator.SetBool(isPullingHash, true);
@@ -121,5 +120,10 @@ public class RoryAnimatorManager : MonoBehaviour
         {
             _animator.SetBool(isPullingHash, false);
         }
+    }
+
+    private void OnDeathAnimation()
+    {
+        _animator.SetTrigger(died);
     }
 }
