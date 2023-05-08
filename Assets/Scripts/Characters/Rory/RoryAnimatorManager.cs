@@ -3,7 +3,6 @@ using UnityEngine;
 public class RoryAnimatorManager : MonoBehaviour
 {
     private Animator _animator;
-    private PushAndPullMechanic _pushAndPull;
     private CharacterController _characterController;
 
     private int isPullingHash;
@@ -12,6 +11,9 @@ public class RoryAnimatorManager : MonoBehaviour
     private int groundedHash;
     private int died;
     private int playerInputYHash;
+    private int pushButtonHash;
+
+    private Vector2 _playerInput;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class RoryAnimatorManager : MonoBehaviour
         groundedHash = Animator.StringToHash("grounded");
         died = Animator.StringToHash("died");
         playerInputYHash = Animator.StringToHash("playerInputY");
+        pushButtonHash = Animator.StringToHash("pushButton");
     }
 
     private void OnEnable()
@@ -40,6 +43,12 @@ public class RoryAnimatorManager : MonoBehaviour
         Death.playerDied -= OnDeathAnimation;
     }
 
+    private void Update()
+    {
+        getPlayerInput();
+        UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y, Mathf.Clamp(RoryMovement._ySpeedInCurrentFrame, -0.2f, 0.2f));
+        IsPullingAnimation(_playerInput.y);
+    }
     public void UpdateAnimatorMovementValues(float horizontalInput, float verticalInput, float ySpeed)
     {
         float snappedVertical;
@@ -125,5 +134,28 @@ public class RoryAnimatorManager : MonoBehaviour
     private void OnDeathAnimation()
     {
         _animator.SetTrigger(died);
+    }
+
+    public void pushingButtonAnimation()
+    {
+        _animator.SetTrigger(pushButtonHash);
+    }
+
+    public void pushingButtonStartEvent()
+    {
+        GetComponent<CharacterRotation>().enabled = false;
+        GetComponent<RoryMovement>().enabled = false;
+    }
+
+    public void pushingButtonEndEvent()
+    {
+        GetComponent<CharacterRotation>().enabled = true;
+        GetComponent<RoryMovement>().enabled = true;
+    }
+
+    private void getPlayerInput()
+    {
+        _playerInput.x = Input.GetAxis("HumanHorizontal");
+        _playerInput.y = Input.GetAxis("HumanVertical");
     }
 }

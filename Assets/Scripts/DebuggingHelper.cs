@@ -7,7 +7,6 @@ public class DebuggingHelper : MonoBehaviour
 
     [SerializeField] SpiritPlayerController _playerController;
     [SerializeField] SpiritPossession _spiritPossession;
-    [SerializeField] RoryManager _humanPlayerController;
     [SerializeField] float DistanceFromController;
 
     void Awake()

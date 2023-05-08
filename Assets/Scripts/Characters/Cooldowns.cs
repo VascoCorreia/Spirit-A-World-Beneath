@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-//class used for posession and whistle cooldown
+//class used for cooldowns
 static class Cooldowns
 {
     public static IEnumerator Cooldown(float cooldownTime, Action<bool> callback)

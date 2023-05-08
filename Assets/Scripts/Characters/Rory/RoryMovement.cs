@@ -5,7 +5,7 @@ public class RoryMovement : MonoBehaviour
     [field: SerializeField] public Camera _camera { get; private set; }
     [field: SerializeField, Range(0f, 10f)] public float maxSpeed { get; set; } = 7f;
     [field: SerializeField] public float _ySpeed { get; private set; }
-    [field: SerializeField] public float _ySpeedInCurrentFrame { get; private set; }
+    [field: SerializeField] public static float _ySpeedInCurrentFrame { get; private set; }
 
     [SerializeField, Range(0f, 10f)] private float _maxJumpHeight = 2f;
 
@@ -14,10 +14,12 @@ public class RoryMovement : MonoBehaviour
 
     private CharacterController _characterController;
     private float _lastPositionY;
+    private Vector2 _playerInput;
 
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _characterController.enabled = true;
     }
 
     private void Start()
@@ -27,7 +29,10 @@ public class RoryMovement : MonoBehaviour
 
     private void Update()
     {
+        getPlayerInput();
         IsFalling();
+        applyGravity();
+        calculateVelocityAndMove(_playerInput);
     }
     public void HandleMovement(Vector2 playerInput)
     {
@@ -91,6 +96,26 @@ public class RoryMovement : MonoBehaviour
         }
     }
 
+    //Can only move backwards
+    private void MovementWhilePushingOrPulling(ref Vector2 playerInput)
+    {
+        Vector3 forward = transform.forward;
+
+        if(playerInput.y > 0)
+        {
+            playerInput.y = 0;
+        }
+
+        Vector3 forwardRelativeVerticalInput = forward * playerInput.y;
+
+        Vector3 _velocity = forwardRelativeVerticalInput * maxSpeed;
+
+        _velocity.y = _ySpeed;
+        _velocity = AdjustvelocityToSlope(_velocity);
+
+        _characterController.Move(_velocity * Time.deltaTime);
+    }
+
     //https://screenrec.com/share/62pUYiuKDW
     private void Jump()
     {
@@ -137,16 +162,9 @@ public class RoryMovement : MonoBehaviour
             return true;
     }
 
-    //Can only move forwards or backwards
-    private void MovementWhilePushingOrPulling(ref Vector2 playerInput)
+    private void getPlayerInput()
     {
-        Vector3 forward = transform.forward;
-        Vector3 forwardRelativeVerticalInput = forward * playerInput.y;
-
-        Vector3 _velocity = forwardRelativeVerticalInput * maxSpeed * Time.deltaTime;
-
-        _velocity = AdjustvelocityToSlope(_velocity);
-
-        _characterController.Move(_velocity);
+        _playerInput.x = Input.GetAxis("HumanHorizontal");
+        _playerInput.y = Input.GetAxis("HumanVertical");
     }
 }

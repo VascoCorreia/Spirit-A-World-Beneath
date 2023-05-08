@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -7,6 +6,8 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float interactableDistance;
     [SerializeField] private string[] _objectsThatPlayerCanInteractWith;
+    [SerializeField] private float _interactCooldown = 1f;
+    [SerializeField] private bool _canInteract;
 
     private GameObject interactedObject;
 
@@ -25,15 +26,22 @@ public class PlayerInteract : MonoBehaviour
     {
         interactableDistance = 15f;
         _layerMask = LayerMask.GetMask("Interactable");
+        _canInteract = true;
     }
+
     private void Update()
     {
         if (gameObject.CompareTag("Spirit"))
-            Interaction("Spirit");
+        {
+            Interaction("Spirit");    
+        }
 
         if (gameObject.CompareTag("Rory"))
+        {
             Interaction("Human");
+        }
     }
+
     public void Interact(Camera camera)
     {
         Ray ray = new(camera.transform.position, camera.transform.forward);
@@ -45,22 +53,14 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (info.collider.gameObject.CompareTag(tag))
                 {
-
                     //cache the interacted object
                     interactedObject = info.collider.gameObject;
+
+                    //Rotate to face object
                     Vector3 direction = interactedObject.transform.position - transform.position;
                     direction.y = 0;
                     Quaternion rotation = Quaternion.LookRotation(direction);
                     transform.rotation = rotation;
-
-                    //transform.LookAt(direction);
-                    //cannot be like this because character rotates up
-                    //look at interacted object
-                    //transform.LookAt(interactedObject.transform, Vector3.up);
-                    //transform.rotation = new Quaternion(0, transform.rotation.y, transform.rotation.z, 0);
-
-                    //disable regular character rotating with camera
-                    GetComponent<CharacterRotation>().enabled = false;
 
                     //Make stuff happen
                     interactedObject.GetComponent<IInteractable>().Interacted(gameObject);
@@ -74,21 +74,22 @@ public class PlayerInteract : MonoBehaviour
         if (interactedObject != null)
         {
             interactedObject.GetComponent<IInteractable>().Released(gameObject);
-            GetComponent<CharacterRotation>().enabled = true;
         }
     }
 
     private void Interaction(string character)
     {
-        if (Input.GetButtonDown(character + "Interact"))
+        if (Input.GetButtonDown(character + "Interact") && _canInteract)
         {
             Interact(_camera);
+            StartCoroutine(Cooldowns.Cooldown(_interactCooldown, (flag) => _canInteract = flag));
         }
         if (Input.GetButtonUp(character + "Interact"))
         {
             StopInteract();
         }
     }
+
     private void playerHasDiedEventHandler()
     {
         enabled = false;
