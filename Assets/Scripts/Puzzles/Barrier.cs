@@ -3,20 +3,28 @@ using UnityEngine;
 public class Barrier : MonoBehaviour
 {
     [SerializeField] private bool staysOpen;
+
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
     public void OpenBarrier()
     {
         //PlaySound()
         //PlayAnimation()
-        gameObject.SetActive(false);
+        _animator.SetTrigger("Open");
+        //gameObject.SetActive(false);
     }
 
     public void CloseBarrier()
     {
         //PlaySound()
         //PlayAnimation()
-        if(!staysOpen)
+        if (!staysOpen)
         {
-            gameObject.SetActive(true);
+            _animator.SetTrigger("Close");
         }
     }
 }

@@ -12,7 +12,8 @@ public class Button : MonoBehaviour, IInteractable
         //PlayAnimation
         if(player.CompareTag("Rory"))
         {
-            player.GetComponent<RoryAnimatorManager>().pushingButtonAnimation();
+            player.GetComponent<RoryAnimatorManager>().PushingButtonAnimation();
+            player.GetComponent<RoryAnimatorManager>().PushingButtonStartHandler();
 
         }
 
@@ -26,6 +27,8 @@ public class Button : MonoBehaviour, IInteractable
         {
             //PlaySound
             //PlayAnimation
+            player.GetComponent<RoryAnimatorManager>().StopPushingButtonAnimation();
+            player.GetComponent<RoryAnimatorManager>().PushingButtonEndHandler();
             associatedBarrier.CloseBarrier();
         }
     }

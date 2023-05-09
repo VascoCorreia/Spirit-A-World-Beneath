@@ -136,18 +136,22 @@ public class RoryAnimatorManager : MonoBehaviour
         _animator.SetTrigger(died);
     }
 
-    public void pushingButtonAnimation()
+    public void PushingButtonAnimation()
     {
-        _animator.SetTrigger(pushButtonHash);
+        _animator.SetBool(pushButtonHash, true);
+    }
+    public void StopPushingButtonAnimation()
+    {
+        _animator.SetBool(pushButtonHash, false);
     }
 
-    public void pushingButtonStartEvent()
+    public void PushingButtonStartHandler()
     {
         GetComponent<CharacterRotation>().enabled = false;
         GetComponent<RoryMovement>().enabled = false;
     }
 
-    public void pushingButtonEndEvent()
+    public void PushingButtonEndHandler()
     {
         GetComponent<CharacterRotation>().enabled = true;
         GetComponent<RoryMovement>().enabled = true;
