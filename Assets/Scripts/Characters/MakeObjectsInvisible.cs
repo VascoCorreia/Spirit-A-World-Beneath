@@ -47,9 +47,27 @@ public class MakeObjectsInvisible : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            if (!materials.Contains(hit.collider.GetComponent<MeshRenderer>().materials))
+            if(hit.collider.GetComponent<MeshRenderer>() == null && hit.collider.GetComponentsInChildren<MeshRenderer>().Length == 0)
             {
-                materials.Add(hit.collider.GetComponent<MeshRenderer>().materials);
+                continue;
+            }
+
+            else
+            {
+                MeshRenderer[] MeshRenderersInChildren = hit.collider.GetComponentsInChildren<MeshRenderer>();
+
+                foreach(MeshRenderer meshRenderer in MeshRenderersInChildren)
+                {
+                    if (!materials.Contains(meshRenderer.materials))
+                    {
+                        materials.Add(meshRenderer.materials);
+                    }
+                }
+
+                if (hit.collider.GetComponent<MeshRenderer>() != null && !materials.Contains(hit.collider.GetComponent<MeshRenderer>().materials))
+                {
+                    materials.Add(hit.collider.GetComponent<MeshRenderer>().materials);
+                }
             }
         }
 

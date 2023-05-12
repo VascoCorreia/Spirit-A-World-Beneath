@@ -23,7 +23,6 @@ public class MovableController : SpiritPlayerController
         _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
 
         _maxSpeed = 10f;
-
     }
 
     protected override void Update()

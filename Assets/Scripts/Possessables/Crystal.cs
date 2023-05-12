@@ -10,6 +10,8 @@ public class Crystal : MonoBehaviour, IPossessable
     {
         gameObject.GetComponent<CrystalController>().enabled = false;
         gameObject.GetComponent<CrystalController>().DisableLights();
+        gameObject.tag = "Crystal";
+        gameObject.layer = LayerMask.NameToLayer("PossessableStatic");
 
     }
 

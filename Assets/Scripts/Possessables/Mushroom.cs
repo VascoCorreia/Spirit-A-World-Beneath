@@ -14,6 +14,8 @@ public class Mushroom : MonoBehaviour, IPossessable
     public void ExitPossess()
     {
         gameObject.GetComponent<MushroomController>().enabled = false;
+        gameObject.tag = "Mushroom";
+        gameObject.layer = LayerMask.NameToLayer("PossessableStatic");
     }
 
 }
