@@ -17,5 +17,4 @@ public class Mushroom : MonoBehaviour, IPossessable
         gameObject.tag = "Mushroom";
         gameObject.layer = LayerMask.NameToLayer("PossessableStatic");
     }
-
 }

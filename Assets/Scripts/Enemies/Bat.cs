@@ -13,9 +13,7 @@ public class Bat : MonoBehaviour, IPossessable
             gameObject.AddComponent<PlayerInteract>();
             gameObject.AddComponent<BatController>();
             gameObject.GetComponent<BatAi>().enabled = false;
-
-            gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-
+            gameObject.GetComponent<CharacterRotation>().enabled = true;
         }
     }
 
@@ -25,8 +23,9 @@ public class Bat : MonoBehaviour, IPossessable
         Destroy(GetComponent<PlayerInteract>());
         Destroy(GetComponent<MovableController>());
         gameObject.GetComponent<BatAi>().enabled = true;
+        gameObject.GetComponent<CharacterRotation>().enabled = false;
 
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+
         gameObject.tag = "Bat";
         gameObject.layer = LayerMask.NameToLayer("PossessableDynamic");
     }

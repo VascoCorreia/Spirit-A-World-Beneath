@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BatAi : MonoBehaviour
@@ -22,29 +23,30 @@ public class BatAi : MonoBehaviour
     public int currentTarget; //current target, waypoint or player
     public bool isCalled; //current target, waypoint or player
     public Vector3 positionToGoWhenCalled; //current target, waypoint or player
+
     private void Awake()
     {
         _rory = GameObject.Find("Rory").transform;
         _roryWhistle = _rory.GetComponent<WhistleMechanic>();
         _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
 
-        _currentState = State.Wander;
-
-        _roryWhistle.OnWhistleSucessfull += BatCalling;
-    }
-
-    private void OnDestroy()
-    {
-        _roryWhistle.OnWhistleSucessfull -= BatCalling;
+        _currentState = State.Wander; 
     }
 
     private void OnEnable()
     {
+        _roryWhistle.OnWhistleSucessfull += BatCalling;
         isCalled = false;
+
     }
+    private void OnDisable()
+    {
+        _roryWhistle.OnWhistleSucessfull -= BatCalling;
+
+    }    
     void Update()
     {
-        Rotate();
+        //Rotate();
         StateTransitions();
         Movement();
         ChangeWaypoint();

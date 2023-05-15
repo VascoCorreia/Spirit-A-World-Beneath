@@ -9,6 +9,7 @@ public class MakeObjectsInvisible : MonoBehaviour
     private List<Material[]> _materialsInTheWay = new List<Material[]>();
     private List<Material[]> _materialsAlreadyTransparent = new List<Material[]>();
     private LayerMask _combinedLayerMask;
+
     private void Start()
     {
         CreateLayerMask();
@@ -47,7 +48,7 @@ public class MakeObjectsInvisible : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            if(hit.collider.GetComponent<MeshRenderer>() == null && hit.collider.GetComponentsInChildren<MeshRenderer>().Length == 0)
+            if (hit.collider.GetComponent<MeshRenderer>() == null && hit.collider.GetComponentsInChildren<MeshRenderer>().Length == 0)
             {
                 continue;
             }
@@ -56,7 +57,7 @@ public class MakeObjectsInvisible : MonoBehaviour
             {
                 MeshRenderer[] MeshRenderersInChildren = hit.collider.GetComponentsInChildren<MeshRenderer>();
 
-                foreach(MeshRenderer meshRenderer in MeshRenderersInChildren)
+                foreach (MeshRenderer meshRenderer in MeshRenderersInChildren)
                 {
                     if (!materials.Contains(meshRenderer.materials))
                     {

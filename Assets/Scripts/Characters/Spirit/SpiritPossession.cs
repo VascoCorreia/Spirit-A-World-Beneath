@@ -1,6 +1,4 @@
-﻿using Cinemachine;
-using System;
-using System.Collections;
+﻿using System;
 using UnityEngine;
 
 public class SpiritPossession : MonoBehaviour
@@ -8,16 +6,13 @@ public class SpiritPossession : MonoBehaviour
     [field: SerializeField] public bool alreadyInPossession { get; set; }
     [field: SerializeField] public bool canPossess { get; set; }
     [field: SerializeField] public Camera spiritCamera { get; private set; }
-    [field: SerializeField] public CinemachineFreeLook spiritFreeLookCamera { get; private set; }
     [field: SerializeField, Range(10f, 30f)] public float possessableDistance { get; private set; }
     [field: SerializeField] public GameObject currentPossessedObject { get; private set; }
 
     [SerializeField] private float _possessionCooldown;
     [SerializeField] private GameObject _cacheSpirit;
 
-    private LayerMask _combinedPossessionLayerMask;
-    private LayerMask _possessionStaticLayerMask;
-    private LayerMask _possessionDynamicLayerMask;
+    private LayerMask _combinedPossessionLayerMask, _possessionStaticLayerMask, _possessionDynamicLayerMask;
 
     public string typeInPossession;
 
@@ -28,7 +23,6 @@ public class SpiritPossession : MonoBehaviour
     private void Awake()
     {
         spiritCamera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
-        spiritFreeLookCamera = GameObject.Find("SpiritCamera").GetComponent<CinemachineFreeLook>();
         _cacheSpirit = GameObject.Find("Spirit");
 
         _possessionDynamicLayerMask = LayerMask.GetMask("PossessableDynamic");

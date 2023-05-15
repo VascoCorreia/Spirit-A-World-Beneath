@@ -4,8 +4,6 @@ using UnityEngine;
 public class MushroomController : SpiritPlayerController
 {
     [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
-    private ParticleSystem _particleSystem;
-    private ParticleSystem.MainModule _particleSystemMain;
 
     [SerializeField, Range(4, 6)] private float _maxSize;
     [SerializeField] private Vector3 _minSizeVector;
@@ -33,12 +31,10 @@ public class MushroomController : SpiritPlayerController
         base.Update();
         getPlayerInput();
         Actions();
-
     }
 
     protected override void Actions()
     {
-        //_growthPercentage = CalculateGrowthPercentages();
         _growthPercentages = CalculateGrowthPercentages();
 
         if (_growthPercentages["X"] < 1 - _growthPercentageYToStartGrowingX && _growthPercentages["Y"] > _growthPercentageYToStartGrowingX)
