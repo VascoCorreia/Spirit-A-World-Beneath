@@ -11,7 +11,6 @@ public class Cheats : MonoBehaviour
     [SerializeField] private int _roryCurrentTeleportIndex;
     [SerializeField] private int _spiritCurrentTeleportIndex;
 
-    // Start is called before the first frame update
     void Start()
     {
         _invicibility = false;
@@ -19,13 +18,10 @@ public class Cheats : MonoBehaviour
         _spiritCurrentTeleportIndex = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Invicibility") && !_invicibility)
         {
-            print(_invicibility);
-
             _invicibility = true;
         }
 
@@ -36,25 +32,24 @@ public class Cheats : MonoBehaviour
 
         if(Input.GetButtonDown("Human Teleport"))
         {
-            TeleportToCheatPosition(_rory, _roryCurrentTeleportIndex);
 
-            if (_roryCurrentTeleportIndex == _teleportCheatPosition.Count - 1)
+            if (_roryCurrentTeleportIndex == _teleportCheatPosition.Count)
             {
                 _roryCurrentTeleportIndex = 0;
             }
 
+            TeleportToCheatPosition(_rory, _roryCurrentTeleportIndex);
             _roryCurrentTeleportIndex++;
         }
 
         if (Input.GetButtonDown("Spirit Teleport"))
         {
-            TeleportToCheatPosition(_spirit, _spiritCurrentTeleportIndex);
-
-            if (_spiritCurrentTeleportIndex == _teleportCheatPosition.Count - 1)
+            if (_spiritCurrentTeleportIndex == _teleportCheatPosition.Count)
             {
                 _spiritCurrentTeleportIndex = 0;
             }
 
+            TeleportToCheatPosition(_spirit, _spiritCurrentTeleportIndex);
             _spiritCurrentTeleportIndex++;
         }
     }
@@ -64,6 +59,5 @@ public class Cheats : MonoBehaviour
         playerToTeleport.GetComponentInChildren<CharacterController>().enabled = false;
         playerToTeleport.transform.position = _teleportCheatPosition[index].position;
         playerToTeleport.GetComponentInChildren<CharacterController>().enabled = true;
-
     }
 }
