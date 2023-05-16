@@ -12,6 +12,11 @@ public class CharacterRotation : MonoBehaviour
         _rotationSpeed = 10f;
     }
 
+    private void Awake()
+    {
+        
+    }
+
     void Update()
     {
         getPlayerInput();

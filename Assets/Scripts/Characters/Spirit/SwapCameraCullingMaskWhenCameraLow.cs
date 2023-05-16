@@ -17,12 +17,12 @@ public class SwapCameraCullingMaskWhenCameraLow : MonoBehaviour
     {
         if(_freeLookCamera != null)
         {
-            if(_freeLookCamera.transform.position.y <= 0f && _camera.cullingMask != LayerMask.NameToLayer("_cameraCloseToPlayerLayerMask"))
+            if(_freeLookCamera.transform.position.y <= -0.2f && _camera.cullingMask != LayerMask.NameToLayer("_cameraCloseToPlayerLayerMask"))
             {
                 _camera.cullingMask = _cameraCloseToPlayerLayerMask;
             }
             
-            if(_freeLookCamera.transform.position.y > -1f && _camera.cullingMask != _normalCameraLayerMask)
+            if(_freeLookCamera.transform.position.y > -0.2f && _camera.cullingMask != _normalCameraLayerMask)
             {
                 _camera.cullingMask = _normalCameraLayerMask;
             }

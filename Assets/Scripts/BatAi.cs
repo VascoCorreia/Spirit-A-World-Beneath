@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BatAi : MonoBehaviour
@@ -15,7 +14,7 @@ public class BatAi : MonoBehaviour
     private Transform _rory;
     private WhistleMechanic _roryWhistle;
     private SpiritPossession _spiritPossession;
-    private State _currentState;
+    [SerializeField] private State _currentState;
 
     public float startChasingDistance;
     public float rotationSpeed = 5f; //Rotation speed
@@ -30,7 +29,7 @@ public class BatAi : MonoBehaviour
         _roryWhistle = _rory.GetComponent<WhistleMechanic>();
         _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
 
-        _currentState = State.Wander; 
+        _currentState = State.Wander;
     }
 
     private void OnEnable()
@@ -43,7 +42,7 @@ public class BatAi : MonoBehaviour
     {
         _roryWhistle.OnWhistleSucessfull -= BatCalling;
 
-    }    
+    }
     void Update()
     {
         //Rotate();
@@ -79,16 +78,22 @@ public class BatAi : MonoBehaviour
     private void MoveTo(Vector3 positionToMoveTo)
     {
         transform.position = Vector3.MoveTowards(transform.position, positionToMoveTo, movementSpeed * Time.deltaTime);
+        transform.LookAt(positionToMoveTo);
     }
 
     void Rotate()
     {
-        if ((Vector3.Distance(transform.position, _rory.transform.position) > startChasingDistance) || isCalled)
+        if (Vector3.Distance(transform.position, _rory.transform.position) < startChasingDistance)
         {
             transform.LookAt(_rory);
         }
 
-        transform.LookAt(allWaypoints[currentTarget].position);
+        else if (isCalled)
+        {
+            transform.LookAt(positionToGoWhenCalled);
+        }
+        else
+            transform.LookAt(allWaypoints[currentTarget].position);
     }
     void ChangeWaypoint()
     {
@@ -114,15 +119,16 @@ public class BatAi : MonoBehaviour
         if (Vector3.Distance(transform.position, _rory.transform.position) <= startChasingDistance)
         {
             _currentState = State.ChaseRory;
+            isCalled = false;
         }
 
         else if (
-                _spiritPossession.typeInPossession == "Bat" 
-                 && _spiritPossession.currentPossessedObject != gameObject 
+                _spiritPossession.typeInPossession == "Bat"
+                 && _spiritPossession.currentPossessedObject != gameObject
                  && Vector3.Distance(transform.position, _spiritPossession.currentPossessedObject.transform.position) <= startChasingDistance)
         {
             _currentState = State.ChasePossessedBat;
-
+            isCalled = false;
         }
 
         else if (isCalled)
@@ -136,6 +142,9 @@ public class BatAi : MonoBehaviour
         }
 
         else
+        {
             _currentState = State.Wander;
+            isCalled = false;
+        }
     }
 }

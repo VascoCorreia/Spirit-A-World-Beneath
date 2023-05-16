@@ -43,6 +43,11 @@ public class SpiritCameraController : CameraController
 
         }
 
+        if(_spiritPossession.typeInPossession == "Crystal")
+        {
+            _camera.m_Orbits[2].m_Height *= 0f;
+        }
+
         _camera.Priority = 99;
     }
 

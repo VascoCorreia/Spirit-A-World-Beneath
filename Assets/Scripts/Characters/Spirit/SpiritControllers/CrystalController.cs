@@ -5,6 +5,7 @@ public class CrystalController : SpiritPlayerController
 {
     [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
     [SerializeField] private float _lightBeamTranslateSpeed;
+    [SerializeField] private MeshRenderer _crystalRenderer;
 
     private Light _spotLight;
     private VolumetricLightBeam _lightBeam;
@@ -54,15 +55,15 @@ public class CrystalController : SpiritPlayerController
     {
         _lightBeam.enabled = true;
         _spotLight.enabled = true;
-        _spotLight.color = GetComponent<MeshRenderer>().material.color;
-        _lightBeam.color = GetComponent<MeshRenderer>().material.color;
+        _spotLight.color = _crystalRenderer.material.color;
+        _lightBeam.color = _crystalRenderer.material.color;
     }
 
     public void DisableLights()
     {
         _lightBeam.enabled = false;
         _spotLight.enabled = false;
-        _spotLight.color = GetComponent<MeshRenderer>().material.color;
-        _lightBeam.color = GetComponent<MeshRenderer>().material.color;
+        _spotLight.color = _crystalRenderer.material.color;
+        _lightBeam.color = _crystalRenderer.material.color;
     }
 }
