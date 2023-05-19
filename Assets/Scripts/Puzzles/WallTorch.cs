@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class WallTorch : MonoBehaviour
 {
-        public void Interacted(GameObject player)
-        {
-           // BridgeActive();
-        }
+    [SerializeField] public GameObject _Torch;
+    [SerializeField] public GameObject _WallTorch;
+    [SerializeField] public GameObject _Bridge;
 
-        public void Released(GameObject player)
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Torch")
         {
-           // BridgeClosed();
+            _Torch.SetActive(false);
+            _WallTorch.SetActive(true);
+            _Bridge.SetActive(true);
         }
+    }
 }
