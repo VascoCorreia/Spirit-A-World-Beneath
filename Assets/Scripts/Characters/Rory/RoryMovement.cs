@@ -15,6 +15,7 @@ public class RoryMovement : MonoBehaviour
     private CharacterController _characterController;
     private float _lastPositionY;
     private Vector2 _playerInput;
+    public bool isGrounded;
 
     private void Awake()
     {
@@ -30,15 +31,12 @@ public class RoryMovement : MonoBehaviour
 
     private void Update()
     {
+        isGrounded = _characterController.isGrounded;
+
         getPlayerInput();
         IsFalling();
         applyGravity();
         calculateVelocityAndMove(_playerInput);
-    }
-    public void HandleMovement(Vector2 playerInput)
-    {
-        applyGravity();
-        calculateVelocityAndMove(playerInput);
     }
 
     private void applyGravity()
@@ -56,7 +54,7 @@ public class RoryMovement : MonoBehaviour
     //It is also responsible for listening to jumping input
     private void calculateVelocityAndMove(Vector2 playerInput)
     {
-        if (_characterController.isGrounded && Input.GetButtonDown("HumanJump") && !PushAndPullMechanic.isPulling)
+        if (_characterController.isGrounded && Input.GetButtonDown("HumanJump") && !PushAndPullMechanic.isPulling )
         {
             Jump();
         }
@@ -130,19 +128,22 @@ public class RoryMovement : MonoBehaviour
     //removes bounciness when moving down slopes, keeps the direction of the movement align with the slope angle
     private Vector3 AdjustvelocityToSlope(Vector3 velocity)
     {
-        Debug.DrawRay(transform.position, Vector3.down);
+        Debug.DrawRay(transform.position, Vector3.down * 0.7f);
 
         var ray = new Ray(transform.position, Vector3.down);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 1.5f))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 0.7f))
         {
             var rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
             var adjustedvelocity = rotation * velocity;
 
+            Debug.Log(adjustedvelocity);
+
             //if slope is over controller limit slide down
             if (Vector3.Angle(Vector3.up, hitInfo.normal) > _characterController.slopeLimit)
             {
-                return rotation * Vector3.forward * Physics.gravity.y;
+                //return rotation * Vector3.forward * Physics.gravity.y;
+                adjustedvelocity = Vector3.ProjectOnPlane(new Vector3(0, _ySpeed, 0), hitInfo.normal);
             }
             //only adjust the _velocity if were moving down a slope which means out Y component of velocity must be negative, otherwise dont change velocity
             if (adjustedvelocity.y < 0)
@@ -153,7 +154,7 @@ public class RoryMovement : MonoBehaviour
         return velocity;
     }
 
-    private bool IsFalling()
+    public bool IsFalling()
     {
         _ySpeedInCurrentFrame = (transform.position.y - _lastPositionY) / Time.deltaTime;
 

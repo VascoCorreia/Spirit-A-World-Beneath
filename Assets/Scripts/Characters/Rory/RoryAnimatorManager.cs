@@ -27,7 +27,6 @@ public class RoryAnimatorManager : MonoBehaviour
         playerInputXYCombinedHash = Animator.StringToHash("playerInputXYCombined");
         ySpeedHash = Animator.StringToHash("ySpeed");
         groundedHash = Animator.StringToHash("grounded");
-        groundedHash = Animator.StringToHash("grounded");
         died = Animator.StringToHash("died");
         playerInputYHash = Animator.StringToHash("playerInputY");
         pushButtonHash = Animator.StringToHash("pushButton");
@@ -162,4 +161,6 @@ public class RoryAnimatorManager : MonoBehaviour
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
     }
+
+
 }
