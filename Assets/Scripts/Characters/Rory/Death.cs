@@ -15,7 +15,9 @@ public class Death : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Bat"))
-        {  
+        {
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+
             if (!eventFiredAlready && !Cheats._invicibility)
             {
                 //Fire Event

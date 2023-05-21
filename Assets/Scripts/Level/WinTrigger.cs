@@ -34,6 +34,7 @@ public class WinTrigger : MonoBehaviour
         if (_roryInside && _spiritInside)
         {
             SceneManager.LoadScene("Main menu");
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
         }
     }
 }

@@ -45,11 +45,14 @@ public class MovableController : SpiritPlayerController
         if (Input.GetButtonDown("SpiritPossession"))
         {
             _spiritPossession.tryPossession();
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
         }
         //R2
         if (Input.GetButtonDown("SpiritExitPossession"))
         {
             _spiritPossession.ExitPossession();
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+
         }
         //Square
         if (Input.GetButtonDown("SpiritInteract"))
@@ -105,7 +108,9 @@ public class MovableController : SpiritPlayerController
         if (_onGround && Input.GetButtonDown("SpiritJump"))
         {
             Jump();
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
         }
+
         //get cameras forward and right vectors
         //We zero the y components since we do not want out character to fly
         //multiply input X vector by camera right vector

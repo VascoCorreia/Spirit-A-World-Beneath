@@ -88,6 +88,8 @@ public class SpiritPossession : MonoBehaviour
                 //change tag and layer
                 currentPossessedObject.tag = "Spirit";
                 currentPossessedObject.layer = LayerMask.NameToLayer("Spirit");
+                //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+
 
                 //Which type of object was possessed
                 typeInPossession = possessable.TypeInPossession;
@@ -112,6 +114,8 @@ public class SpiritPossession : MonoBehaviour
             {
                 //Invoke failed event if possession fails
                 possessionFailed?.Invoke();
+                //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+
 
                 //Start the cooldown
                 StartCoroutine(Cooldowns.Cooldown(_possessionCooldown, (canPossessFlag) =>

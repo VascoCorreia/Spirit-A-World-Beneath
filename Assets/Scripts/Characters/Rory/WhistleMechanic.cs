@@ -49,6 +49,7 @@ public class WhistleMechanic : MonoBehaviour
             {
                 BatsInRadius = GetBatsInRadius(BatsInRadius);
                 Transform positionWhenCalled = gameObject.transform;
+                //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
 
                 if (BatsInRadius.Count > 0)
                 {
