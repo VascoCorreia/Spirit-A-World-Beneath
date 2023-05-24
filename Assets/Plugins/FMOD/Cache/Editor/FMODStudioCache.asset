@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Sounds/fef/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638204579761976000
+  lastModified: 638205415614387913
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -41,7 +41,7 @@ MonoBehaviour:
   - {fileID: -3630708248783067062}
   StringsBanks:
   - {fileID: 988411445423414182}
-  cacheTime: 638204579761996228
+  cacheTime: 638205415614417915
   cacheVersion: 131603
 --- !u!114 &988411445423414182
 MonoBehaviour:
@@ -58,7 +58,7 @@ MonoBehaviour:
   Path: Assets/Sounds/fef/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638204579761996228
+  lastModified: 638205415614417915
   FileSizes:
   - Name: Desktop
     Value: 712

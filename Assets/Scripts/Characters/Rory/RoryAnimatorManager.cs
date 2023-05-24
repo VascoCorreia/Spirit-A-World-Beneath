@@ -4,6 +4,7 @@ public class RoryAnimatorManager : MonoBehaviour
 {
     private Animator _animator;
     private CharacterController _characterController;
+    private RoryMovement _roryMovement;
 
     private int isPullingHash;
     private int playerInputXYCombinedHash;
@@ -12,6 +13,7 @@ public class RoryAnimatorManager : MonoBehaviour
     private int died;
     private int playerInputYHash;
     private int pushButtonHash;
+    private int isFallingHash;
 
     private Vector2 _playerInput;
 
@@ -19,6 +21,7 @@ public class RoryAnimatorManager : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
+        _roryMovement = GetComponent<RoryMovement>();
     }
 
     private void Start()
@@ -30,6 +33,7 @@ public class RoryAnimatorManager : MonoBehaviour
         died = Animator.StringToHash("died");
         playerInputYHash = Animator.StringToHash("playerInputY");
         pushButtonHash = Animator.StringToHash("pushButton");
+        isFallingHash = Animator.StringToHash("isFalling");
     }
 
     private void OnEnable()
@@ -45,9 +49,10 @@ public class RoryAnimatorManager : MonoBehaviour
     private void Update()
     {
         getPlayerInput();
-        UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y, Mathf.Clamp(RoryMovement._ySpeedInCurrentFrame, -0.2f, 0.2f));
+        UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y, Mathf.Clamp(RoryMovement._ySpeedTest, -0.2f, 0.2f));
         IsPullingAnimation(_playerInput.y);
     }
+
     public void UpdateAnimatorMovementValues(float horizontalInput, float verticalInput, float ySpeed)
     {
         float snappedVertical;
@@ -104,11 +109,11 @@ public class RoryAnimatorManager : MonoBehaviour
         _animator.SetFloat(playerInputXYCombinedHash, Mathf.Clamp01(Mathf.Abs(sumOfMovementInputs)), 0.1f, Time.deltaTime);
         _animator.SetFloat(ySpeedHash, ySpeed, 0.1f, Time.deltaTime);
 
-        if (_characterController.isGrounded)
+        if (_roryMovement.isGrounded)
         {
             _animator.SetBool(groundedHash, true);
         }
-        if (!_characterController.isGrounded)
+        if (!_roryMovement.isGrounded)
         {
             _animator.SetBool(groundedHash, false);
         }
@@ -139,6 +144,7 @@ public class RoryAnimatorManager : MonoBehaviour
     {
         _animator.SetBool(pushButtonHash, true);
     }
+
     public void StopPushingButtonAnimation()
     {
         _animator.SetBool(pushButtonHash, false);
@@ -161,6 +167,4 @@ public class RoryAnimatorManager : MonoBehaviour
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
     }
-
-
 }

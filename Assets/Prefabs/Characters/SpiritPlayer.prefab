@@ -2045,7 +2045,6 @@ MonoBehaviour:
   <alreadyInPossession>k__BackingField: 0
   <canPossess>k__BackingField: 0
   <spiritCamera>k__BackingField: {fileID: 0}
-  <spiritFreeLookCamera>k__BackingField: {fileID: 0}
   <possessableDistance>k__BackingField: 25.1
   <currentPossessedObject>k__BackingField: {fileID: 0}
   _possessionCooldown: 2
@@ -6956,7 +6955,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 0.74
   m_Radius: 0.16
@@ -6978,7 +6977,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_camera>k__BackingField: {fileID: 0}
-  <_FreeLookCamera>k__BackingField: {fileID: 0}
   <_playerInteract>k__BackingField: {fileID: 0}
   <_spiritPossession>k__BackingField: {fileID: 0}
   <_controller>k__BackingField: {fileID: 0}
