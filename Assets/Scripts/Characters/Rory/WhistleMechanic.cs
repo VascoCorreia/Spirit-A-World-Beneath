@@ -13,10 +13,12 @@ public class WhistleMechanic : MonoBehaviour
     public Action<WhistleEventArgs> OnWhistleSucessfull;
     public Action OnWhistleFailed;
 
+    private RoryAnimatorManager _roryAnimatorManager;
 
     private void Awake()
     {
         _canWhistle = true;
+        _roryAnimatorManager = GetComponent<RoryAnimatorManager>();
     }
 
     // Update is called once per frame
@@ -47,15 +49,24 @@ public class WhistleMechanic : MonoBehaviour
         {
             if (_canWhistle)
             {
+                //play animation
+                _roryAnimatorManager.RoryWhistleAnimation();
+
+                //Check if there are bats in the radius around rory
                 BatsInRadius = GetBatsInRadius(BatsInRadius);
+
+                //store the position of the whistle for bats to know where they need to go
                 Transform positionWhenCalled = gameObject.transform;
+
                 //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
 
+                //If there is at least one bat -> sucess
                 if (BatsInRadius.Count > 0)
                 {
                     OnWhistleSucessfull?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled.position));
                 }
 
+                //If there are no bats -> Failure
                 if (BatsInRadius.Count == 0)
                 {
                     OnWhistleFailed?.Invoke();

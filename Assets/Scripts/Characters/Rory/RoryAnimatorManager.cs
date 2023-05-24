@@ -14,6 +14,7 @@ public class RoryAnimatorManager : MonoBehaviour
     private int playerInputYHash;
     private int pushButtonHash;
     private int isFallingHash;
+    private int whistledTrigger;
 
     private Vector2 _playerInput;
 
@@ -34,6 +35,8 @@ public class RoryAnimatorManager : MonoBehaviour
         playerInputYHash = Animator.StringToHash("playerInputY");
         pushButtonHash = Animator.StringToHash("pushButton");
         isFallingHash = Animator.StringToHash("isFalling");
+        whistledTrigger = Animator.StringToHash("whistled");
+
     }
 
     private void OnEnable()
@@ -160,6 +163,11 @@ public class RoryAnimatorManager : MonoBehaviour
     {
         GetComponent<CharacterRotation>().enabled = true;
         GetComponent<RoryMovement>().enabled = true;
+    }
+
+    public void RoryWhistleAnimation()
+    {
+        _animator.SetTrigger(whistledTrigger);
     }
 
     private void getPlayerInput()
