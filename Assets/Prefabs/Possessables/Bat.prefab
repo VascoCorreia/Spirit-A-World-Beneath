@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: fb30663a575a2bf4db9e54b205f37253, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb30663a575a2bf4db9e54b205f37253, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.29
+      value: -217.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb30663a575a2bf4db9e54b205f37253, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.11
+      value: 1.81
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb30663a575a2bf4db9e54b205f37253, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.560616
+      value: 52.657352
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb30663a575a2bf4db9e54b205f37253, type: 3}
       propertyPath: m_LocalRotation.w
@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fb30663a575a2bf4db9e54b205f37253, type: 3}
       propertyPath: m_Name
-      value: Bat
+      value: Bat (1)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fb30663a575a2bf4db9e54b205f37253, type: 3}
       propertyPath: m_Layer
@@ -197,7 +197,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _currentState: 0
-  startChasingDistance: 10
+  startChasingDistance: 2.5
   rotationSpeed: 5
   movementSpeed: 3
   currentTarget: 0

@@ -17,7 +17,7 @@ public class Cheats : MonoBehaviour
         _roryCurrentTeleportIndex = 0;
         _spiritCurrentTeleportIndex = 0;
         _rory = _rory.GetComponentInChildren<CharacterController>().gameObject;
-        _rory = _spirit.GetComponentInChildren<CharacterController>().gameObject;
+        _spirit = _spirit.GetComponentInChildren<CharacterController>().gameObject;
     }
 
     void Update()

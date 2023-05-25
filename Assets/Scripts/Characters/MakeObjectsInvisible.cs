@@ -31,6 +31,7 @@ public class MakeObjectsInvisible : MonoBehaviour
         _roryLayerMask = LayerMask.GetMask("Rory");
         _spiritLayerMask = LayerMask.GetMask("Spirit");
         _dynamicPossessablesLayerMask = LayerMask.GetMask("PossessableDynamic");
+        _dynamicPossessablesLayerMask = LayerMask.GetMask("BothPlayerBarrier");
         humanBarrierLayerMask = LayerMask.GetMask("RoryBarrier");
         spiritBarrierLayerMask = LayerMask.GetMask("SpiritBarrier");
         levelLayout = LayerMask.GetMask("Default");

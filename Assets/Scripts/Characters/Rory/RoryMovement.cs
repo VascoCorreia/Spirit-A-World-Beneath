@@ -18,7 +18,7 @@ public class RoryMovement : MonoBehaviour
     private float _lastPositionY;
     private Vector2 _playerInput;
     public bool isGrounded;
-    public static bool isFalling;
+    public bool isFalling;
     public bool isSliding;
     public Transform testOrigin;
     public float maxDistance;

@@ -28,7 +28,7 @@ public class MovableBox : MonoBehaviour, IInteractable
     private void Update()
     {
         //If player is not grounded stop pushing
-        if(cachedPlayer != null && !cachedPlayer.GetComponent<CharacterController>().isGrounded)
+        if(cachedPlayer != null && !cachedPlayer.GetComponent<RoryMovement>().isGrounded)
         {
             PushAndPullMechanic.isPulling = false;
             transform.SetParent(null, true);
@@ -40,7 +40,7 @@ public class MovableBox : MonoBehaviour, IInteractable
         isInteracted = true;
 
         //The player can only use mechanic when grounded
-        if (player.GetComponent<CharacterController>().isGrounded)
+        if (player.GetComponent<RoryMovement>().isGrounded)
         {
             PushAndPullMechanic.isPulling = true;
             

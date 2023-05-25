@@ -111,6 +111,7 @@ public class RoryAnimatorManager : MonoBehaviour
 
         _animator.SetFloat(playerInputXYCombinedHash, Mathf.Clamp01(Mathf.Abs(sumOfMovementInputs)), 0.1f, Time.deltaTime);
         _animator.SetFloat(ySpeedHash, ySpeed, 0.1f, Time.deltaTime);
+        _animator.SetBool(isFallingHash, _roryMovement.isFalling);
 
         if (_roryMovement.isGrounded)
         {

@@ -76,4 +76,10 @@ public class WhistleMechanic : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _callingRadius);
+    }
 }

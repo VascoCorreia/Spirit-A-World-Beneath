@@ -147,4 +147,10 @@ public class BatAi : MonoBehaviour
             isCalled = false;
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, startChasingDistance);
+    }
 }
