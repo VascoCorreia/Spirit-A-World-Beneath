@@ -1,20 +1,33 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InGameUIController : MonoBehaviour
 {
     [SerializeField] private GameObject _noTargetForPossessionText;
     [SerializeField] private GameObject _alreadyInPossessionText;
+    [SerializeField] private GameObject _whistleFailedText;
     [SerializeField] private SpiritPossession _spiritPossession;
+    [SerializeField] private WhistleMechanic _whistleMechanic;
 
-    void Awake()
+    void OnEnable()
     {
-        _spiritPossession.possessionFailed += PossessionFailed;
+        _spiritPossession.possessionFailed += PossessionFailedEventHandler;
+        _whistleMechanic.OnWhistleFailed += WhistleFailedEventHandler;
     }
 
-    private void PossessionFailed()
+    private void OnDisable()
+    {
+        _spiritPossession.possessionFailed -= PossessionFailedEventHandler;
+        _whistleMechanic.OnWhistleFailed -= WhistleFailedEventHandler;
+    }
+
+    private void WhistleFailedEventHandler()
+    {
+        StartCoroutine(DeactivateAfterAnimationComplete(_whistleFailedText, _whistleFailedText.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length));
+    }
+
+    private void PossessionFailedEventHandler()
     {
         if (!_spiritPossession.alreadyInPossession)
             StartCoroutine(DeactivateAfterAnimationComplete(_noTargetForPossessionText, _noTargetForPossessionText.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length));

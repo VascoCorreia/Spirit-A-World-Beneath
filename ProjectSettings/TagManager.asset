@@ -12,6 +12,7 @@ TagManager:
   - Crystal
   - Pushable
   - Torch
+  - ChangeCameraTunnelTrigger
   layers:
   - Default
   - TransparentFX

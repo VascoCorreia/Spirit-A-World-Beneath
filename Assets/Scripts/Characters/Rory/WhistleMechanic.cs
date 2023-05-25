@@ -70,6 +70,7 @@ public class WhistleMechanic : MonoBehaviour
                 if (BatsInRadius.Count == 0)
                 {
                     OnWhistleFailed?.Invoke();
+
                 }
 
                 StartCoroutine(Cooldowns.Cooldown(_whisleCooldown, (possessionFlag) => _canWhistle = possessionFlag));

@@ -7,6 +7,7 @@ public class SwapCameraCullingMaskWhenCameraLow : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private LayerMask _cameraCloseToPlayerLayerMask;
     [SerializeField] private LayerMask _normalCameraLayerMask;
+    [SerializeField] private float _switchCullingMaskYValyeThreshold;
 
     private void Start()
     {
@@ -17,12 +18,13 @@ public class SwapCameraCullingMaskWhenCameraLow : MonoBehaviour
     {
         if(_freeLookCamera != null)
         {
-            if(_freeLookCamera.transform.position.y <= -0.2f && _camera.cullingMask != LayerMask.NameToLayer("_cameraCloseToPlayerLayerMask"))
+            if(_freeLookCamera.m_YAxis.Value <= _switchCullingMaskYValyeThreshold && _camera.cullingMask != LayerMask.NameToLayer("_cameraCloseToPlayerLayerMask"))
             {
                 _camera.cullingMask = _cameraCloseToPlayerLayerMask;
+                
             }
             
-            if(_freeLookCamera.transform.position.y > -0.2f && _camera.cullingMask != _normalCameraLayerMask)
+            if(_freeLookCamera.m_YAxis.Value > _switchCullingMaskYValyeThreshold && _camera.cullingMask != _normalCameraLayerMask)
             {
                 _camera.cullingMask = _normalCameraLayerMask;
             }

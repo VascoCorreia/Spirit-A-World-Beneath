@@ -40,14 +40,14 @@ public class RoryMovement : MonoBehaviour
     private void Update()
     {
         //test sphere cast for grounded
-        isGrounded = GroundSphereCast();
+        isGrounded = GroundSphereCastGroundCheck();
 
         _ySpeedTest = _ySpeed;
         isFalling = IsFalling();
 
-        getPlayerInput();
-        applyGravity();
-        calculateVelocityAndMove(_playerInput);
+        GetPlayerInput();
+        ApplyGravity();
+        CalculateVelocityAndMove(_playerInput);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -57,7 +57,7 @@ public class RoryMovement : MonoBehaviour
         CheckIfPlayerIsSliding();
     }
 
-    private void applyGravity()
+    private void ApplyGravity()
     {
         _ySpeed += Physics.gravity.y * Time.deltaTime;
 
@@ -70,7 +70,7 @@ public class RoryMovement : MonoBehaviour
 
     //this function calculates the velocity magnitude and direction of the current movement and after makes the character move.
     //It is also responsible for listening to jumping input
-    private void calculateVelocityAndMove(Vector2 playerInput)
+    private void CalculateVelocityAndMove(Vector2 playerInput)
     {
         if (isGrounded && Input.GetButtonDown("HumanJump") && !PushAndPullMechanic.isPulling)
         {
@@ -190,7 +190,6 @@ public class RoryMovement : MonoBehaviour
             return adjustedvelocity;
         }
 
-        Debug.Log("dont slide");
         return velocity;
     }
 
@@ -209,7 +208,7 @@ public class RoryMovement : MonoBehaviour
             return true;
     }
 
-    private void getPlayerInput()
+    private void GetPlayerInput()
     {
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
@@ -217,11 +216,10 @@ public class RoryMovement : MonoBehaviour
 
     }
 
-    private bool GroundSphereCast()
+    private bool GroundSphereCastGroundCheck()
     {
         if (Physics.SphereCast(testOrigin.position, 0.13f, -transform.up, out RaycastHit hit, maxDistance))
         {
-            Debug.Log(hit.collider);
             return true;
         }
         else
@@ -238,7 +236,7 @@ public class RoryMovement : MonoBehaviour
     {
         float angle = Vector3.Angle(Vector3.up, hitNormal);
 
-        if (!GroundSphereCast() && angle > _characterController.slopeLimit && _ySpeed < 0)
+        if (!GroundSphereCastGroundCheck() && angle > _characterController.slopeLimit && _ySpeed < 0)
         {
             isSliding = true;
         }
