@@ -17,7 +17,7 @@ public class Button : MonoBehaviour, IInteractable
         isInteracted = true;
         //PlaySound
         //PlayAnimation
-        if(player.CompareTag("Rory"))
+        if (player.CompareTag("Rory"))
         {
             player.GetComponent<RoryAnimatorManager>().PushingButtonAnimation();
             player.GetComponent<RoryAnimatorManager>().PushingButtonStartHandler();
@@ -30,12 +30,16 @@ public class Button : MonoBehaviour, IInteractable
 
     public void Released(GameObject player)
     {
-        if(isInteracted)
+        if (isInteracted)
         {
             //PlaySound
             //PlayAnimation
-            player.GetComponent<RoryAnimatorManager>().StopPushingButtonAnimation();
-            player.GetComponent<RoryAnimatorManager>().PushingButtonEndHandler();
+            if (player.CompareTag("Rory"))
+            {
+                player.GetComponent<RoryAnimatorManager>().StopPushingButtonAnimation();
+                player.GetComponent<RoryAnimatorManager>().PushingButtonEndHandler();
+            }
+
             _animator.SetTrigger("out");
             associatedBarrier.CloseBarrier();
         }

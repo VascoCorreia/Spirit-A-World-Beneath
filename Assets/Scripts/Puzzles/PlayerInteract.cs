@@ -27,6 +27,7 @@ public class PlayerInteract : MonoBehaviour
         interactableDistance = 15f;
         _layerMask = LayerMask.GetMask("Interactable");
         _canInteract = true;
+        _camera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
     }
 
     private void Update()

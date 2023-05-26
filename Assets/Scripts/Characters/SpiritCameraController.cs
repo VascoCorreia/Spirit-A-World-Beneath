@@ -1,9 +1,10 @@
 using UnityEngine;
+using Cinemachine;
 
 public class SpiritCameraController : CameraController
 {
     [SerializeField] private SpiritPossession _spiritPossession;
-    //[SerializeField] private CinemachineFreeLook _possessionCamera;
+    [SerializeField] private CinemachineFreeLook _possessionCamera;
     private GameObject _spiritCached;
 
     private void OnEnable()
@@ -47,7 +48,7 @@ public class SpiritCameraController : CameraController
         _mainCamera.LookAt = possessedGameobject.getPossessedEnemy().transform;
 
         //parent the possessed camera to the possessed gameobject
-        transform.SetParent(possessedGameobject.getPossessedEnemy().transform);
+        _possessionCamera.transform.SetParent(possessedGameobject.getPossessedEnemy().transform);
 
         //Mushroom possession requires the camera to be further away from the character, since he can grow
         if (_spiritPossession.typeInPossession == "Mushroom")
@@ -66,11 +67,13 @@ public class SpiritCameraController : CameraController
             _mainCamera.m_Orbits[2].m_Height *= 0f;
         }
 
-        _mainCamera.Priority = 99;
+        _possessionCamera.Priority = 99;
+        _mainCamera.Priority = 1;
     }
 
     private void ChangeCameraOnExitPossession()
     {
+        _possessionCamera.transform.SetParent(_spiritCached.transform);
         //Return camera to spirit
         if (_character == "Spirit")
         {
@@ -85,7 +88,8 @@ public class SpiritCameraController : CameraController
 
         _mainCamera.m_Orbits[0].m_Height = SpiritDefaultTopRigHeight;
 
-        _mainCamera.Priority = 8;
+        _possessionCamera.Priority = 1;
+        _mainCamera.Priority = 99;
     }
     private void spiritEnterTunnelCameraEventHandler(GameObject obj)
     {
