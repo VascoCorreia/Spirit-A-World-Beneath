@@ -20,7 +20,7 @@ public class Bat : MonoBehaviour, IPossessable
     {
         Destroy(GetComponent<CharacterController>());
         Destroy(GetComponent<PlayerInteract>());
-        Destroy(GetComponent<MovableController>());
+        Destroy(GetComponent<BatController>());
         gameObject.GetComponent<BatAi>().enabled = true;
 
         gameObject.tag = "Bat";

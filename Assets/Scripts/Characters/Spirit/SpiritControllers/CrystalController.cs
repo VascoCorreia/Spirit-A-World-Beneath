@@ -3,23 +3,23 @@ using VLB;
 
 public class CrystalController : SpiritPlayerController
 {
-    [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
     [SerializeField] private float _lightBeamTranslateSpeed;
     [SerializeField] private MeshRenderer _crystalRenderer;
 
     private Light _spotLight;
     private VolumetricLightBeam _lightBeam;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _lightBeam = GetComponentInChildren<VolumetricLightBeam>();
-        _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
         GetSpotLight();
     }
     protected override void Update()
     {
         base.Update();
-        getPlayerInput();
+        GetPlayerInput();
         Actions();
     }
 
@@ -28,15 +28,15 @@ public class CrystalController : SpiritPlayerController
         _lightBeam.transform.Rotate(playerInput.x * Time.deltaTime * _lightBeamTranslateSpeed, playerInput.y * Time.deltaTime * _lightBeamTranslateSpeed, 0);
     }
 
-    protected override void getPlayerInput()
-    {
-        base.getPlayerInput();
+    //protected override void GetPlayerInput()
+    //{
+    //    base.GetPlayerInput();
 
-        if (Input.GetButtonDown("SpiritExitPossession"))
-        {
-            _spiritPossession.ExitPossession();
-        }
-    }
+    //    if (Input.GetButtonDown("SpiritExitPossession"))
+    //    {
+    //        _spiritPossession.ExitPossession();
+    //    }
+    //}
 
     private void GetSpotLight()
     {

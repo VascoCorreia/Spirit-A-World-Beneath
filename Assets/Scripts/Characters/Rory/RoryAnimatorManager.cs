@@ -52,7 +52,7 @@ public class RoryAnimatorManager : MonoBehaviour
     private void Update()
     {
         getPlayerInput();
-        UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y, Mathf.Clamp(RoryMovement._ySpeedTest, -0.2f, 0.2f));
+        UpdateAnimatorMovementValues(_playerInput.x, _playerInput.y, Mathf.Clamp(_roryMovement._ySpeed, -0.2f, 0.2f));
         IsPullingAnimation(_playerInput.y);
     }
 

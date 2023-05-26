@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MushroomController : SpiritPlayerController
 {
-    [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
+    //[field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
 
     [SerializeField, Range(4, 6)] private float _maxSize;
     [SerializeField] private Vector3 _minSizeVector;
@@ -23,13 +23,13 @@ public class MushroomController : SpiritPlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
-        _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
+        //_spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
     }
 
     protected override void Update()
     {
         base.Update();
-        getPlayerInput();
+        //GetPlayerInput();
         Actions();
     }
 
@@ -93,15 +93,15 @@ public class MushroomController : SpiritPlayerController
 
     }
 
-    protected override void getPlayerInput()
-    {
-        base.getPlayerInput();
+    //protected override void GetPlayerInput()
+    //{
+    //    base.GetPlayerInput();
 
-        if (Input.GetButtonDown("SpiritExitPossession"))
-        {
-            _spiritPossession.ExitPossession();
-        }
-    }
+    //    if (Input.GetButtonDown("SpiritExitPossession"))
+    //    {
+    //        _spiritPossession.ExitPossession();
+    //    }
+    //}
 
     private Dictionary<string, float> CalculateGrowthPercentages()
     {

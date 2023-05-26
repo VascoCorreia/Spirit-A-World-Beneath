@@ -6,54 +6,59 @@ using UnityEngine;
 public class MovableController : SpiritPlayerController
 {
     [field: SerializeField] public PlayerInteract _playerInteract { get; private set; }
-    [field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
-    [field: SerializeField] public CharacterController _controller { get; private set; }
+    //[field: SerializeField] public SpiritPossession _spiritPossession { get; private set; }
+    //[field: SerializeField] public CharacterController _controller { get; private set; }
     [field: SerializeField, Range(0f, 50f)] public float _maxSpeed { get; set; }
 
     [SerializeField, Range(0f, 10f)] private float maxJumpHeight;
     [SerializeField] protected Vector3 _velocity;
-    [SerializeField] private bool _onGround;
+    [SerializeField] private bool _isGrounded;
+    [SerializeField] private bool _isSliding;
+    [SerializeField] private Transform _originForGroundSphereCast;
+    [SerializeField] private float _maxDistanceForSphereGroundCheck;
+    [SerializeField] private float _radiusSphereGroundCheck;
+
     private float _ySpeed;
+    private Vector3 hitNormal;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        _controller = GetComponent<CharacterController>();
+        //_controller = GetComponent<CharacterController>();
         _playerInteract = GetComponent<PlayerInteract>();
-        _spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
-
-        _maxSpeed = 8f;
+        //_spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
     }
 
     protected override void Update()
     {
         base.Update();
-        getPlayerInput();
+        GetPlayerInput();
 
         if (_spiritPossession.typeInPossession == null)
         {
-            applyGravity();
+            _isGrounded = GroundSphereCastGroundCheck();
+            ApplyGravity();
             Actions();
         }
     }
 
     //gets player movement input
-    protected override void getPlayerInput()
+    protected override void GetPlayerInput()
     {
-        base.getPlayerInput();
-        //R1
-        if (Input.GetButtonDown("SpiritPossession"))
-        {
-            _spiritPossession.tryPossession();
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
-        }
-        //R2
-        if (Input.GetButtonDown("SpiritExitPossession"))
-        {
-            _spiritPossession.ExitPossession();
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+        base.GetPlayerInput();
+        ////R1
+        //if (Input.GetButtonDown("SpiritPossession"))
+        //{
+        //    _spiritPossession.tryPossession();
+        //    //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+        //}
+        ////R2
+        //if (Input.GetButtonDown("SpiritExitPossession"))
+        //{
+        //    _spiritPossession.ExitPossession();
+        //    //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
 
-        }
+        //}
         //Square
         if (Input.GetButtonDown("SpiritInteract"))
         {
@@ -65,13 +70,12 @@ public class MovableController : SpiritPlayerController
         }
     }
     //This function is reponsible for continuously applying gravity to our character.
-    private void applyGravity()
+    private void ApplyGravity()
     {
-        _onGround = _controller.isGrounded;
         _ySpeed += Physics.gravity.y * Time.deltaTime;
 
         //if we set it to zero the _controller.isGrounded property does not work as intended so we must set it to a small negative value
-        if (_onGround)
+        if (_isGrounded)
         {
             _ySpeed = -0.01f;
         }
@@ -86,26 +90,40 @@ public class MovableController : SpiritPlayerController
     //removes bounciness when moving down slopes, keeps the direction of the movement aligned with the slope angle
     protected Vector3 AdjustVelocityToSlope(Vector3 velocity)
     {
-        var ray = new Ray(transform.position, Vector3.down);
+        Quaternion rotation;
+        Vector3 adjustedVelocity;
+        Ray ray = new Ray(transform.position, Vector3.down);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 2f))
         {
-            var rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-            var adjustedvelocity = rotation * velocity;
+            rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+            adjustedVelocity = rotation * velocity;
 
             //only adjust the _velocity if were moving down a slope which means out Y component of velocity must be negative, otherwise dont change velocity
-            if (adjustedvelocity.y < 0)
+            if (adjustedVelocity.y < 0)
             {
-                return adjustedvelocity;
+                return adjustedVelocity;
 
             }
         }
+
+        if (_isSliding)
+        {
+            adjustedVelocity = Vector3.ProjectOnPlane(new Vector3(0, _ySpeed, 0), hitNormal);
+
+            velocity = Vector3.zero;
+
+            adjustedVelocity = adjustedVelocity + velocity;
+
+            return adjustedVelocity;
+        }
+
         return velocity;
     }
 
     protected override void Actions()
     {
-        if (_onGround && Input.GetButtonDown("SpiritJump"))
+        if (_isGrounded && Input.GetButtonDown("SpiritJump"))
         {
             Jump();
             //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
@@ -134,10 +152,46 @@ public class MovableController : SpiritPlayerController
 
         cameraRelativeMovement.Normalize();
         _velocity = cameraRelativeMovement * magnitude;
-        _velocity.y = _ySpeed;
+
         _velocity = AdjustVelocityToSlope(_velocity);
+        _velocity.y += _ySpeed;
+
 
         _controller.Move(_velocity * Time.deltaTime);
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        hitNormal = hit.normal;
+        CheckIfPlayerIsSliding();
+    }
+
+    private bool GroundSphereCastGroundCheck()
+    {
+        if (Physics.SphereCast(_originForGroundSphereCast.position, _radiusSphereGroundCheck, -transform.up, out RaycastHit hit, _maxDistanceForSphereGroundCheck))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private void CheckIfPlayerIsSliding()
+    {
+        float angle = Vector3.Angle(Vector3.up, hitNormal);
+
+        if (!GroundSphereCastGroundCheck() && angle > _controller.slopeLimit && _ySpeed < 0)
+        {
+            _isSliding = true;
+        }
+        else
+            _isSliding = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(_originForGroundSphereCast.position - transform.up * _maxDistanceForSphereGroundCheck, _radiusSphereGroundCheck);
+    }
+
 }
 

@@ -1,9 +1,18 @@
 using UnityEngine;
 
-public class BatController : MovableController
+public class BatController : SpiritPlayerController
 {
-    [SerializeField] private float _rotationSpeed;
+    [field: SerializeField] public PlayerInteract _playerInteract { get; private set; }
 
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _maxSpeed;
+    [SerializeField] private Vector3 _velocity;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _playerInteract = GetComponent<PlayerInteract>();
+    }
     void Start()
     {
         _maxSpeed = 12f;
@@ -14,13 +23,13 @@ public class BatController : MovableController
     protected override void Update()
     {
         base.Update();
+        GetPlayerInput();
+        Rotate();
         Actions();
     }
 
     protected override void Actions()
     {
-        Rotate();
-
         Vector3 forward = _camera.transform.forward;
         Vector3 right = _camera.transform.right;
 
@@ -33,7 +42,7 @@ public class BatController : MovableController
 
         PlayerCameraRelativeMovement.Normalize();
         _velocity = PlayerCameraRelativeMovement * magnitudeTest;
-        _velocity = AdjustVelocityToSlope(_velocity);
+        //_velocity = AdjustVelocityToSlope(_velocity);
 
         _controller.Move(_velocity * Time.deltaTime);
     }
@@ -60,6 +69,33 @@ public class BatController : MovableController
         if (other.tag == "Bat" && other.gameObject != gameObject)
         {
             _spiritPossession.ExitPossession();
+        }
+    }
+
+    protected override void GetPlayerInput()
+    {
+        base.GetPlayerInput();
+        ////R1
+        //if (Input.GetButtonDown("SpiritPossession"))
+        //{
+        //    _spiritPossession.tryPossession();
+        //    //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+        //}
+        ////R2
+        //if (Input.GetButtonDown("SpiritExitPossession"))
+        //{
+        //    _spiritPossession.ExitPossession();
+        //    //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+
+        //}
+        //Square
+        if (Input.GetButtonDown("SpiritInteract"))
+        {
+            _playerInteract.Interact(_camera);
+        }
+        if (Input.GetButtonUp("SpiritInteract"))
+        {
+            _playerInteract.StopInteract();
         }
     }
 }

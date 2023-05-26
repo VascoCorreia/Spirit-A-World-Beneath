@@ -5,23 +5,21 @@ public class RoryMovement : MonoBehaviour
     [field: SerializeField] public Camera _camera { get; private set; }
     [field: SerializeField, Range(0f, 10f)] public float maxSpeed { get; set; } = 7f;
     [field: SerializeField] public float _ySpeed { get; private set; }
-
-    public static float _ySpeedTest;
     [field: SerializeField] public static float _ySpeedInCurrentFrame { get; private set; }
 
     [SerializeField, Range(0f, 10f)] private float _maxJumpHeight = 2f;
 
     [SerializeField] private Vector3 _velocity;
     [SerializeField] private float FallingThreshold = 0.2f;
+    [SerializeField] private Transform _originForGroundSphereCast;
+    [SerializeField] private float _maxDistanceForSphereGroundCheck;
 
     private CharacterController _characterController;
     private float _lastPositionY;
     private Vector2 _playerInput;
+    private bool isSliding;
     public bool isGrounded;
     public bool isFalling;
-    public bool isSliding;
-    public Transform testOrigin;
-    public float maxDistance;
 
     //test for slope sliding
     public Vector3 hitNormal;
@@ -42,7 +40,6 @@ public class RoryMovement : MonoBehaviour
         //test sphere cast for grounded
         isGrounded = GroundSphereCastGroundCheck();
 
-        _ySpeedTest = _ySpeed;
         isFalling = IsFalling();
 
         GetPlayerInput();
@@ -147,39 +144,24 @@ public class RoryMovement : MonoBehaviour
     private Vector3 AdjustvelocityToSlope(Vector3 velocity)
     {
         Debug.DrawRay(transform.position, Vector3.down * 0.1f);
+
         Quaternion rotation;
         Vector3 adjustedvelocity;
+
         var ray = new Ray(transform.position, Vector3.down);
 
         //Raycast used to check if a player is on a slope that he can walk on or not
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 0.1f))
         {
-            /*Quaternion*/ rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-            /*Vector3*/ adjustedvelocity = rotation * velocity;
+            rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
 
-            ////if slope is over controller limit slide down
-            //if (Vector3.Angle(Vector3.up, hitNormal) > _characterController.slopeLimit)
-            //{
-            //    Debug.Log("Slide");
-            //    adjustedvelocity = Vector3.ProjectOnPlane(new Vector3(0, _ySpeed, 0), hitNormal);
-
-            //    adjustedvelocity = adjustedvelocity + velocity;                
-
-            //    return adjustedvelocity;
-            //}
-            //else
-            //{
-            //    //only adjust the _velocity if were moving down a slope which means out Y component of velocity must be negative, otherwise dont change velocity
-            //    if (adjustedvelocity.y < 0)
-
-            //        return adjustedvelocity;
-            //}
+            adjustedvelocity = rotation * velocity;
 
             return adjustedvelocity;
         }
 
         //if the character is sliding the movement must be different
-        if(isSliding)
+        if (isSliding)
         {
             adjustedvelocity = Vector3.ProjectOnPlane(new Vector3(0, _ySpeed, 0), hitNormal);
 
@@ -218,18 +200,12 @@ public class RoryMovement : MonoBehaviour
 
     private bool GroundSphereCastGroundCheck()
     {
-        if (Physics.SphereCast(testOrigin.position, 0.13f, -transform.up, out RaycastHit hit, maxDistance))
+        if (Physics.SphereCast(_originForGroundSphereCast.position, 0.13f, -transform.up, out RaycastHit hit, _maxDistanceForSphereGroundCheck))
         {
             return true;
         }
         else
             return false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        //debug sphere cast for grounded
-        Gizmos.DrawWireSphere(testOrigin.position - transform.up * maxDistance, 0.13f);
     }
 
     private void CheckIfPlayerIsSliding()
@@ -243,6 +219,10 @@ public class RoryMovement : MonoBehaviour
         else
             isSliding = false;
     }
-}
 
-//e semrpe o vector3 forward o player q temm de ser cancelado no lado positivo
+    private void OnDrawGizmos()
+    {
+        //debug sphere cast for grounded
+        Gizmos.DrawWireSphere(_originForGroundSphereCast.position - transform.up * _maxDistanceForSphereGroundCheck, 0.13f);
+    }
+}

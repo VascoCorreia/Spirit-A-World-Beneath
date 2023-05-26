@@ -9,7 +9,7 @@ public class MovableBox : MonoBehaviour, IInteractable
     #region Helps fixing an issue where after the player stops pushing the CC and Rigidbody collide and the box gets propelled since CC mass is infinite
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.CompareTag("Rory"))
+        if (collision.collider.CompareTag("Rory") || collision.collider.CompareTag("Spirit"))
         {
             GetComponent<Rigidbody>().isKinematic = true;
         }
@@ -18,7 +18,7 @@ public class MovableBox : MonoBehaviour, IInteractable
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.CompareTag("Rory"))
+        if (collision.collider.CompareTag("Rory") || collision.collider.CompareTag("Rory"))
         {
             GetComponent<Rigidbody>().isKinematic = false;
         }
@@ -28,7 +28,7 @@ public class MovableBox : MonoBehaviour, IInteractable
     private void Update()
     {
         //If player is not grounded stop pushing
-        if(cachedPlayer != null && !cachedPlayer.GetComponent<RoryMovement>().isGrounded)
+        if (cachedPlayer != null && !cachedPlayer.GetComponent<RoryMovement>().isGrounded)
         {
             PushAndPullMechanic.isPulling = false;
             transform.SetParent(null, true);
@@ -43,7 +43,7 @@ public class MovableBox : MonoBehaviour, IInteractable
         if (player.GetComponent<RoryMovement>().isGrounded)
         {
             PushAndPullMechanic.isPulling = true;
-            
+
             //disable regular character rotating with camera 
             player.GetComponent<CharacterRotation>().enabled = false;
 
@@ -66,20 +66,4 @@ public class MovableBox : MonoBehaviour, IInteractable
             cachedPlayer = null;
         }
     }
-
-    ////1 raycast in the direction of movement in the x axis and one in the z axis to detect obstacles. If there is an obstacle stop box from moving
-    //void RaycastsToDetectObstacles()
-    //{
-    //    Ray ray = new Ray(transform.position, cachedPlayer.transform.forward * GetComponent<BoxCollider>().size.x * _distanceToObstacleThreshold);
-
-    //    if(Physics.Raycast(ray, out RaycastHit hit, GetComponent<BoxCollider>().size.x * _distanceToObstacleThreshold))
-    //    {
-    //        if(hit.collider)
-    //        {
-    //            PushAndPullMechanic.isPulling = false;
-    //            transform.SetParent(null, true);
-    //        }
-    //    }
-    //    Debug.DrawRay(transform.position, cachedPlayer.transform.forward * GetComponent<BoxCollider>().size.x * _distanceToObstacleThreshold);
-    //}
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MakeObjectsInvisible : MonoBehaviour
 {
@@ -26,17 +27,18 @@ public class MakeObjectsInvisible : MonoBehaviour
     //Creates a LayerMask with only the layers that we want to make transparent
     private void CreateLayerMask()
     {
-        int _roryLayerMask, _spiritLayerMask, _dynamicPossessablesLayerMask, spiritBarrierLayerMask, humanBarrierLayerMask, levelLayout;
+        int _roryLayerMask, _spiritLayerMask, _dynamicPossessablesLayerMask, _spiritBarrierLayerMask, _humanBarrierLayerMask, _levelLayoutLayerMask, _transparentFXLayerMask;
 
         _roryLayerMask = LayerMask.GetMask("Rory");
         _spiritLayerMask = LayerMask.GetMask("Spirit");
         _dynamicPossessablesLayerMask = LayerMask.GetMask("PossessableDynamic");
         _dynamicPossessablesLayerMask = LayerMask.GetMask("BothPlayerBarrier");
-        humanBarrierLayerMask = LayerMask.GetMask("RoryBarrier");
-        spiritBarrierLayerMask = LayerMask.GetMask("SpiritBarrier");
-        levelLayout = LayerMask.GetMask("Default");
+        _humanBarrierLayerMask = LayerMask.GetMask("RoryBarrier");
+        _spiritBarrierLayerMask = LayerMask.GetMask("SpiritBarrier");
+        _levelLayoutLayerMask = LayerMask.GetMask("Default");
+        _transparentFXLayerMask = LayerMask.GetMask("TransparentFX");
 
-        _combinedLayerMask = ~(_roryLayerMask | _spiritLayerMask | _dynamicPossessablesLayerMask | humanBarrierLayerMask | spiritBarrierLayerMask | levelLayout);
+        _combinedLayerMask = ~(_roryLayerMask | _spiritLayerMask | _dynamicPossessablesLayerMask | _humanBarrierLayerMask | _spiritBarrierLayerMask | _levelLayoutLayerMask | _transparentFXLayerMask);
     }
 
     //Puts all materials of an object that is between the character and the camera and belongs to the correct layermask in a List
@@ -56,9 +58,18 @@ public class MakeObjectsInvisible : MonoBehaviour
 
             else
             {
-                MeshRenderer[] MeshRenderersInChildren = hit.collider.GetComponentsInChildren<MeshRenderer>();
+                MeshRenderer[] MeshRenderersInChildrenNotFiltered = hit.collider.GetComponentsInChildren<MeshRenderer>();
+                List<MeshRenderer> MeshRenderersInChildrenFiltered = new List<MeshRenderer>();
 
-                foreach (MeshRenderer meshRenderer in MeshRenderersInChildren)
+                foreach (MeshRenderer meshRenderer in MeshRenderersInChildrenNotFiltered)
+                {
+                    if(_combinedLayerMask == (_combinedLayerMask | (1 << meshRenderer.gameObject.layer)))
+                    {
+                        MeshRenderersInChildrenFiltered.Add(meshRenderer);
+                    }
+                }
+
+                foreach (MeshRenderer meshRenderer in MeshRenderersInChildrenFiltered)
                 {
                     if (!materials.Contains(meshRenderer.materials))
                     {
@@ -66,10 +77,10 @@ public class MakeObjectsInvisible : MonoBehaviour
                     }
                 }
 
-                if (hit.collider.GetComponent<MeshRenderer>() != null && !materials.Contains(hit.collider.GetComponent<MeshRenderer>().materials))
-                {
-                    materials.Add(hit.collider.GetComponent<MeshRenderer>().materials);
-                }
+                //if (hit.collider.GetComponent<MeshRenderer>() != null && !materials.Contains(hit.collider.GetComponent<MeshRenderer>().materials))
+                //{
+                //    materials.Add(hit.collider.GetComponent<MeshRenderer>().materials);
+                //}
             }
         }
 

@@ -17,13 +17,12 @@ public static class MaterialExtensions
 
         material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-
-        material.color = new Color(
+        material.SetColor("_BaseColor", new Color(
             material.color.r,
             material.color.g,
             material.color.b,
             1f
-        );
+        ));
     }
 
     public static void ToTransparentMode(Material material)
@@ -43,11 +42,11 @@ public static class MaterialExtensions
         material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
         material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
 
-        material.color = new Color(
+        material.SetColor("_BaseColor", new Color(
             material.color.r,
             material.color.g,
             material.color.b,
             0.3f
-        );
+        ));
     }
 }

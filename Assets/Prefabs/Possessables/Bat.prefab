@@ -240,7 +240,7 @@ MonoBehaviour:
   _currentState: 0
   startChasingDistance: 2.5
   rotationSpeed: 5
-  movementSpeed: 3
+  movementSpeed: 2
   currentTarget: 0
   isCalled: 0
   positionToGoWhenCalled: {x: 0, y: 0, z: 0}
