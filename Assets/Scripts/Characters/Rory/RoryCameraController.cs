@@ -14,7 +14,7 @@ public class RoryCameraController : CameraController
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         foreach (GameObject trigger in _TunnelCameraTriggers)
         {

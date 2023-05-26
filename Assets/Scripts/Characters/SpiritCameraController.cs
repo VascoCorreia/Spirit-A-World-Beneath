@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class SpiritCameraController : CameraController
@@ -14,8 +13,11 @@ public class SpiritCameraController : CameraController
 
         foreach (GameObject trigger in _TunnelCameraTriggers)
         {
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritEnterTunnelCameraEvent += spiritEnterTunnelCameraEventHandler;
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritExitTunnelCameraEvent += spiritExitTunnelCameraEventHandler;
+            if (trigger != null)
+            {
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritEnterTunnelCameraEvent += spiritEnterTunnelCameraEventHandler;
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritExitTunnelCameraEvent += spiritExitTunnelCameraEventHandler;
+            }
         }
     }
 
@@ -26,10 +28,12 @@ public class SpiritCameraController : CameraController
 
         foreach (GameObject trigger in _TunnelCameraTriggers)
         {
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritEnterTunnelCameraEvent -= spiritEnterTunnelCameraEventHandler;
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritExitTunnelCameraEvent -= spiritExitTunnelCameraEventHandler;
+            if (trigger != null)
+            {
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritEnterTunnelCameraEvent -= spiritEnterTunnelCameraEventHandler;
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().spiritExitTunnelCameraEvent -= spiritExitTunnelCameraEventHandler;
+            }
         }
-
     }
 
     void Start()
