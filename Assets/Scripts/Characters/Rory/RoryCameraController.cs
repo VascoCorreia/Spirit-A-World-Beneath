@@ -6,20 +6,26 @@ public class RoryCameraController : CameraController
     {
         foreach (GameObject trigger in _TunnelCameraTriggers)
         {
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryEnterTunnelCameraEvent += roryEnterTunnelCameraEventHandler;
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryExitTunnelCameraEvent += roryExitTunnelCameraEventHandler;
+            if (trigger != null)
+            {
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryEnterTunnelCameraEvent += roryEnterTunnelCameraEventHandler;
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryExitTunnelCameraEvent += roryExitTunnelCameraEventHandler;
+            }
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         foreach (GameObject trigger in _TunnelCameraTriggers)
         {
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryEnterTunnelCameraEvent -= roryEnterTunnelCameraEventHandler;
-            trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryExitTunnelCameraEvent -= roryExitTunnelCameraEventHandler;
+            if (trigger != null)
+            {
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryEnterTunnelCameraEvent -= roryEnterTunnelCameraEventHandler;
+                trigger.GetComponent<ChangeToTunnelCameraTrigger>().roryExitTunnelCameraEvent -= roryExitTunnelCameraEventHandler;
+            }
         }
-
     }
+
     private void roryExitTunnelCameraEventHandler(GameObject obj)
     {
         _mainCamera.m_Orbits[0].m_Radius = DefaultTopRigRadius;
