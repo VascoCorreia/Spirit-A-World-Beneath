@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BatAi : MonoBehaviour
 {
-    private enum State
+    public enum State
     {
         Wander,
         ChaseRory,
@@ -14,7 +14,7 @@ public class BatAi : MonoBehaviour
     private Transform _rory;
     private WhistleMechanic _roryWhistle;
     private SpiritPossession _spiritPossession;
-    [SerializeField] private State _currentState;
+    [SerializeField] public State _currentState;
 
     public float startChasingDistance;
     public float rotationSpeed = 5f; //Rotation speed
@@ -45,7 +45,7 @@ public class BatAi : MonoBehaviour
     }
     void Update()
     {
-        //Rotate();
+
         StateTransitions();
         Movement();
         ChangeWaypoint();

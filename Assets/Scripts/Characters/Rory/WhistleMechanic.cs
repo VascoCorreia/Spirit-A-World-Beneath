@@ -63,7 +63,9 @@ public class WhistleMechanic : MonoBehaviour
                 //If there is at least one bat -> sucess
                 if (BatsInRadius.Count > 0)
                 {
-                    OnWhistleSucessfull?.Invoke(new WhistleEventArgs(BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)], positionWhenCalled.position));
+                    GameObject calledBat = BatsInRadius[UnityEngine.Random.Range(0, BatsInRadius.Count)];
+
+                    OnWhistleSucessfull?.Invoke(new WhistleEventArgs(calledBat, positionWhenCalled.position));
                 }
 
                 //If there are no bats -> Failure
