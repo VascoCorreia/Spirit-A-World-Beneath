@@ -7,6 +7,7 @@ public class WhistleMechanic : MonoBehaviour
     [SerializeField] private float _whisleCooldown = 2f;
     [SerializeField] private float _callingRadius;
     [SerializeField] private bool _canWhistle;
+    [SerializeField] private ParticleSystem _whistleParticleSystem;
 
     private List<GameObject> BatsInRadius = new List<GameObject>();
 
@@ -49,6 +50,9 @@ public class WhistleMechanic : MonoBehaviour
         {
             if (_canWhistle)
             {
+                //play particle system
+                _whistleParticleSystem.Play();
+
                 //play animation
                 _roryAnimatorManager.RoryWhistleAnimation();
 

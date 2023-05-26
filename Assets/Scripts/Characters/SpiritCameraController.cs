@@ -1,5 +1,5 @@
-using UnityEngine;
 using Cinemachine;
+using UnityEngine;
 
 public class SpiritCameraController : CameraController
 {
@@ -49,6 +49,8 @@ public class SpiritCameraController : CameraController
 
         //parent the possessed camera to the possessed gameobject
         _possessionCamera.transform.SetParent(possessedGameobject.getPossessedEnemy().transform);
+
+        _possessionCamera.transform.rotation = new Quaternion(0, 0, 0, 0);
 
         //Mushroom possession requires the camera to be further away from the character, since he can grow
         if (_spiritPossession.typeInPossession == "Mushroom")
