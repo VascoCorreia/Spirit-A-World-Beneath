@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{775b2fb9-3814-466d-81c7-b4a04ae53c9f}">
+		<property name="assetPath">
+			<value>FINAL- ACTIVATE BARRIERS.aif</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.3714285714285714</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3f266f16-3296-4e2e-9e7e-323bb8a72ed5}</destination>
+		</relationship>
+	</object>
+</objects>

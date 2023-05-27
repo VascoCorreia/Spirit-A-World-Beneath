@@ -1484,6 +1484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 795473322}
   - component: {fileID: 795473323}
+  - component: {fileID: 795473324}
   m_Layer: 0
   m_Name: VolumeSlider
   m_TagString: Untagged
@@ -1566,8 +1567,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 845070305}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 795473324}
+        m_TargetAssemblyTypeName: VcaController1, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
         m_Arguments:
@@ -1578,6 +1579,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &795473324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795473321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb23e51910f1a09448ead94a6c124c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VcaName: Master
 --- !u!1 &799887169
 GameObject:
   m_ObjectHideFlags: 0

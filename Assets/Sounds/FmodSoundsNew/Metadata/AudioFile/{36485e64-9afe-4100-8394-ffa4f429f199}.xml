@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{36485e64-9afe-4100-8394-ffa4f429f199}">
+		<property name="assetPath">
+			<value>FINAL- STEP RUNNING.aif</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.5714285714285716</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3f266f16-3296-4e2e-9e7e-323bb8a72ed5}</destination>
+		</relationship>
+	</object>
+</objects>
