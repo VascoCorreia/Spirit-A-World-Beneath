@@ -292,8 +292,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: Assets/Sounds/fef/fef.fspro
-  sourceBankPath: Assets/Sounds/fef/Build
+  sourceProjectPath: Assets/Sounds/FmodSounds/FmodSounds.fspro
+  sourceBankPath: Assets/Sounds/FmodSounds/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
