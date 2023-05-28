@@ -62,7 +62,7 @@ public class WhistleMechanic : MonoBehaviour
                 //store the position of the whistle for bats to know where they need to go
                 Transform positionWhenCalled = gameObject.transform;
 
-                //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Whistle", GetComponent<Transform>().position);
 
                 //If there is at least one bat -> sucess
                 if (BatsInRadius.Count > 0)

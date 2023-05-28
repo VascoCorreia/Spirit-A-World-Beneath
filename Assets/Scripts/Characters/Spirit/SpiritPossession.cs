@@ -88,7 +88,7 @@ public class SpiritPossession : MonoBehaviour
                 //change tag and layer
                 currentPossessedObject.tag = "Spirit";
                 currentPossessedObject.layer = LayerMask.NameToLayer("Spirit");
-                //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Spirit Possessing", GetComponent<Transform>().position);
 
 
                 //Which type of object was possessed

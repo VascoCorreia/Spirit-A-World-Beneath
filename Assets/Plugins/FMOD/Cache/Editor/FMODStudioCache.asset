@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Sounds/FmodSoundsNew/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638208189794951120
+  lastModified: 638208831663643825
   FileSizes:
   - Name: Desktop
     Value: 1642
@@ -89,7 +89,7 @@ MonoBehaviour:
   Path: Assets/Sounds/FmodSoundsNew/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638208189794840854
+  lastModified: 638208831663568261
   FileSizes:
   - Name: Desktop
     Value: 1130
@@ -190,10 +190,10 @@ MonoBehaviour:
   Path: Assets/Sounds/FmodSoundsNew/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638208189805971449
+  lastModified: 638208831665387290
   FileSizes:
   - Name: Desktop
-    Value: 1044000
+    Value: 1044320
   Exists: 1
 --- !u!114 &-4665418748705935628
 MonoBehaviour:
@@ -236,19 +236,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Players/Rory Running
   Guid:
-    Data1: -1365914378
-    Data2: 1173408433
-    Data3: 787911832
-    Data4: 2003899810
+    Data1: -2004562396
+    Data2: 1181153143
+    Data3: -720598393
+    Data4: -1248713339
   Banks:
   - {fileID: -6049641438851337862}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2571
 --- !u!114 &-4325299443855125859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,19 +290,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Others/Dragging Box
   Guid:
-    Data1: -650540139
-    Data2: 1288804224
-    Data3: 1099232940
-    Data4: 1882338095
+    Data1: -962065074
+    Data2: 1101259432
+    Data3: -1552655955
+    Data4: 2048147223
   Banks:
   - {fileID: -6049641438851337862}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2742
 --- !u!114 &-2657345139818370445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +376,6 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 9042602735844940685}
   - {fileID: -4665418748705935628}
-  - {fileID: 2868433524379939314}
   - {fileID: -7722472167480656823}
   - {fileID: -6707518176976814153}
   - {fileID: -4325299443855125859}
@@ -391,14 +390,15 @@ MonoBehaviour:
   - {fileID: 4083154532845410609}
   - {fileID: 7353691626711379044}
   - {fileID: -4581080752322202331}
+  - {fileID: 2975288064221204752}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7677552312552997665}
   StringsBanks:
   - {fileID: -8962817346723843733}
-  cacheTime: 638208189805971449
+  cacheTime: 638208831665387290
   cacheVersion: 131603
---- !u!114 &2868433524379939314
+--- !u!114 &2975288064221204752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -412,19 +412,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Players/Spirit Float
   Guid:
-    Data1: -348124647
-    Data2: 1336045297
-    Data3: -946112622
-    Data4: 515084196
+    Data1: -844763187
+    Data2: 1108373812
+    Data3: -863709567
+    Data4: 1058418232
   Banks:
   - {fileID: -6049641438851337862}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 10971
 --- !u!114 &4083154532845410609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,19 +466,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Players/Rory Walking
   Guid:
-    Data1: 509903816
-    Data2: 1218599641
-    Data3: -2140129374
-    Data4: 1929048187
+    Data1: 1212813128
+    Data2: 1325176494
+    Data3: 977631933
+    Data4: 741848749
   Banks:
   - {fileID: -6049641438851337862}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2400
 --- !u!114 &7353691626711379044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,19 +493,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Enemies/Bat
   Guid:
-    Data1: 1204515314
-    Data2: 1095390247
-    Data3: 1200226441
-    Data4: -868432513
+    Data1: 2075562336
+    Data2: 1198003005
+    Data3: -1648540526
+    Data4: -864297113
   Banks:
   - {fileID: -6049641438851337862}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 32914
 --- !u!114 &7799263315570215359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,16 +547,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Others/Torch Being Lit
   Guid:
-    Data1: -1678174715
-    Data2: 1310802184
-    Data3: 1613558186
-    Data4: 1520782115
+    Data1: -1198796333
+    Data2: 1089521069
+    Data3: -225969254
+    Data4: 547804728
   Banks:
   - {fileID: -6049641438851337862}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2742

@@ -12,16 +12,17 @@ public class Barrier : MonoBehaviour
     }
     public void OpenBarrier()
     {
-        //PlaySound()
         //PlayAnimation()
         _animator.SetTrigger("Open");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Barrier Open", GetComponent<Transform>().position);
+
         //gameObject.SetActive(false);
     }
 
     public void CloseBarrier()
     {
-        //PlaySound()
         //PlayAnimation()
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Close Barrier", GetComponent<Transform>().position);
         if (!staysOpen)
         {
             _animator.SetTrigger("Close");

@@ -673,6 +673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: Spirit
   _spiritPossession: {fileID: 6647199174347428363}
+  _possessionCamera: {fileID: 0}
 --- !u!1 &1774239832
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,7 +835,7 @@ Transform:
   - {fileID: 1691551569}
   - {fileID: 1056919920819795731}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &669121225237390725
 GameObject:
@@ -864,7 +865,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121225237390725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.750885, y: 3.5, z: 1.7844925}
+  m_LocalPosition: {x: 1.7508831, y: 3.5, z: 1.7844911}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1022,6 +1023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: Spirit
   _spiritPossession: {fileID: 6647199174347428363}
+  _possessionCamera: {fileID: 0}
 --- !u!114 &1433889195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1194,7 +1196,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121225681561643}
-  m_LocalRotation: {x: 0.30071118, y: -0.66974366, z: 0.34406686, w: 0.5853497}
+  m_LocalRotation: {x: -0.17309761, y: 0.8230918, z: -0.42357776, w: -0.33636144}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1272,7 +1274,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121225992051296}
-  m_LocalRotation: {x: 0.2792499, y: -0.6817999, z: 0.31951138, w: 0.5958867}
+  m_LocalRotation: {x: -0.16076508, y: 0.83793503, z: -0.39339942, w: -0.34242722}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1604,7 +1606,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121227016420212}
-  m_LocalRotation: {x: 0.29001427, y: -0.6758912, z: 0.33182758, w: 0.5907227}
+  m_LocalRotation: {x: -0.16695073, y: 0.83066034, z: -0.40853608, w: -0.33945435}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1684,8 +1686,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056919920819795724}
-  m_LocalRotation: {x: 0.30071124, y: -0.66974366, z: 0.34406686, w: 0.5853497}
-  m_LocalPosition: {x: 2.4320984, y: 3.4256754, z: 0.32855988}
+  m_LocalRotation: {x: 0.36512056, y: 0.5359396, z: -0.27580407, w: 0.70949835}
+  m_LocalPosition: {x: -2.4047499, y: 3.5, z: -0.6835046}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2092,6 +2094,7 @@ GameObject:
   - component: {fileID: 6647199174145069513}
   - component: {fileID: 6647199174145069514}
   - component: {fileID: 6647199174083050278}
+  - component: {fileID: 5219214788675596568}
   m_Layer: 13
   m_Name: Spirit
   m_TagString: Spirit
@@ -7000,13 +7003,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_camera>k__BackingField: {fileID: 0}
-  <_playerInteract>k__BackingField: {fileID: 0}
   <_spiritPossession>k__BackingField: {fileID: 0}
   <_controller>k__BackingField: {fileID: 0}
+  <_playerInteract>k__BackingField: {fileID: 0}
   <_maxSpeed>k__BackingField: 0
   maxJumpHeight: 2
   _velocity: {x: 0, y: 0, z: 0}
-  _onGround: 0
+  _isGrounded: 0
+  _isSliding: 0
+  _originForGroundSphereCast: {fileID: 0}
+  _maxDistanceForSphereGroundCheck: 0
+  _radiusSphereGroundCheck: 0
 --- !u!114 &6647199174145069512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7077,3 +7084,34 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5219214788675596568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675918340373964093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -844763187
+      Data2: 1108373812
+      Data3: -863709567
+      Data4: 1058418232
+    Path: event:/Players/Spirit Float
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

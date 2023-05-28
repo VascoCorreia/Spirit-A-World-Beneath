@@ -21,6 +21,7 @@ public class Button : MonoBehaviour, IInteractable
         {
             player.GetComponent<RoryAnimatorManager>().PushingButtonAnimation();
             player.GetComponent<RoryAnimatorManager>().PushingButtonStartHandler();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Button", GetComponent<Transform>().position);
 
         }
         _animator.SetTrigger("in");

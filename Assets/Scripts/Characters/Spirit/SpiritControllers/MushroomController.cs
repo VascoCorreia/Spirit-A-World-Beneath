@@ -24,6 +24,7 @@ public class MushroomController : SpiritPlayerController
     {
         base.OnEnable();
         //_spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Growing Mushroom", GetComponent<Transform>().position);
     }
 
     protected override void Update()
@@ -40,18 +41,15 @@ public class MushroomController : SpiritPlayerController
         if (_growthPercentages["X"] < 1 - _growthPercentageYToStartGrowingX && _growthPercentages["Y"] > _growthPercentageYToStartGrowingX)
         {
             transform.localScale += new Vector3(playerInput.y * _mushroomGrowthSpeed, playerInput.y * _mushroomGrowthSpeed, playerInput.y * _mushroomGrowthSpeed);
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
         }
         else if (_growthPercentages["X"] < 1 - _growthPercentageYToStartGrowingX && _growthPercentages["Y"] != 1)
         {
             transform.localScale += new Vector3(0, playerInput.y * _mushroomGrowthSpeed, 0);
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
         }
 
         else if (_growthPercentages["X"] > 1 - _growthPercentageYToStartGrowingX && _growthPercentages["Y"] == 1)
         {
             transform.localScale += new Vector3(playerInput.y * _mushroomGrowthSpeed, 0, playerInput.y * _mushroomGrowthSpeed);
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
         }
 
         sizeConstraints();

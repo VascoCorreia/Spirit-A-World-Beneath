@@ -77,7 +77,7 @@ public class RoryMovement : MonoBehaviour
         if (PushAndPullMechanic.isPulling)
         {
             MovementWhilePushingOrPulling(ref playerInput);
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Running", GetComponent<Transform>().position);
 
         }
         else
@@ -136,7 +136,7 @@ public class RoryMovement : MonoBehaviour
     private void Jump()
     {
         _ySpeed += Mathf.Sqrt(_maxJumpHeight * -2.0f * Physics.gravity.y);
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Jump", GetComponent<Transform>().position);
 
     }
 
@@ -194,7 +194,7 @@ public class RoryMovement : MonoBehaviour
     {
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Running", GetComponent<Transform>().position);
 
     }
 

@@ -1812,6 +1812,7 @@ GameObject:
   - component: {fileID: 845070304}
   - component: {fileID: 845070303}
   - component: {fileID: 845070305}
+  - component: {fileID: 845070306}
   m_Layer: 0
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -1860,6 +1861,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolutionDropdown: {fileID: 1233488904}
+--- !u!114 &845070306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845070302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff98b761edeb9e44c9338ab68c115461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: even
+  PlayOnAwake: 0
 --- !u!1 &873650629
 GameObject:
   m_ObjectHideFlags: 0

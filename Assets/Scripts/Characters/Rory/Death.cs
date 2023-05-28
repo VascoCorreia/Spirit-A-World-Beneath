@@ -16,7 +16,7 @@ public class Death : MonoBehaviour
     {
         if (collision.CompareTag("Bat"))
         {
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Death", GetComponent<Transform>().position);
 
             if (!eventFiredAlready && !Cheats._invicibility)
             {
