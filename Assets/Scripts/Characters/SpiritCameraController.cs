@@ -59,7 +59,7 @@ public class SpiritCameraController : CameraController
             _mainCamera.m_Orbits[1].m_Radius *= 1.5f;
             _mainCamera.m_Orbits[2].m_Radius *= 1.5f;
 
-            _mainCamera.m_Orbits[0].m_Height *= 2.5f;
+            _mainCamera.m_Orbits[0].m_Height *= 3.5f;
             _mainCamera.m_Orbits[2].m_Height *= 0f;
 
         }

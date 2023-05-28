@@ -27,14 +27,19 @@ public class PlayerInteract : MonoBehaviour
         interactableDistance = 15f;
         _layerMask = LayerMask.GetMask("Interactable");
         _canInteract = true;
-        _camera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
+
+        if (gameObject.CompareTag("Spirit"))
+            _camera = GameObject.Find("SpiritCameraBrain").GetComponent<Camera>();
+        if (gameObject.CompareTag("Rory"))
+            _camera = GameObject.Find("RoryCameraBrain").GetComponent<Camera>();
+
     }
 
     private void Update()
     {
         if (gameObject.CompareTag("Spirit"))
         {
-            Interaction("Spirit");    
+            Interaction("Spirit");
         }
 
         if (gameObject.CompareTag("Rory"))

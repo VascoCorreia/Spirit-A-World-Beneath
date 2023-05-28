@@ -30,7 +30,7 @@ public class MushroomController : SpiritPlayerController
     protected override void Update()
     {
         base.Update();
-        //GetPlayerInput();
+        GetPlayerInput();
         Actions();
     }
 
