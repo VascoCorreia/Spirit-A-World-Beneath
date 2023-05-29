@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034503188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.011, y: 1.342, z: 0}
+  m_LocalPosition: {x: 0.011, y: 1.326, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -90,7 +90,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 2485
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 0, y: 6e-44, z: 1.1e-44, w: 1.611e-42}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -172,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7337552825413892854, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.009
+      value: 0.037
       objectReference: {fileID: 0}
     - target: {fileID: -7337552825413892854, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
       propertyPath: m_LocalPosition.y
@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
       propertyPath: m_Name
-      value: Torch
+      value: Player Torch
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
       propertyPath: m_IsActive
@@ -201,10 +201,125 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2034503189}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4359333544520924985}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 354897259764856647}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7383842815110404139}
+    - targetCorrespondingSourceObject: {fileID: 8513859187771203891, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5261063679596172996}
   m_SourcePrefab: {fileID: 100100000, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
+--- !u!1 &1723090198025614842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
+  m_PrefabInstance: {fileID: 1957039120237398187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &4359333544520924985
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723090198025614842}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &354897259764856647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723090198025614842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d109e1d118ecd40bbb14d5d05d1119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 0}
+  _rb: {fileID: 0}
+--- !u!114 &7383842815110404139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723090198025614842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1198796333
+      Data2: 1089521069
+      Data3: -225969254
+      Data4: 547804728
+    Path: event:/Others/Torch Being Lit
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &2063341096107667264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
   m_PrefabInstance: {fileID: 1957039120237398187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7858642144226404760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8513859187771203891, guid: 8bb3d2c05c41d124bb29f2264c83fb20, type: 3}
+  m_PrefabInstance: {fileID: 1957039120237398187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5261063679596172996
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858642144226404760}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.25828394, y: 1.3992329, z: 0.258284}
+  m_Center: {x: -0.00000028312206, y: 0.585187, z: 0}

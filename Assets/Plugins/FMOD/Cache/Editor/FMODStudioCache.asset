@@ -190,7 +190,7 @@ MonoBehaviour:
   Path: Assets/Sounds/FmodSoundsNew/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638208831665387290
+  lastModified: 638209277948085842
   FileSizes:
   - Name: Desktop
     Value: 1044320
@@ -396,7 +396,7 @@ MonoBehaviour:
   - {fileID: -7677552312552997665}
   StringsBanks:
   - {fileID: -8962817346723843733}
-  cacheTime: 638208831665387290
+  cacheTime: 638209277948085842
   cacheVersion: 131603
 --- !u!114 &2975288064221204752
 MonoBehaviour:

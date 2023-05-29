@@ -77,8 +77,6 @@ public class RoryMovement : MonoBehaviour
         if (PushAndPullMechanic.isPulling)
         {
             MovementWhilePushingOrPulling(ref playerInput);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Running", GetComponent<Transform>().position);
-
         }
         else
         {
@@ -110,6 +108,15 @@ public class RoryMovement : MonoBehaviour
 
             _characterController.Move(_velocity * Time.deltaTime);
         }
+
+        FMOD.Studio.EventInstance footstepEventInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Players/Rory Running");
+        footstepEventInstance.start();
+
+        // To decrease the volume of the footstep sound
+        footstepEventInstance.setVolume(0.5f);
+
+        // To stop the footstep sound
+        footstepEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     //Can only move backwards
@@ -136,7 +143,7 @@ public class RoryMovement : MonoBehaviour
     private void Jump()
     {
         _ySpeed += Mathf.Sqrt(_maxJumpHeight * -2.0f * Physics.gravity.y);
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Jump", GetComponent<Transform>().position);
+       FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Jump", GetComponent<Transform>().position);
 
     }
 
@@ -194,8 +201,6 @@ public class RoryMovement : MonoBehaviour
     {
         _playerInput.x = Input.GetAxis("HumanHorizontal");
         _playerInput.y = Input.GetAxis("HumanVertical");
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Running", GetComponent<Transform>().position);
-
     }
 
     private bool GroundSphereCastGroundCheck()
