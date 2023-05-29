@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &44905452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44905453}
+  m_Layer: 13
+  m_Name: 'groundedSphereCastOrigin '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &44905453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44905452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.317, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8299251685922520967}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &357915458
 GameObject:
   m_ObjectHideFlags: 3
@@ -673,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: Spirit
   _spiritPossession: {fileID: 6647199174347428363}
-  _possessionCamera: {fileID: 0}
+  _possessionCamera: {fileID: 1691551568}
 --- !u!1 &1774239832
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +832,106 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &1866193178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1866193179}
+  - component: {fileID: 1866193182}
+  - component: {fileID: 1866193181}
+  - component: {fileID: 1866193180}
+  m_Layer: 13
+  m_Name: EnemyArrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1866193179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866193178}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.351, z: -0.042}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8299251685922520967}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1866193182
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866193178}
+  m_Mesh: {fileID: -6059289630307354871, guid: 58522c63198aaf84b8958a4965940636, type: 3}
+--- !u!23 &1866193181
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866193178}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5c8be9d8b6181264d9d3ada405ad95c2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1866193180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866193178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4861a17548bc98949b4a213e0ba73232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distancePlayerBatToActivate: 7
+  _batLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!1 &606165823754898866
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121225237390725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7508831, y: 3.5, z: 1.7844911}
+  m_LocalPosition: {x: 0.54151726, y: 3.5000002, z: 2.4406433}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1023,7 +1154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: Spirit
   _spiritPossession: {fileID: 6647199174347428363}
-  _possessionCamera: {fileID: 0}
+  _possessionCamera: {fileID: 1691551568}
 --- !u!114 &1433889195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1196,7 +1327,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121225681561643}
-  m_LocalRotation: {x: -0.17309761, y: 0.8230918, z: -0.42357776, w: -0.33636144}
+  m_LocalRotation: {x: -0.25040957, y: 0.7391841, z: -0.50815034, w: -0.36425984}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1274,7 +1405,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121225992051296}
-  m_LocalRotation: {x: -0.16076508, y: 0.83793503, z: -0.39339942, w: -0.34242722}
+  m_LocalRotation: {x: -0.23701261, y: 0.75715476, z: -0.48096418, w: -0.3731155}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1606,7 +1737,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669121227016420212}
-  m_LocalRotation: {x: -0.16695073, y: 0.83066034, z: -0.40853608, w: -0.33945435}
+  m_LocalRotation: {x: -0.24374247, y: 0.7483048, z: -0.49462092, w: -0.3687544}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1686,8 +1817,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056919920819795724}
-  m_LocalRotation: {x: 0.36512056, y: 0.5359396, z: -0.27580407, w: 0.70949835}
-  m_LocalPosition: {x: -2.4047499, y: 3.5, z: -0.6835046}
+  m_LocalRotation: {x: 0.3256424, y: 0.6699803, z: -0.51615465, w: 0.42269117}
+  m_LocalPosition: {x: -0.83335876, y: 3.5000002, z: 0.39756775}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1992,7 +2123,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 0.3
+  m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -2095,6 +2226,7 @@ GameObject:
   - component: {fileID: 6647199174145069514}
   - component: {fileID: 6647199174083050278}
   - component: {fileID: 5219214788675596568}
+  - component: {fileID: 857168503129681390}
   m_Layer: 13
   m_Name: Spirit
   m_TagString: Spirit
@@ -2116,6 +2248,8 @@ Transform:
   m_Children:
   - {fileID: 6647199174062328064}
   - {fileID: 8864246953156562552}
+  - {fileID: 44905453}
+  - {fileID: 1866193179}
   m_Father: {fileID: 4788040081083996529}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7006,14 +7140,14 @@ MonoBehaviour:
   <_spiritPossession>k__BackingField: {fileID: 0}
   <_controller>k__BackingField: {fileID: 0}
   <_playerInteract>k__BackingField: {fileID: 0}
-  <_maxSpeed>k__BackingField: 0
-  maxJumpHeight: 2
+  <_maxSpeed>k__BackingField: 7
+  maxJumpHeight: 1
   _velocity: {x: 0, y: 0, z: 0}
   _isGrounded: 0
   _isSliding: 0
-  _originForGroundSphereCast: {fileID: 0}
-  _maxDistanceForSphereGroundCheck: 0
-  _radiusSphereGroundCheck: 0
+  _originForGroundSphereCast: {fileID: 44905453}
+  _maxDistanceForSphereGroundCheck: 0.21
+  _radiusSphereGroundCheck: 0.3
 --- !u!114 &6647199174145069512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7115,3 +7249,16 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &857168503129681390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675918340373964093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 669121225237390725}
