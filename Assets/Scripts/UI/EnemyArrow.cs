@@ -32,11 +32,24 @@ public class EnemyArrow : MonoBehaviour
     {
         _allBats = Physics.OverlapSphere(transform.position, _distancePlayerBatToActivate, _batLayerMask);
 
-        for (int i = 0; i < _allBats.Length - 1; i++)
+        if (_allBats.Length == 0)
         {
-            if (Vector3.Distance(_allBats[i].transform.position, transform.parent.position) > Vector3.Distance(_allBats[i + 1].transform.position, transform.parent.position))
+            _closestBat = null;
+        }
+
+        else if (_allBats.Length == 1)
+        {
+            _closestBat = _allBats[0].gameObject;
+        }
+
+        else
+        {
+            for (int i = 0; i < _allBats.Length - 1; i++)
             {
-                _closestBat = _allBats[i + 1].gameObject;
+                if (Vector3.Distance(_allBats[i].transform.position, transform.parent.position) > Vector3.Distance(_allBats[i + 1].transform.position, transform.parent.position))
+                {
+                    _closestBat = _allBats[i + 1].gameObject;
+                }
             }
         }
     }

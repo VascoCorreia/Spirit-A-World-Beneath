@@ -45,6 +45,8 @@ public class MovableBox : MonoBehaviour, IInteractable
             PushAndPullMechanic.isPulling = true;
             FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Dragging Box", GetComponent<Transform>().position);
 
+            Debug.Log("1");
+
             //disable regular character rotating with camera 
             player.GetComponent<CharacterRotation>().enabled = false;
 
@@ -60,6 +62,8 @@ public class MovableBox : MonoBehaviour, IInteractable
     {
         if (isInteracted)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Dragging Box", GetComponent<Transform>().position);
+
             isInteracted = false;
             PushAndPullMechanic.isPulling = false;
             player.GetComponent<CharacterRotation>().enabled = true;

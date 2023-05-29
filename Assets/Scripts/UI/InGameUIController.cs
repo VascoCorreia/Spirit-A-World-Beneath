@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InGameUIController : MonoBehaviour
 {
@@ -20,6 +21,31 @@ public class InGameUIController : MonoBehaviour
     {
         _spiritPossession.possessionFailed -= PossessionFailedEventHandler;
         _whistleMechanic.OnWhistleFailed -= WhistleFailedEventHandler;
+    }
+
+    private void Update()
+    {
+        //if((Input.GetButtonDown("SpiritPause") || Input.GetButtonDown("RoryPause")) && !_gamePaused)
+        //{
+        //    _pauseMenu.SetActive(true);
+        //    _pauseMenuEventSystem.SetActive(true);
+        //    _gamePaused = true;
+        //    Debug.Log("Pause");
+        //}
+
+        //else if ((Input.GetButtonDown("SpiritPause") || Input.GetButtonDown("RoryPause")) && _gamePaused)
+        //{
+        //    _pauseMenu.SetActive(false);
+        //    _pauseMenuEventSystem.SetActive(false);
+        //    _gamePaused = false;
+        //}
+
+        //if (_gamePaused)
+        //{
+        //    Time.timeScale = 0;
+        //}
+        //else
+        //    Time.timeScale = 1;
     }
 
     private void WhistleFailedEventHandler()

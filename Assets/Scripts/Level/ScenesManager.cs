@@ -40,6 +40,11 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+
     //Fade out and back in and restarts scene
     private void OnPlayerDied()
     {
