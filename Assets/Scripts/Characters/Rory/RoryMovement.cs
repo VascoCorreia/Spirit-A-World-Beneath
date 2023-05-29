@@ -20,6 +20,7 @@ public class RoryMovement : MonoBehaviour
     private bool isSliding;
     public bool isGrounded;
     public bool isFalling;
+    private bool isPlayingFootstepSound;
 
     //test for slope sliding
     public Vector3 hitNormal;
@@ -45,6 +46,13 @@ public class RoryMovement : MonoBehaviour
         GetPlayerInput();
         ApplyGravity();
         CalculateVelocityAndMove(_playerInput);
+
+        if (_velocity.magnitude <= 0.01f && isGrounded && isPlayingFootstepSound)
+        {
+            // Stop the footstep sound event here
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("FootstepIntensity", 0f);
+            isPlayingFootstepSound = false;
+        }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -109,14 +117,12 @@ public class RoryMovement : MonoBehaviour
             _characterController.Move(_velocity * Time.deltaTime);
         }
 
-        FMOD.Studio.EventInstance footstepEventInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Players/Rory Running");
-        footstepEventInstance.start();
-
-        // To decrease the volume of the footstep sound
-        footstepEventInstance.setVolume(0.5f);
-
-        // To stop the footstep sound
-        footstepEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        if (_velocity.magnitude > 0 && isGrounded && !isPlayingFootstepSound)
+        {
+            // Play footstep sound here
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Running", GetComponent<Transform>().position);
+            isPlayingFootstepSound = true;
+        }
     }
 
     //Can only move backwards
@@ -143,8 +149,7 @@ public class RoryMovement : MonoBehaviour
     private void Jump()
     {
         _ySpeed += Mathf.Sqrt(_maxJumpHeight * -2.0f * Physics.gravity.y);
-       FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Jump", GetComponent<Transform>().position);
-
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Jump", GetComponent<Transform>().position);
     }
 
     //removes bounciness when moving down slopes, keeps the direction of the movement align with the slope angle
@@ -193,8 +198,9 @@ public class RoryMovement : MonoBehaviour
             return false;
         }
         else
-
+        {
             return true;
+        }
     }
 
     private void GetPlayerInput()
@@ -210,7 +216,9 @@ public class RoryMovement : MonoBehaviour
             return true;
         }
         else
+        {
             return false;
+        }
     }
 
     private void CheckIfPlayerIsSliding()
@@ -222,7 +230,9 @@ public class RoryMovement : MonoBehaviour
             isSliding = true;
         }
         else
+        {
             isSliding = false;
+        }
     }
 
     private void OnDrawGizmos()
