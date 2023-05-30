@@ -16,5 +16,12 @@ public class Mushroom : MonoBehaviour, IPossessable
         gameObject.GetComponent<MushroomController>().enabled = false;
         gameObject.tag = "Mushroom";
         gameObject.layer = LayerMask.NameToLayer("PossessableStatic");
+
+        Transform[] _allMushroom = gameObject.GetComponentsInChildren<Transform>();
+
+        foreach(Transform t in _allMushroom)
+        {
+            t.gameObject.layer = LayerMask.NameToLayer("PossessableStatic");
+        }
     }
 }

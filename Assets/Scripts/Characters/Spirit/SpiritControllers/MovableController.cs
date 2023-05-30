@@ -24,9 +24,7 @@ public class MovableController : SpiritPlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
-        //_controller = GetComponent<CharacterController>();
         _playerInteract = GetComponent<PlayerInteract>();
-        //_spiritPossession = GameObject.Find("Possession").GetComponent<SpiritPossession>();
     }
 
     protected override void Update()
@@ -46,19 +44,7 @@ public class MovableController : SpiritPlayerController
     protected override void GetPlayerInput()
     {
         base.GetPlayerInput();
-        ////R1
-        //if (Input.GetButtonDown("SpiritPossession"))
-        //{
-        //    _spiritPossession.tryPossession();
-        //    //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
-        //}
-        ////R2
-        //if (Input.GetButtonDown("SpiritExitPossession"))
-        //{
-        //    _spiritPossession.ExitPossession();
-        //    //FMODUnity.RuntimeManager.PlayOneShot("event:/", GetComponent<Transform>().position);
 
-        //}
         //Square
         if (Input.GetButtonDown("SpiritInteract"))
         {

@@ -43,7 +43,7 @@ public class MovableBox : MonoBehaviour, IInteractable
         if (player.GetComponent<RoryMovement>().isGrounded)
         {
             PushAndPullMechanic.isPulling = true;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Dragging Box", GetComponent<Transform>().position);
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Dragging Box", GetComponent<Transform>().position);
 
             Debug.Log("1");
 
@@ -62,7 +62,7 @@ public class MovableBox : MonoBehaviour, IInteractable
     {
         if (isInteracted)
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Dragging Box", GetComponent<Transform>().position);
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/Others/Dragging Box", GetComponent<Transform>().position);
 
             isInteracted = false;
             PushAndPullMechanic.isPulling = false;

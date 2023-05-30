@@ -50,7 +50,7 @@ public class RoryMovement : MonoBehaviour
         if (_velocity.magnitude <= 0.01f && isGrounded && isPlayingFootstepSound)
         {
             // Stop the footstep sound event here
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("FootstepIntensity", 0f);
+            //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("FootstepIntensity", 0f);
             isPlayingFootstepSound = false;
         }
     }
@@ -120,7 +120,7 @@ public class RoryMovement : MonoBehaviour
         if (_velocity.magnitude > 0 && isGrounded && !isPlayingFootstepSound)
         {
             // Play footstep sound here
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Running", GetComponent<Transform>().position);
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/Players/Rory Running", GetComponent<Transform>().position);
             isPlayingFootstepSound = true;
         }
     }
